@@ -1,10 +1,10 @@
 ---
-export interface CustomButton {
+export interface ICustomButton {
   title: string;
   icon?: HTMLElement;
 }
 interface Props {
-  buttonArray: CustomButton[];
+  buttonArray: ICustomButton[];
 }
 const { buttonArray } = Astro.props;
 ---
@@ -13,7 +13,7 @@ const { buttonArray } = Astro.props;
   <img src="public/header-icon.svg" alt="header-logo" />
   <div id="header_button_group">
     {
-      buttonArray.map((button: CustomButton) => (
+      buttonArray.map((button: ICustomButton) => (
         <a id="header_button">{button.title}</a>
       ))
     }
