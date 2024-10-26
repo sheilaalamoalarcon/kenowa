@@ -1,0 +1,56 @@
+---
+export enum ImagesSourceEnum {
+  STOCK_IMAGE_1 = "public/stock-image-katsiaryna-endruszkiewicz.svg",
+  STOCK_IMAGE_2 = "public/stock-image-dom-hill.svg",
+  STOCK_IMAGE_3 = "public/stock-image-ave-calvar.svg",
+  STOCK_IMAGE_4 = "public/stock-image-aiony-haust.svg",
+}
+export interface CastleImage {
+  src: ImagesSourceEnum;
+  isRound: boolean;
+}
+interface Props {
+  images: CastleImage[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="horizontal-images-group">
+  {
+    images.map((image: CastleImage) => (
+      <img
+        src={image.src}
+        alt={image.src.slice(3)}
+        id={image.isRound ? "image_round" : "image_rectangle"}
+      />
+    ))
+  }
+</div>
+
+<style>
+  .horizontal-images-group {
+    display: flex;
+    align-self: stretch;
+    height: 39.1875rem;
+    padding: 4.375rem 3.125rem;
+    justify-content: space-between;
+    align-items: center;
+
+    background: var(--TEXT, #45362f);
+  }
+  #image_round {
+    border-radius: var(--Corner-Full, 62.5rem) var(--Corner-Full, 62.5rem) 0rem
+      0rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    object-fit: cover;
+    max-height: 30.5625rem;
+    aspect-ratio: 18/30;
+  }
+  #image_rectangle {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    object-fit: cover;
+    max-height: 30.5625rem;
+    aspect-ratio: 12/30;
+  }
+</style>
