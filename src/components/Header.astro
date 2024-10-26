@@ -1,0 +1,46 @@
+---
+export interface CustomButton {
+  title: string;
+  icon?: HTMLElement;
+}
+interface Props {
+  buttonArray: CustomButton[];
+}
+const { buttonArray } = Astro.props;
+---
+
+<div id="header">
+  <img src="public/header-icon.svg" alt="header-logo" />
+  <div id="header_button_group">
+    {
+      buttonArray.map((button: CustomButton) => (
+        <a id="header_button">{button.title}</a>
+      ))
+    }
+  </div>
+</div>
+<style>
+  #header {
+    display: flex;
+    align-self: stretch;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--PRIMARY, #f36337);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 2.03838rem 1.92975rem 1.99475rem 1.91644rem;
+  }
+  #header_button_group {
+    display: flex;
+    align-items: center;
+    gap: 2.9375rem;
+  }
+  #header_button {
+    color: var(--PURE_WHITE, #f5faf9);
+    text-align: center;
+    /* HEADING_1 */
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 3.3rem */
+  }
+</style>
