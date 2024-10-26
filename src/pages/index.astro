@@ -1,6 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header, { type ICustomButton } from "../components/Header.astro";
+import Header, {
+  WebRoutesEnum,
+  type ICustomButton,
+} from "../components/Header.astro";
 import LandingImages, {
   ImagesSourceEnum,
   type CastleImage,
@@ -9,12 +12,15 @@ import LandingImages, {
 const _defaultButtons: ICustomButton[] = [
   {
     title: "Test Prototype",
+    href: WebRoutesEnum.LOG_IN,
   },
   {
     title: "Log In",
+    href: WebRoutesEnum.LOG_IN,
   },
   {
     title: "Sig In",
+    href: WebRoutesEnum.LOG_IN,
   },
 ];
 

@@ -1,6 +1,10 @@
 ---
+export enum WebRoutesEnum {
+  LOG_IN = "/logIn",
+}
 export interface ICustomButton {
   title: string;
+  href: WebRoutesEnum;
   icon?: HTMLElement;
 }
 interface Props {
@@ -13,8 +17,10 @@ const { buttonArray } = Astro.props;
   <img src="public/header-icon.svg" alt="header-logo" />
   <div id="header_button_group">
     {
-      buttonArray.map((button: ICustomButton) => (
-        <a id="header_button">{button.title}</a>
+      buttonArray.map(({ href, title }: ICustomButton) => (
+        <a href={href} id="header_button">
+          {title}
+        </a>
       ))
     }
   </div>
