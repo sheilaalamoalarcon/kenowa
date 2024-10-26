@@ -8,6 +8,7 @@ import LandingImages, {
   ImagesSourceEnum,
   type CastleImage,
 } from "../components/LandingImages.astro";
+import Footer from "../components/Footer.astro";
 
 const _defaultButtons: ICustomButton[] = [
   {
@@ -119,17 +120,7 @@ const _landingImages: CastleImage[] = [
         </p>
       </section>
     </div>
-    <footer>
-      <p>
-        Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend.
-        Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh
-        enim est arcu diam. Pellentesque proin suspendisse egestas ut sed vitae
-        vel. Lectus purus cum diam cursus id pellentesque diam. Cursus vehicula
-        orci phasellus cum nullam sagittis sagittis varius. Non orci convallis
-        arcu ultrices aliquam senectus. Mauris vitae mi id a posuere in id.
-        Nulla sit nisl magna ligula nisl. Sit nibh tristique semper
-      </p>
-    </footer>
+    <Footer />
   </main>
 
   <style>
@@ -242,25 +233,6 @@ const _landingImages: CastleImage[] = [
       font-style: normal;
       font-weight: 400;
       line-height: 110%; /* 2.2rem */
-    }
-    footer {
-      display: flex;
-      padding: 3.53125rem 5.3125rem 3.78125rem 6.5rem;
-      justify-content: flex-end;
-      align-items: flex-start;
-      gap: 25.1875rem;
-      align-self: stretch;
-
-      background: var(--TEXT, #45362f);
-    }
-    footer p {
-      color: var(--SECONDARY, #fede71);
-
-      /* BODY_BIG_REGULAR */
-      font-size: 1rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
     }
   </style>
 </Layout>
