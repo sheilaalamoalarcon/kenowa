@@ -6,6 +6,7 @@ import LandingImages, {
   type CastleImage,
 } from "../components/LandingImages.astro";
 import Footer from "../components/Footer.astro";
+import CustomButton from "../components/CustomButton.tsx";
 
 const _landingImages: CastleImage[] = [
   {
@@ -52,9 +53,7 @@ const _landingImages: CastleImage[] = [
           a posuere in id. Nulla sit nisl magna ligula nisl. Sit nibh tristique
           semper
         </p>
-        <button id="custom_button">
-          <p id="custom_button_title">Start sharing</p>
-        </button>
+        <CustomButton title="Start sharing" client:load />
       </div>
     </div>
     <LandingImages images={_landingImages} />
