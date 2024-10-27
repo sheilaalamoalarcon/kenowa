@@ -22,12 +22,13 @@ const { images } = Astro.props;
   {
     images.map((image: CastleImage) => (
       <Image
-        width={100}
-        height={100}
+        width={288}
+        height={489}
         loading={"lazy"}
         src={image.src}
         alt={image.src.slice(3)}
         id={image.isRound ? "image_round" : "image_rectangle"}
+        class="shadow"
       />
     ))
   }
@@ -44,18 +45,17 @@ const { images } = Astro.props;
 
     background: var(--TEXT, #45362f);
   }
-  #image_round {
-    border-radius: var(--Corner-Full, 62.5rem) var(--Corner-Full, 62.5rem) 0rem
-      0rem;
+  .shadow {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     object-fit: cover;
     max-height: 30.5625rem;
     aspect-ratio: 18/30;
   }
+  #image_round {
+    border-radius: var(--Corner-Full, 62.5rem) var(--Corner-Full, 62.5rem) 0rem
+      0rem;
+  }
   #image_rectangle {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    object-fit: cover;
-    max-height: 30.5625rem;
-    aspect-ratio: 12/30;
   }
 </style>
