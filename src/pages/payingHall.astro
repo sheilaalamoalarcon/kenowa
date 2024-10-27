@@ -4,6 +4,7 @@ import Header, { HeaderTypeEnum } from "../components/Header.astro";
 import ProductCard from "../components/ProductCard.astro";
 import CustomButton from "../components/CustomButton";
 import Footer from "../components/Footer.astro";
+import Image from "astro/components/Image.astro";
 ---
 
 <Layout title="Paying Hall">
@@ -54,9 +55,12 @@ import Footer from "../components/Footer.astro";
       </div>
       <div id="paying-hall-information">
         <div id="user-header">
-          <img
+          <Image
+            width={100}
+            height={100}
+            loading={"lazy"}
             src="/public/stock-image-aiony-haust.svg"
-            alt="user-header-img"
+            alt="user-header"
             id="user-header-img"
           />
           <p id="user-header-text">Madelyn Vaccaro</p>

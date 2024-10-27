@@ -1,12 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CustomInput from "../components/CustomInput";
+import Image from "astro/components/Image.astro";
 ---
 
 <Layout title="LogIn">
   <main id="main">
     <div id="orange-upper-section">
-      <img src="/public/big-logo.svg" alt="big-logo" />
+      <Image
+        width={200}
+        height={294.62}
+        loading={"lazy"}
+        src="/public/big-logo.svg"
+        alt="big-logo"
+      />
       <p id="login-big-text">
         Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend.
         Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh

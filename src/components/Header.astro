@@ -1,4 +1,6 @@
 ---
+import Image from "astro/components/Image.astro";
+
 export enum WebRoutesEnum {
   LOG_IN = "/logIn",
   LOG_OUT = "/logOut",
@@ -83,7 +85,13 @@ const _buttonArray: ICustomButton[] = SwitchHeaderButtons();
 ---
 
 <div id="header">
-  <img src="public/header-icon.svg" alt="header-logo" />
+  <Image
+    width={264.5}
+    height={54}
+    src="/public/header-icon.svg"
+    alt="header-logo"
+    loading={"lazy"}
+  />
   <div id="header_button_group">
     {
       _buttonArray.map(({ href, title }: ICustomButton) => (

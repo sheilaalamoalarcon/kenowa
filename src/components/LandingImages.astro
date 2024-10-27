@@ -1,9 +1,11 @@
 ---
+import Image from "astro/components/Image.astro";
+
 export enum ImagesSourceEnum {
-  STOCK_IMAGE_1 = "public/stock-image-katsiaryna-endruszkiewicz.svg",
-  STOCK_IMAGE_2 = "public/stock-image-dom-hill.svg",
-  STOCK_IMAGE_3 = "public/stock-image-ave-calvar.svg",
-  STOCK_IMAGE_4 = "public/stock-image-aiony-haust.svg",
+  STOCK_IMAGE_1 = "/public/stock-image-katsiaryna-endruszkiewicz.svg",
+  STOCK_IMAGE_2 = "/public/stock-image-dom-hill.svg",
+  STOCK_IMAGE_3 = "/public/stock-image-ave-calvar.svg",
+  STOCK_IMAGE_4 = "/public/stock-image-aiony-haust.svg",
 }
 export interface CastleImage {
   src: ImagesSourceEnum;
@@ -19,7 +21,10 @@ const { images } = Astro.props;
 <div class="horizontal-images-group">
   {
     images.map((image: CastleImage) => (
-      <img
+      <Image
+        width={100}
+        height={100}
+        loading={"lazy"}
         src={image.src}
         alt={image.src.slice(3)}
         id={image.isRound ? "image_round" : "image_rectangle"}
