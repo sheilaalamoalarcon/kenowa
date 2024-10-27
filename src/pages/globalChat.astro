@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import Header, { HeaderTypeEnum } from "../components/Header.astro";
 import ProductCard from "../components/ProductCard.astro";
+import CustomButton from "../components/CustomButton";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout title="global-chat">
@@ -45,9 +47,8 @@ import ProductCard from "../components/ProductCard.astro";
         />
       </div>
       <div id="product-column">
-        <button>
-          <p id="button-text">Create new message</p>
-        </button>
+        <CustomButton client:load title="Create new message" />
+
         <div id="trending">
           <h5>Trending Theme</h5>
           <p>Trending time</p>
@@ -62,6 +63,7 @@ import ProductCard from "../components/ProductCard.astro";
         </div>
       </div>
     </div>
+    <Footer />
   </main>
   <style>
     #content {
