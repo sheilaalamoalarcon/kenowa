@@ -2,22 +2,85 @@
 export enum WebRoutesEnum {
   LOG_IN = "/logIn",
 }
+export enum HeaderTypeEnum {
+  USER = "user", //is logged in
+  USER_WITH_STORE = "vendor", //is logged and have a store
+  PASSENGER = "passenger",
+}
 export interface ICustomButton {
   title: string;
   href: WebRoutesEnum;
   icon?: HTMLElement;
 }
 interface Props {
-  buttonArray: ICustomButton[];
+  headerType: HeaderTypeEnum;
 }
-const { buttonArray } = Astro.props;
+const { headerType } = Astro.props;
+
+function SwitchHeaderButtons() {
+  switch (headerType) {
+    case HeaderTypeEnum.PASSENGER:
+      const _default: ICustomButton[] = [
+        {
+          title: "Test Prototype",
+          href: WebRoutesEnum.LOG_IN,
+        },
+        {
+          title: "Log In",
+          href: WebRoutesEnum.LOG_IN,
+        },
+        {
+          title: "Sig In",
+          href: WebRoutesEnum.LOG_IN,
+        },
+      ];
+      return _default;
+    case HeaderTypeEnum.PASSENGER:
+      const _vendor: ICustomButton[] = [
+        {
+          title: "global chat",
+          href: WebRoutesEnum.LOG_IN,
+        },
+        {
+          title: "bag",
+          href: WebRoutesEnum.LOG_IN,
+        },
+        {
+          title: "bag",
+          href: WebRoutesEnum.LOG_IN,
+        },
+        {
+          title: "log out",
+          href: WebRoutesEnum.LOG_IN,
+        },
+      ];
+      return _vendor;
+    default:
+      const _user: ICustomButton[] = [
+        {
+          title: "global chat",
+          href: WebRoutesEnum.LOG_IN,
+        },
+        {
+          title: "bag",
+          href: WebRoutesEnum.LOG_IN,
+        },
+        {
+          title: "Log out",
+          href: WebRoutesEnum.LOG_IN,
+        },
+      ];
+      return _user;
+  }
+}
+const _buttonArray: ICustomButton[] = SwitchHeaderButtons();
 ---
 
 <div id="header">
   <img src="public/header-icon.svg" alt="header-logo" />
   <div id="header_button_group">
     {
-      buttonArray.map(({ href, title }: ICustomButton) => (
+      _buttonArray.map(({ href, title }: ICustomButton) => (
         <a href={href} id="header_button">
           {title}
         </a>

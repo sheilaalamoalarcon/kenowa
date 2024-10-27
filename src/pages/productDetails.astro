@@ -2,43 +2,27 @@
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import CustomCard from "../components/CustomCard.astro";
-import Header, { WebRoutesEnum } from "../components/Header.astro";
-import { type ICustomButton } from "../components/Header.astro";
-
-const _loggedButtons: ICustomButton[] = [
-  {
-    title: "GlobalChat",
-    href: WebRoutesEnum.LOG_IN,
-  },
-  {
-    title: "Bag",
-    href: WebRoutesEnum.LOG_IN,
-  },
-  {
-    title: "LogOut",
-    href: WebRoutesEnum.LOG_IN,
-  },
-];
+import Header, { HeaderTypeEnum } from "../components/Header.astro";
 ---
 
 <Layout title="productDetails">
   <main>
-    <Header buttonArray={_loggedButtons} />
-    <div id="product-details-top">
+    <Header headerType={HeaderTypeEnum.USER_WITH_STORE} />
+    <div id="product" class="row">
       <img
         src="/public/stock-image-aiony-haust.svg"
         alt="vertical-image"
         id="vertical-image"
       />
-      <div id="product-details-top">
+      <div id="product-details-top" class="row">
         <section>
           <img
             src="/public/stock-image-aiony-haust.svg"
             alt="horizontal-image"
             id="horizontal-image"
           />
-          <div id="product-details-top">
-            <div>
+          <div id="product-details-container" class="row">
+            <div id="product-details">
               <h2 id="product-name">Product Name</h2>
               <h3 id="product-cost">Product Cost</h3>
               <button id="button"> add to bag </button>
@@ -83,6 +67,19 @@ const _loggedButtons: ICustomButton[] = [
     <Footer />
   </main>
   <style>
+    @media (max-width: 730px) {
+      .row {
+        display: flex;
+        flex-direction: column;
+      }
+      #vertical-image {
+        display: none;
+      }
+      #product-opinions {
+        display: flex;
+        flex-direction: column;
+      }
+    }
     main {
       display: flex;
       width: 100%;
@@ -90,11 +87,12 @@ const _loggedButtons: ICustomButton[] = [
       justify-content: center;
       align-items: center;
     }
-    #product-details-top {
+    .row {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
     }
+
     #vertical-image {
       width: 28.1875rem;
       height: 49.3125rem;

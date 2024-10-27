@@ -1,29 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header, {
-  WebRoutesEnum,
-  type ICustomButton,
-} from "../components/Header.astro";
+import Header, { HeaderTypeEnum } from "../components/Header.astro";
 import LandingImages, {
   ImagesSourceEnum,
   type CastleImage,
 } from "../components/LandingImages.astro";
 import Footer from "../components/Footer.astro";
-
-const _defaultButtons: ICustomButton[] = [
-  {
-    title: "Test Prototype",
-    href: WebRoutesEnum.LOG_IN,
-  },
-  {
-    title: "Log In",
-    href: WebRoutesEnum.LOG_IN,
-  },
-  {
-    title: "Sig In",
-    href: WebRoutesEnum.LOG_IN,
-  },
-];
 
 const _landingImages: CastleImage[] = [
   {
@@ -47,7 +29,7 @@ const _landingImages: CastleImage[] = [
 
 <Layout title="Kenowa">
   <main>
-    <Header buttonArray={_defaultButtons} />
+    <Header headerType={HeaderTypeEnum.PASSENGER} />
 
     <div id="welcome_message">
       <img
