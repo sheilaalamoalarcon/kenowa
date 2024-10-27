@@ -1,10 +1,16 @@
 ---
 export enum WebRoutesEnum {
   LOG_IN = "/logIn",
+  LOG_OUT = "/logOut",
+  SIGN_IN = "/signIn",
+  RESET_PASSWORD = "/resetPassword",
+  GLOBAL_CHAT = "/globalChat",
+  PAYING_HALL = "/payingHall",
+  SHOP = "/shop",
 }
 export enum HeaderTypeEnum {
   USER = "user", //is logged in
-  USER_WITH_STORE = "vendor", //is logged and have a store
+  USER_WITH_STORE = "vendor", //is logged and have a shop
   PASSENGER = "passenger",
 }
 export interface ICustomButton {
@@ -31,7 +37,7 @@ function SwitchHeaderButtons() {
         },
         {
           title: "Sig In",
-          href: WebRoutesEnum.LOG_IN,
+          href: WebRoutesEnum.SIGN_IN,
         },
       ];
       return _default;
@@ -39,19 +45,15 @@ function SwitchHeaderButtons() {
       const _vendor: ICustomButton[] = [
         {
           title: "global chat",
-          href: WebRoutesEnum.LOG_IN,
+          href: WebRoutesEnum.GLOBAL_CHAT,
         },
         {
           title: "bag",
-          href: WebRoutesEnum.LOG_IN,
-        },
-        {
-          title: "bag",
-          href: WebRoutesEnum.LOG_IN,
+          href: WebRoutesEnum.PAYING_HALL,
         },
         {
           title: "log out",
-          href: WebRoutesEnum.LOG_IN,
+          href: WebRoutesEnum.LOG_OUT,
         },
       ];
       return _vendor;
@@ -59,11 +61,15 @@ function SwitchHeaderButtons() {
       const _user: ICustomButton[] = [
         {
           title: "global chat",
-          href: WebRoutesEnum.LOG_IN,
+          href: WebRoutesEnum.GLOBAL_CHAT,
         },
         {
           title: "bag",
-          href: WebRoutesEnum.LOG_IN,
+          href: WebRoutesEnum.PAYING_HALL,
+        },
+        {
+          title: "Store",
+          href: WebRoutesEnum.SHOP,
         },
         {
           title: "Log out",
