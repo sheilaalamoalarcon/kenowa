@@ -85,13 +85,15 @@ const _buttonArray: ICustomButton[] = SwitchHeaderButtons();
 ---
 
 <div id="header">
-  <Image
-    width={264.5}
-    height={54}
-    src="/public/header-icon.svg"
-    alt="header-logo"
-    loading={"lazy"}
-  />
+  <a href="/">
+    <Image
+      width={264.5}
+      height={54}
+      src="/public/header-icon.svg"
+      alt="header-logo"
+      loading={"lazy"}
+    />
+  </a>
   <div id="header_button_group">
     {
       _buttonArray.map(({ href, title }: ICustomButton) => (
