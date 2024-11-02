@@ -1,20 +1,9 @@
 ---
+import { HeaderTypeEnum, WebRoutesEnum } from "@/constants/enums";
 import Image from "astro/components/Image.astro";
+import HeaderNav from "./HeaderNav";
+import { defaultBttns, userBttns, vendorBttns } from "@/constants/constants";
 
-export enum WebRoutesEnum {
-  LOG_IN = "/logIn",
-  LOG_OUT = "/logOut",
-  SIGN_IN = "/signIn",
-  RESET_PASSWORD = "/resetPassword",
-  GLOBAL_CHAT = "/globalChat",
-  PAYING_HALL = "/payingHall",
-  SHOP = "/shop",
-}
-export enum HeaderTypeEnum {
-  USER = "user", //is logged in
-  USER_WITH_STORE = "vendor", //is logged and have a shop
-  PASSENGER = "passenger",
-}
 export interface ICustomButton {
   title: string;
   href: WebRoutesEnum;
@@ -28,82 +17,29 @@ const { headerType } = Astro.props;
 function SwitchHeaderButtons() {
   switch (headerType) {
     case HeaderTypeEnum.PASSENGER:
-      const _default: ICustomButton[] = [
-        {
-          title: "Test Prototype",
-          href: WebRoutesEnum.LOG_IN,
-        },
-        {
-          title: "Log In",
-          href: WebRoutesEnum.LOG_IN,
-        },
-        {
-          title: "Sig In",
-          href: WebRoutesEnum.SIGN_IN,
-        },
-      ];
-      return _default;
+      return defaultBttns;
     case HeaderTypeEnum.PASSENGER:
-      const _vendor: ICustomButton[] = [
-        {
-          title: "global chat",
-          href: WebRoutesEnum.GLOBAL_CHAT,
-        },
-        {
-          title: "bag",
-          href: WebRoutesEnum.PAYING_HALL,
-        },
-        {
-          title: "log out",
-          href: WebRoutesEnum.LOG_OUT,
-        },
-      ];
-      return _vendor;
+      return vendorBttns;
     default:
-      const _user: ICustomButton[] = [
-        {
-          title: "global chat",
-          href: WebRoutesEnum.GLOBAL_CHAT,
-        },
-        {
-          title: "bag",
-          href: WebRoutesEnum.PAYING_HALL,
-        },
-        {
-          title: "Store",
-          href: WebRoutesEnum.SHOP,
-        },
-        {
-          title: "Log out",
-          href: WebRoutesEnum.LOG_IN,
-        },
-      ];
-      return _user;
+      return userBttns;
   }
 }
-const _buttonArray: ICustomButton[] = SwitchHeaderButtons();
+const buttonsArray: ICustomButton[] = SwitchHeaderButtons();
 ---
 
-<div id="header">
+<header id="header">
   <a href="/">
     <Image
       width={264.5}
       height={54}
-      src="/public/header-icon.svg"
+      src="/header-icon.svg"
       alt="header-logo"
-      loading={"lazy"}
+      id="header-logo"
+      loading={"eager"}
     />
   </a>
-  <div id="header_button_group">
-    {
-      _buttonArray.map(({ href, title }: ICustomButton) => (
-        <a href={href} id="header_button">
-          {title}
-        </a>
-      ))
-    }
-  </div>
-</div>
+  <HeaderNav client:only buttons={buttonsArray} />
+</header>
 <style>
   #header {
     display: flex;
@@ -113,19 +49,5 @@ const _buttonArray: ICustomButton[] = SwitchHeaderButtons();
     background: var(--PRIMARY, #f36337);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     padding: 2.03838rem 1.92975rem 1.99475rem 1.91644rem;
-  }
-  #header_button_group {
-    display: flex;
-    align-items: center;
-    gap: 2.9375rem;
-  }
-  #header_button {
-    color: var(--PURE_WHITE, #f5faf9);
-    text-align: center;
-    /* HEADING_1 */
-    font-size: 3rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 110%; /* 3.3rem */
   }
 </style>

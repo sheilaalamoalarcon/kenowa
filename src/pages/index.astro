@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header, { HeaderTypeEnum } from "../components/Header.astro";
+import Header from "../components/Header.astro";
 import LandingImages, {
   ImagesSourceEnum,
   type CastleImage,
@@ -8,6 +8,7 @@ import LandingImages, {
 import Footer from "../components/Footer.astro";
 import CustomButton from "../components/CustomButton.tsx";
 import Image from "astro/components/Image.astro";
+import { API_ROUTES, HeaderTypeEnum, WebRoutesEnum } from "@/constants/enums";
 
 const _landingImages: CastleImage[] = [
   {
@@ -32,10 +33,9 @@ const _landingImages: CastleImage[] = [
 <Layout title="Kenowa">
   <main>
     <Header headerType={HeaderTypeEnum.PASSENGER} />
-
     <div id="welcome_message">
       <Image
-        src="/public/landing-top-image.svg"
+        src="/landing-top-image.svg"
         alt="landing-top-image"
         id="landing-top-image"
         loading={"lazy"}
@@ -57,7 +57,11 @@ const _landingImages: CastleImage[] = [
           a posuere in id. Nulla sit nisl magna ligula nisl. Sit nibh tristique
           semper
         </p>
-        <CustomButton title="Start sharing" client:load />
+        <CustomButton
+          title="Start sharing"
+          href={WebRoutesEnum.GLOBAL_CHAT}
+          client:load
+        />
       </div>
     </div>
     <LandingImages images={_landingImages} />
@@ -110,7 +114,6 @@ const _landingImages: CastleImage[] = [
     main {
       display: flex;
       flex-direction: column;
-      max-width: calc(100% - 2rem);
       color: var(-text-light);
       overflow: hidden;
       align-items: center;
@@ -216,6 +219,19 @@ const _landingImages: CastleImage[] = [
       font-style: normal;
       font-weight: 400;
       line-height: 110%; /* 2.2rem */
+    }
+
+    @media (max-width: 700px) /*/mobile size*/ {
+      #welcome_message {
+        flex-direction: column;
+      }
+      .landing-info {
+        flex-direction: column;
+        align-self: center;
+      }
+      #landing-top-image {
+        width: 80vw;
+      }
     }
   </style>
 </Layout>
