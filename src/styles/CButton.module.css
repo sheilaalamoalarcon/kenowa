@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  height: 2.625rem;
+  width: 100%;
+  padding: 0.5625rem 7rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  border-radius: var(--Corner-Extra-small, 0.25rem);
+  background: var(--TEXT, #45362f);
+}
+.title {
+  color: var(--SECONDARY, #fede71);
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media (max-width: 700px) {
+}
+@media (max-width: 1040px) {
+}
