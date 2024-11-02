@@ -2,10 +2,10 @@
 import Image from "astro/components/Image.astro";
 
 export enum ImagesSourceEnum {
-  STOCK_IMAGE_1 = "/public/stock-image-katsiaryna-endruszkiewicz.svg",
-  STOCK_IMAGE_2 = "/public/stock-image-dom-hill.svg",
-  STOCK_IMAGE_3 = "/public/stock-image-ave-calvar.svg",
-  STOCK_IMAGE_4 = "/public/stock-image-aiony-haust.svg",
+  STOCK_IMAGE_1 = "/stock-image-katsiaryna-endruszkiewicz.svg",
+  STOCK_IMAGE_2 = "/stock-image-dom-hill.svg",
+  STOCK_IMAGE_3 = "/stock-image-ave-calvar.svg",
+  STOCK_IMAGE_4 = "/stock-image-aiony-haust.svg",
 }
 export interface CastleImage {
   src: ImagesSourceEnum;
@@ -35,10 +35,21 @@ const { images } = Astro.props;
 </div>
 
 <style>
+  @media (max-width: 700px) /*/mobile size*/ {
+    .horizontal-images-group {
+      flex-direction: column;
+      height: fit-content;
+    }
+    .shadow:nth-child(3) {
+      display: none;
+    }
+    .shadow:last-child {
+      display: none;
+    }
+  }
   .horizontal-images-group {
     display: flex;
     align-self: stretch;
-    height: 39.1875rem;
     padding: 4.375rem 3.125rem;
     justify-content: space-between;
     align-items: center;
