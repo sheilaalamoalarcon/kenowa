@@ -1,91 +1,34 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import CustomInput from "../components/CustomInput";
-import Image from "astro/components/Image.astro";
+import AuthLayout from "@/layouts/AuthLayout.astro";
+import CustomButton from "@/components/CustomButton";
 ---
 
-<Layout title="LogIn">
-  <main id="main">
-    <div id="orange-upper-section">
-      <Image
-        width={200}
-        height={294.62}
-        loading={"lazy"}
-        src="/public/big-logo.svg"
-        alt="big-logo"
-      />
-      <p id="login-big-text">
-        Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend.
-        Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh
-        enim est arcu diam.
-      </p>
-      <p id="login-small-text">
-        Cursus vehicula orci phasellus cum nullam sagittis sagittis varius. Non
-        orci convallis arcu ultrices aliquam senectus. Mauris vitae mi id a
-        posuere in id. Nulla sit nisl magna ligula nisl. Sit nibh tristique
-        semper
-      </p>
-    </div>
-    <form id="form">
-      <CustomInput placeholder="Enter your email" name="email" client:load />
-      <CustomInput
-        placeholder="Enter your password"
-        name="password"
-        client:load
-      />
-    </form>
-  </main>
-  <style>
-    #main {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
-      height: 100vh;
-      width: 100vw;
+<AuthLayout title="Log in">
+  <CustomInput
+    placeholder="Enter your email"
+    name="email"
+    type="email"
+    client:load
+    required
+  />
+  <CustomInput
+    placeholder="Enter your password"
+    name="password"
+    type="password"
+    required
+    client:load
+  />
+  <script>
+    import { CUser } from "@/constants/classes";
 
-      background: var(--BACKGROUND, #f5faf9);
-    }
-    #orange-upper-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 50vw;
-      height: 100vh;
+    const inputs = document.getElementsByClassName("custom-input");
+    const email = inputs[0] as HTMLInputElement;
+    const password = inputs[1] as HTMLInputElement;
+    const user = new CUser(email.value, password.value);
 
-      padding: 11rem 6.875rem 11rem 7rem;
-
-      background: var(--PRIMARY, #f36337);
-    }
-    #login-big-text {
-      color: var(--BACKGROUND, #f5faf9);
-      text-align: center;
-
-      /* HEADING_3 */
-      font-size: 2rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 110%; /* 2.2rem */
-    }
-    #login-small-text {
-      color: var(--BACKGROUND, #f5faf9);
-
-      /* BODY_EXTRA_BIG_BOLD */
-      font-size: 1.125rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-    #form {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 100vw;
-      height: 64rem;
-      padding: 0rem 12.1875rem 0rem 12.25rem;
-      background: var(--BACKGROUND, #f5faf9);
-    }
-  </style>
-</Layout>
+    const button = document.getElementById("custom-button");
+    button?.addEventListener("click", user.LogIn);
+  </script>
+  <CustomButton title={"log in"} />
+</AuthLayout>
