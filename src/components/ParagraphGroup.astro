@@ -1,0 +1,33 @@
+---
+import type { CParagraph } from "@/constants/classes";
+import Paragraph from "./Paragraph.astro";
+
+interface Props {
+  content: CParagraph[];
+}
+
+const { content } = Astro.props;
+---
+
+<div class="landing-info">
+  {content.map((paragraph: CParagraph) => <Paragraph {...paragraph} />)}
+</div>
+<style>
+  @media (max-width: 700px) /*/mobile size*/ {
+    .landing-info {
+      flex-direction: column;
+      align-self: center;
+    }
+  }
+  @media (max-width: 991px) {
+  }
+  @media (min-width: 992px) {
+    .landing-info {
+      display: flex;
+      padding: 0rem 3.125rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      align-self: stretch;
+    }
+  }
+</style>
