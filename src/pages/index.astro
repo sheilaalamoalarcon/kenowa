@@ -1,62 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
-import LandingImages, {
-  ImagesSourceEnum,
-  type CastleImage,
-} from "../components/LandingImages.astro";
+import LandingImages from "../components/LandingImages.astro";
 import Footer from "../components/Footer.astro";
 import CustomButton from "../components/CustomButton.tsx";
 import Image from "astro/components/Image.astro";
-import { API_ROUTES, HeaderTypeEnum, WebRoutesEnum } from "@/constants/enums";
-
-const _landingImages: CastleImage[] = [
-  {
-    src: ImagesSourceEnum.STOCK_IMAGE_1,
-    isRound: true,
-  },
-  {
-    src: ImagesSourceEnum.STOCK_IMAGE_2,
-    isRound: false,
-  },
-  {
-    src: ImagesSourceEnum.STOCK_IMAGE_3,
-    isRound: true,
-  },
-  {
-    src: ImagesSourceEnum.STOCK_IMAGE_4,
-    isRound: false,
-  },
-];
+import { HeaderTypeEnum, WebRoutesEnum } from "@/constants/enums";
+import ParagraphGroup from "@/components/ParagraphGroup.astro";
+import {
+  landingCopies,
+  landingImages,
+  welcomeMessage,
+} from "@/constants/constants";
 ---
 
 <Layout title="Kenowa">
   <main>
     <Header headerType={HeaderTypeEnum.PASSENGER} />
-    <div id="welcome_message">
+    <div id="welcome-message">
       <Image
         src="/landing-top-image.svg"
-        alt="landing-top-image"
+        alt="landing-top"
         id="landing-top-image"
-        loading={"lazy"}
+        loading={"eager"}
         width={697}
         height={464}
       />
-      <div id="welcome_message_text">
-        <p class="instructions">
-          Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend.
-          Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh
-          enim est arcu diam. Pellentesque proin suspendisse egestas ut sed
-          vitae vel. Lectus purus cum diam cursus id pellentesque diam. Cursus
-          vehicula orci Lorem ipsum dolor sit amet consectetur. At nunc massa
-          sed eleifend. Facilisis dolor sem amet purus sagittis odio. Adipiscing
-          tempus nibh enim est arcu diam. Pellentesque proin suspendisse egestas
-          ut sed vitae vel. Lectus purus cum diam cursus id pellentesque diam.
-          Cursus vehicula orci phasellus cum nullam sagittis sagittis varius.
-          Non orci convallis arcu ultrices aliquam senectus. Mauris vitae mi id
-          a posuere in id. Nulla sit nisl magna ligula nisl. Sit nibh tristique
-          semper
-        </p>
+      <div id="copy">
+        <p class="instructions">{welcomeMessage}</p>
         <CustomButton
           title="Start sharing"
           href={WebRoutesEnum.GLOBAL_CHAT}
@@ -64,173 +35,78 @@ const _landingImages: CastleImage[] = [
         />
       </div>
     </div>
-    <LandingImages images={_landingImages} />
-    <div class="landing-info">
-      <section class="landing-info-section">
-        <h4 class="landing-info-section-title">
-          Share all your visions in the global chat.
-        </h4>
-        <p class="landing-info-section-text">
-          Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend.
-          Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh
-          enim est arcu diam. Pellentesque proin suspendisse egestas ut sed
-          vitae vel. Lectus purus cum diam cursus id pellentesque diam. Cursus
-          vehicula orci phasellus cum nullam sagittis sagittis varius. Non orci
-          convallis arcu ultrices aliquam senectus. Mauris vitae mi id a posuere
-          in id. Nulla sit nisl magna ligula nisl. Sit nibh tristique semper
-        </p>
-      </section>
-      <section class="landing-info-section">
-        <h4 class="landing-info-section-title">
-          Search products with honest reviews.
-        </h4>
-        <p class="landing-info-section-text">
-          Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend.
-          Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh
-          enim est arcu diam. Pellentesque proin suspendisse egestas ut sed
-          vitae vel. Lectus purus cum diam cursus id pellentesque diam. Cursus
-          vehicula orci phasellus cum nullam sagittis sagittis varius. Non orci
-          convallis arcu ultrices aliquam senectus. Mauris vitae mi id a posuere
-          in id. Nulla sit nisl magna ligula nisl. Sit nibh tristique semper
-        </p>
-      </section>
-      <section class="landing-info-section">
-        <h4 class="landing-info-section-title">Build your online store.</h4>
-        <p class="landing-info-section-text">
-          Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend.
-          Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh
-          enim est arcu diam. Pellentesque proin suspendisse egestas ut sed
-          vitae vel. Lectus purus cum diam cursus id pellentesque diam. Cursus
-          vehicula orci phasellus cum nullam sagittis sagittis varius. Non orci
-          convallis arcu ultrices aliquam senectus. Mauris vitae mi id a posuere
-          in id. Nulla sit nisl magna ligula nisl. Sit nibh tristique semper
-        </p>
-      </section>
-    </div>
+
+    <LandingImages images={landingImages} />
+    <ParagraphGroup content={landingCopies} />
+
     <Footer />
   </main>
 
   <style>
-    main {
-      display: flex;
-      flex-direction: column;
-      color: var(-text-light);
-      overflow: hidden;
-      align-items: center;
-      gap: 4.625rem;
-    }
-    #welcome_message {
-      display: flex;
-      padding: 0rem 3.125rem;
-      justify-content: space-between;
-      align-items: center;
-      align-self: stretch;
-    }
-    #welcome_message_text {
-      display: flex;
-      height: 25.1875rem;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-start;
-      width: 20.9375rem;
-    }
-    #custom_button {
-      display: flex;
-      width: 20.9375rem;
-      height: 2.625rem;
-      padding: 0.5625rem 7rem;
-      justify-content: center;
-      align-items: center;
-      gap: 0.625rem;
-      flex-shrink: 0;
-
-      border-radius: var(--Corner-Extra-small, 0.25rem);
-      background: var(--TEXT, #45362f);
-    }
-    #custom_button_title {
-      color: var(--SECONDARY, #fede71);
-      font-size: 1.125rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-    .instructions {
-      color: var(--TEXT, #45362f);
-      text-align: right;
-      /* BODY_BIG_REGULAR */
-      font-size: 1rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-    .horizontal-images-group {
-      display: flex;
-      align-self: stretch;
-      height: 39.1875rem;
-      padding: 4.375rem 3.125rem;
-      justify-content: space-between;
-      align-items: center;
-
-      background: var(--TEXT, #45362f);
-    }
-    #image_round {
-      border-radius: var(--Corner-Full, 62.5rem) var(--Corner-Full, 62.5rem)
-        0rem 0rem;
-      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-      object-fit: cover;
-      max-height: 30.5625rem;
-      aspect-ratio: 18/30;
-    }
-    #image_rectangle {
-      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-      object-fit: cover;
-      max-height: 30.5625rem;
-      aspect-ratio: 12/30;
-    }
-    .landing-info {
-      display: flex;
-      padding: 0rem 3.125rem;
-      justify-content: space-between;
-      align-items: flex-start;
-      align-self: stretch;
-    }
-    .landing-info-section {
-      display: flex;
-      width: 19rem;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2.25rem;
-    }
-    .landing-info-section-text {
-      color: var(--TEXT, #45362f);
-      text-align: center;
-      /* BODY_BIG_REGULAR */
-      font-size: 1rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-    .landing-info-section-title {
-      color: var(--PRIMARY, #f36337);
-      text-align: center;
-
-      /* HEADING_3 */
-      font-size: 2rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 110%; /* 2.2rem */
-    }
-
-    @media (max-width: 700px) /*/mobile size*/ {
-      #welcome_message {
+    @media (min-width: 500px) and (max-width: 740px) /*/mobile size*/ {
+      main {
+        display: flex;
         flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 4.625rem;
       }
-      .landing-info {
+      #welcome-message {
         flex-direction: column;
-        align-self: center;
       }
       #landing-top-image {
         width: 80vw;
+      }
+      #copy {
+        max-width: 100%;
+      }
+    }
+
+    @media (min-width: 741px) {
+      main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 4.625rem;
+      }
+      #landing-top-image {
+        width: 100vw;
+      }
+      #copy {
+        max-width: 100%;
+      }
+    }
+    @media (min-width: 992px) {
+      main {
+        display: flex;
+        flex-direction: column;
+        color: var(-text-light);
+        overflow: hidden;
+        align-items: center;
+        gap: 4.625rem;
+      }
+      #welcome-message {
+        display: flex;
+        padding: 0rem 3.125rem;
+        justify-content: space-between;
+        align-items: center;
+        align-self: stretch;
+      }
+      #copy {
+        max-width: 50%;
+      }
+      .instructions {
+        color: var(--TEXT, #45362f);
+        text-align: right;
+        /* BODY_BIG_REGULAR */
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+      #landing-top-image {
+        width: 697px;
       }
     }
   </style>

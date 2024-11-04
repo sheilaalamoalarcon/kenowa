@@ -25,6 +25,9 @@ export class CUser {
   async CreateUser() {
     try {
       await fetch(API_ROUTES.REGISTER, {
+        headers: {
+          "Content-Type": "application/form-data",
+        },
         method: "POST",
         body: JSON.stringify({
           email: this.email,
@@ -62,4 +65,20 @@ export class CMessages {
     this.content = content;
     this.propietary = propietary;
   }
+}
+
+export class CProduct {
+  src: string = "";
+  title: string = "";
+  subtitle: string = "";
+
+  constructor(src: string, title: string, subtitle: string) {
+    this.src = src;
+    this.title = title;
+    this.subtitle = subtitle;
+  }
+}
+export class CParagraph {
+  title!: string;
+  description!: string;
 }
