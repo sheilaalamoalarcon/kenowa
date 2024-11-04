@@ -1,0 +1,46 @@
+---
+import type { CProduct } from "@/constants/classes";
+import ProductCard from "./ProductCard.astro";
+
+interface Props {
+  productsData: CProduct[];
+}
+const { productsData } = Astro.props;
+---
+
+<div id="selected-products-container">
+  {
+    productsData.map(({ src, title, subtitle }: CProduct) => (
+      <ProductCard src={src} title={title} subtitle={subtitle} />
+    ))
+  }
+</div>
+<style>
+  @media (max-width: 767px) {
+    #selected-products-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100vw;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  @media (max-width: 991px) {
+    #selected-products-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100vw;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  @media (min-width: 991px) {
+    #selected-products-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+</style>
