@@ -7,12 +7,12 @@ interface Props {
 }
 export default function CustomButton({ title, href }: Props) {
   return (
-    <a href={href}>
-      <button id="custom-button" className={styles.container}>
+    <button id="custom-button" className={styles.container}>
+      <a href={href}>
         <p id="custom-button-title" className={styles.title}>
           {title}
         </p>
-      </button>
-    </a>
+      </a>
+    </button>
   );
 }
