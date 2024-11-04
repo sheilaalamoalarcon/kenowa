@@ -1,10 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
-import ProductCard from "../components/ProductCard.astro";
 import Footer from "../components/Footer.astro";
 import Image from "astro/components/Image.astro";
 import { HeaderTypeEnum } from "@/constants/enums";
+import ProductPage from "@/components/productPage.astro";
+import { _defaultCards } from "@/constants/constants";
 
 const { shopName } = Astro.params;
 ---
@@ -23,68 +24,16 @@ const { shopName } = Astro.params;
       alt="store-imag"
       loading={"lazy"}
     />
-    <div id="product-grid">
-      <ProductCard
-        src="/public/stock-image-katsiaryna-endruszkiewicz.svg"
-        title="Test"
-        subtitle="Test"
-      />
-      <ProductCard
-        src="/public/stock-image-katsiaryna-endruszkiewicz.svg"
-        title="Test"
-        subtitle="Test"
-      />
-      <ProductCard
-        src="/public/stock-image-katsiaryna-endruszkiewicz.svg"
-        title="Test"
-        subtitle="Test"
-      />
-      <ProductCard
-        src="/public/stock-image-katsiaryna-endruszkiewicz.svg"
-        title="Test"
-        subtitle="Test"
-      />
-      <ProductCard
-        src="/public/stock-image-katsiaryna-endruszkiewicz.svg"
-        title="Test"
-        subtitle="Test"
-      />
-      <ProductCard
-        src="/public/stock-image-katsiaryna-endruszkiewicz.svg"
-        title="Test"
-        subtitle="Test"
-      />
-      <ProductCard
-        src="/public/stock-image-katsiaryna-endruszkiewicz.svg"
-        title="Test"
-        subtitle="Test"
-      />
-      <ProductCard
-        src="/public/stock-image-katsiaryna-endruszkiewicz.svg"
-        title="Test"
-        subtitle="Test"
-      />
-      <ProductCard
-        src="/public/stock-image-katsiaryna-endruszkiewicz.svg"
-        title="Test"
-        subtitle="Test"
-      />
-      <ProductCard
-        src="/public/stock-image-katsiaryna-endruszkiewicz.svg"
-        title="Test"
-        subtitle="Test"
-      />
-    </div>
+    <ProductPage productsData={_defaultCards} />
     <Footer />
   </main>
   <style>
     #shop-name-container {
       display: flex;
-      padding: 1.4375rem 36.5625rem 1.5rem 39.5625rem;
-      justify-content: flex-end;
+      padding: 1.4375rem 0;
+      justify-content: center;
       align-items: center;
-      align-self: stretch;
-
+      width: 100%;
       background: var(--TEXT, #45362f);
     }
     #store-name {
@@ -99,7 +48,7 @@ const { shopName } = Astro.params;
     }
     #store-image {
       height: 13.125rem;
-      width: 100vw;
+      width: 100%;
 
       object-fit: cover;
     }
