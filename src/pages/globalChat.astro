@@ -11,28 +11,8 @@ import { HeaderTypeEnum } from "@/constants/enums";
   <main>
     <Header headerType={HeaderTypeEnum.USER} />
     <div id="content">
-      <div id="product-column">
-        <ProductCard
-          src="/public/stock-image-aiony-haust.svg"
-          title="Bolso Faux Leather"
-          subtitle="30€"
-        />
-        <ProductCard
-          src="/public/stock-image-aiony-haust.svg"
-          title="Bolso Faux Leather"
-          subtitle="30€"
-        />
-        <ProductCard
-          src="/public/stock-image-aiony-haust.svg"
-          title="Bolso Faux Leather"
-          subtitle="30€"
-        />
-        <ProductCard
-          src="/public/stock-image-aiony-haust.svg"
-          title="Bolso Faux Leather"
-          subtitle="30€"
-        />
-      </div>
+      <CustomButton client:load title="Create new message" />
+
       <div id="messages-container">
         <ProductCard
           src="/public/stock-image-aiony-haust.svg"
@@ -47,95 +27,34 @@ import { HeaderTypeEnum } from "@/constants/enums";
           horizontal
         />
       </div>
-      <div id="product-column">
-        <CustomButton client:load title="Create new message" />
-
-        <div id="trending">
-          <h5>Trending Theme</h5>
-          <p>Trending time</p>
-        </div>
-        <div id="trending">
-          <h5>Trending Theme</h5>
-          <p>Trending time</p>
-        </div>
-        <div id="trending">
-          <h5>Trending Theme</h5>
-          <p>Trending time</p>
-        </div>
-      </div>
     </div>
     <Footer />
+    <style>
+      @media (min-width: 500px) and (max-width: 740px) /*/mobile size*/ {
+        #content {
+          display: flex;
+          flex-direction: column;
+        }
+        #messages-container {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 4.625rem;
+        }
+      }
+      @media (min-width: 741px) {
+      }
+      @media (min-width: 992px) {
+        #content {
+          display: flex;
+          flex-direction: column;
+        }
+
+        #messages-container {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4.625rem;
+        }
+      }
+    </style>
   </main>
-  <style>
-    #content {
-      display: flex;
-      padding: 3.125rem 1.875rem;
-      justify-content: space-between;
-      align-items: flex-start;
-      align-self: stretch;
-    }
-    #product-column {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1.625rem;
-    }
-    #messages-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 4.625rem;
-      flex: 1 0 0;
-      align-self: stretch;
-    }
-    button {
-      display: flex;
-      padding: 0.5625rem 7rem;
-      justify-content: center;
-      align-items: center;
-      gap: 0.625rem;
-      align-self: stretch;
-
-      border-radius: var(--Corner-Extra-small, 0.25rem);
-      background: var(--TEXT, #45362f);
-    }
-    #button-text {
-      color: var(--SECONDARY, #fede71);
-      font-size: 1.125rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-    #trending {
-      display: flex;
-      padding: 0.3125rem;
-      justify-content: flex-end;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.0625rem;
-      align-self: stretch;
-    }
-    #trending h5 {
-      align-self: stretch;
-
-      color: var(--TEXT, #45362f);
-
-      /* BODY_BIG_REGULAR */
-      font-size: 1rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-    #trending p {
-      color: var(--PRIMARY, #f36337);
-      text-align: center;
-
-      /* BODY_SMALL_BOLD */
-      font-size: 0.75rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-  </style>
 </Layout>
