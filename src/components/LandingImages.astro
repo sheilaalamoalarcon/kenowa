@@ -18,16 +18,16 @@ interface Props {
 const { images } = Astro.props;
 ---
 
-<div class="horizontal-images-group">
+<div class="container">
   {
-    images.map((image: CastleImage) => (
+    images.map((image: CastleImage, i) => (
       <Image
         width={288}
         height={489}
         loading={"lazy"}
         src={image.src}
-        alt={image.src.slice(3)}
-        id={image.isRound ? "image_round" : "image_rectangle"}
+        alt={`castle-${i}`}
+        id={image.isRound ? "round" : "rectangle"}
         class="shadow"
       />
     ))
@@ -36,9 +36,19 @@ const { images } = Astro.props;
 
 <style>
   @media (max-width: 700px) /*/mobile size*/ {
-    .horizontal-images-group {
+    .container {
+      display: flex;
       flex-direction: column;
-      height: fit-content;
+      justify-content: space-between;
+      padding: 4.375rem 3.125rem;
+
+      background: var(--TEXT, #45362f);
+    }
+    .shadow {
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      object-fit: cover;
+      max-height: 30.5625rem;
+      aspect-ratio: 18/30;
     }
     .shadow:nth-child(3) {
       display: none;
@@ -46,27 +56,71 @@ const { images } = Astro.props;
     .shadow:last-child {
       display: none;
     }
+    #round {
+      border-radius: var(--Corner-Full, 62.5rem) var(--Corner-Full, 62.5rem)
+        0rem 0rem;
+      align-self: center;
+    }
+    #rectangle {
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      align-self: center;
+    }
   }
-  .horizontal-images-group {
-    display: flex;
-    align-self: stretch;
-    padding: 4.375rem 3.125rem;
-    justify-content: space-between;
-    align-items: center;
+  @media (max-width: 991px) {
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 4.375rem 3.125rem;
+      gap: 7.56rem;
 
-    background: var(--TEXT, #45362f);
+      background: var(--TEXT, #45362f);
+    }
+    .shadow {
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      object-fit: cover;
+      max-height: 30.5625rem;
+      aspect-ratio: 18/30;
+    }
+    .shadow:nth-child(3) {
+      display: none;
+    }
+    .shadow:last-child {
+      display: none;
+    }
+    #round {
+      border-radius: var(--Corner-Full, 62.5rem) var(--Corner-Full, 62.5rem)
+        0rem 0rem;
+      align-self: center;
+    }
+    #rectangle {
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      align-self: center;
+    }
   }
-  .shadow {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    object-fit: cover;
-    max-height: 30.5625rem;
-    aspect-ratio: 18/30;
-  }
-  #image_round {
-    border-radius: var(--Corner-Full, 62.5rem) var(--Corner-Full, 62.5rem) 0rem
-      0rem;
-  }
-  #image_rectangle {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  @media (min-width: 992px) {
+    .container {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+      padding: 4.375rem 3.125rem;
+      gap: 7.56rem;
+
+      background: var(--TEXT, #45362f);
+    }
+    .shadow {
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      object-fit: cover;
+      max-height: 30.5625rem;
+      aspect-ratio: 18/30;
+    }
+    #round {
+      border-radius: var(--Corner-Full, 62.5rem) var(--Corner-Full, 62.5rem)
+        0rem 0rem;
+    }
+    #rectangle {
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
   }
 </style>
