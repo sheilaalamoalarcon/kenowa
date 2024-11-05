@@ -14,6 +14,7 @@ export default function CustomInput({
   required = false,
 }: CustomInputProps) {
   const [props, setProps] = useState({});
+  const [className, setClassName] = useState<string>();
 
   function switchProps() {
     const basicProps = {
@@ -24,24 +25,32 @@ export default function CustomInput({
     };
     switch (type) {
       case "file":
+        setClassName(styles.customInputFile);
+
         return setProps({
           ...basicProps,
           accept: "image/png",
           className: styles.inputFile,
         });
       case "password":
+        setClassName(styles.customInput);
+
         return setProps({
           ...basicProps,
           minlength: "8",
           className: styles.input,
         });
       case "email":
+        setClassName(styles.customInput);
+
         return setProps({
           ...basicProps,
           pattern: ".+@example.com",
           className: styles.input,
         });
       case "text":
+        setClassName(styles.customInput);
+
         return setProps({
           ...basicProps,
           minlength: "8",
@@ -56,11 +65,9 @@ export default function CustomInput({
     switchProps();
   }, [type]);
   return (
-    <div className={styles.customInput} id={"input-container"}>
-      <p className={styles.title} id="input-title">
-        {name}
-      </p>
-      <input class={"custom-input"} id="input" {...props} />
+    <div className={className}>
+      <p className={styles.title}>{name}</p>
+      <input {...props} />
     </div>
   );
 }
