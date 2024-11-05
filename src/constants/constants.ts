@@ -109,26 +109,26 @@ export const defaultComments: CustomCardClass[] = [
 ];
 
 export const produtDescription: string =
-  "Lorem ipsum dolor sit amet consectetur. Donec est ultricies diam enim eget facilisi aliquet. Odio laoreet pretium turpis bibendum pulvinar. Eu ut ipsum nibh elementum neque sit non aliquet sit. Cras bibendum egestas malesuada sagittis. Orci eu dolor quam pellentesque elit ultricies ullamcorper. Pellentesque molestie quis non placerat amet. Fermentum diam consectetur ultricies est duis justo. Duis  placerat nascetur interdum elit venenatis auctor felis fermentum. Viverra in ac mauris integer eu odio. Et aliquet laoreet gravida dictum velit orci vehicula nibh morbi. Porttitor turpis tristique tortor ut.";
+  "Preparate para sumergirte en nuestra web y encontrar los productos con las mejores reviews solo de clientes 100% reales. Share all your visions in the global chat. Search products with honest reviews. Build your fashion online store.";
 export const landingCopies: CParagraph[] = [
   {
     title: "Share all your visions in the global chat.",
     description:
-      "Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend. Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh enim est arcu diam. Pellentesque proin suspendisse egestas ut sed vitae vel. Lectus purus cum diam cursus id pellentesque diam. Cursus vehicula orci phasellus cum nullam sagittis sagittis varius. Non orci convallis arcu ultrices aliquam senectus. Mauris vitae mi id a posuere in id. Nulla sit nisl magna ligula nisl. Sit nibh tristique semper",
+      "Comparte tus ideas y opiniones con el resto de la comunidad en nuestro chat global.",
   },
   {
     title: "Search products with honest reviews.",
     description:
-      "Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend. Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh enim est arcu diam. Pellentesque proin suspendisse egestas ut sed vitae vel. Lectus purus cum diam cursus id pellentesque diam. Cursus vehicula orci phasellus cum nullam sagittis sagittis varius. Non orci convallis arcu ultrices aliquam senectus. Mauris vitae mi id a posuere in id. Nulla sit nisl magna ligula nisl. Sit nibh tristique semper",
+      "Preparate para sumergirte en nuestra web y encontrar los productos con las mejores reviews solo de clientes 100% reales.",
   },
   {
     title: "Build your online store.",
     description:
-      "Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend. Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh enim est arcu diam. Pellentesque proin suspendisse egestas ut sed vitae vel. Lectus purus cum diam cursus id pellentesque diam. Cursus vehicula orci phasellus cum nullam sagittis sagittis varius. Non orci convallis arcu ultrices aliquam senectus. Mauris vitae mi id a posuere in id. Nulla sit nisl magna ligula nisl. Sit nibh tristique semper",
+      "Crea tu propia tienda online de moda y empieza a vender tus productos en todo el mundo.",
   },
 ];
 export const welcomeMessage: string =
-  "Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend. Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh enim est arcu diam. Pellentesque proin suspendisse egestas ut sed vitae vel. Lectus purus cum diam cursus id pellentesque diam. Cursus vehicula orci Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend. Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh enim est arcu diam. Pellentesque proin suspendisse egestas ut sed vitae vel. Lectus purus cum diam cursus id pellentesque diam. Cursus vehicula orci phasellus cum nullam sagittis sagittis varius. Non orci convallis arcu ultrices aliquam senectus. Mauris vitae mi id a posuere in id. Nulla sit nisl magna ligula nisl. Sit nibh tristique semper";
+  "Bienvenido a Kenowa. Preparate para sumergirte en nuestra web y encontrar los productos con las mejores reviews solo de clientes 100% reales. Share all your visions in the global chat. Search products with honest reviews. Build your fashion online store.";
 
 export const landingImages: CastleImage[] = [
   {
