@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Image from "astro/components/Image.astro";
 
 interface Props {
   title: string;
@@ -11,40 +10,60 @@ const { title } = Astro.props;
 
 <Layout title={title}>
   <main id="main">
-    <div class="grid">
-      <div id="orange-upper-section">
-        <Image
-          width={200}
-          height={294.62}
-          loading={"lazy"}
-          src="/public/big-logo.svg"
-          alt="big-logo"
-          id={"big-logo"}
-        />
-        <p id="login-big-text">
-          Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend.
-          Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh
-          enim est arcu diam.
-        </p>
-        <p id="login-small-text">
-          Cursus vehicula orci phasellus cum nullam sagittis sagittis varius.
-          Non orci convallis arcu ultrices aliquam senectus. Mauris vitae mi id
-          a posuere in id. Nulla sit nisl magna ligula nisl. Sit nibh tristique
-          semper
-        </p>
-      </div>
-      <div class="lower-section">
-        <form onsubmit="" id="form">
-          <slot class="slot" />
-        </form>
-      </div>
+    <div id="orange-upper-section">
+      <div class="logo"></div>
+      <p id="big-text" class="display-none">
+        Preparate para sumergirte en nuestra web y encontrar los productos con
+        las mejores reviews solo de clientes 100% reales.
+      </p>
+      <ul id="small-text" class="display-none">
+        <li>Share all your visions in the global chat.</li>
+        <li>Search products with honest reviews.</li>
+        <li>Build your fashion online store.</li>
+      </ul>
     </div>
+    <form class="lower-section" id="form">
+      <slot class="slot" />
+    </form>
   </main>
-  <style>
+</Layout>
+<style>
+  @media (min-width: 500px) and (max-width: 991px) {
     #main {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       height: 100vh;
+      padding: 5.625rem 1.0625rem;
     }
-    .grid {
+    .lower-section {
+      width: 100%;
+    }
+    .column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3.1rem;
+    }
+    .display-none {
+      display: none;
+    }
+    .logo {
+      width: 11.7rem;
+      height: 3.18rem;
+      background: url("/public/small-logo.svg");
+    }
+  }
+
+  @media (min-width: 992px) {
+    .logo {
+      height: 19.5rem;
+      width: 13rem;
+      background: url("/public/big-logo.svg");
+    }
+    #main {
       display: grid;
       grid-template-columns: 1fr 1fr;
       background: var(--BACKGROUND, #f5faf9);
@@ -63,7 +82,7 @@ const { title } = Astro.props;
       padding: 11rem 6.875rem 11rem 7rem;
       background: var(--PRIMARY, #f36337);
     }
-    #login-big-text {
+    #big-text {
       color: var(--BACKGROUND, #f5faf9);
       text-align: center;
 
@@ -73,7 +92,7 @@ const { title } = Astro.props;
       font-weight: 400;
       line-height: 110%; /* 2.2rem */
     }
-    #login-small-text {
+    #small-text {
       color: var(--BACKGROUND, #f5faf9);
 
       /* BODY_EXTRA_BIG_BOLD */
@@ -85,24 +104,7 @@ const { title } = Astro.props;
     #form {
       display: flex;
       flex-direction: column;
+      padding: 0rem 8rem;
     }
-    @media (max-width: 700px) {
-      .grid {
-        display: flex;
-        justify-content: center;
-        height: 100vh;
-        /*/margin: 5.62rem 0;/*/
-      }
-      #orange-upper-section {
-        display: none;
-      }
-      .column {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        gap: 3.1rem;
-      }
-    }
-  </style>
-</Layout>
+  }
+</style>
