@@ -16,9 +16,9 @@ const productCardClass = horizontal ? "product-card-big" : "product-card";
   <Image
     width={880}
     height={100}
-    loading={"lazy"}
+    loading={"eager"}
     src={src}
-    alt=`${productCardClass}-image`
+    alt={productCardClass}
     id=`${productCardClass}-image`
   />
   <p id=`${productCardClass}-text`>{title}</p>
@@ -29,14 +29,14 @@ const productCardClass = horizontal ? "product-card-big" : "product-card";
   #product-card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: flex-start;
-    gap: 0.625rem;
-    border-radius: 0.8125rem;
+    /* gap: 0.625rem; */
+    /* border-radius: 0.8125rem; */
   }
   #product-card-image {
-    width: 9.375rem;
-    height: 6.5rem;
+    width: 100%;
+    aspect-ratio: 1/1;
     border-radius: var(--Corner-Medium, 0.75rem);
     background:
       url(<path-to-image>) lightgray 50% / cover no-repeat,

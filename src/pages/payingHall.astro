@@ -1,91 +1,39 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
-import CustomButton from "../components/CustomButton";
 import Footer from "../components/Footer.astro";
 import { HeaderTypeEnum } from "@/constants/enums";
-import UserHeader from "@/components/UserHeader.astro";
 import ProductPage from "@/components/productPage.astro";
 import { _defaultCards } from "@/constants/constants";
+import BagDetails from "@/components/BagDetails.astro";
 ---
 
 <Layout title="Paying Hall">
   <main class="main">
     <Header headerType={HeaderTypeEnum.USER} />
-    <div id="paying-hall-content">
+    <div class="content">
       <ProductPage productsData={_defaultCards} />
-      <div id="paying-hall-information">
-        <UserHeader
-          src="/public/stock-image-aiony-haust.svg"
-          text="Madelyn Vaccaro"
-        />
-        <div id="paying-details-container">
-          <div class="row">
-            <p id="subtotal">Subtotal</p><p id="subtotal-price">131.95€</p>
-          </div>
-          <div class="row">
-            <p id="total">Total</p><p id="total-price">131.95€</p>
-          </div>
-          <p id="accepted-paying-mode">MÉTODO DE PAGO ACEPTADO</p>
-          <CustomButton title="Pay" />
-        </div>
-      </div>
+      <BagDetails firstValue={90.0} secondValue={70.0} />
     </div>
     <Footer />
   </main>
   <style>
-    @media (max-width: 767px) /*/mobile size*/ {
-      .main {
+    .main0 {
+      gap: 1.56rem;
+    }
+    @media (min-width: 500px) and (max-width: 991px) {
+      .content {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 4.625rem;
-        flex-shrink: 0;
-      }
-      #paying-hall-content {
-        display: flex;
-        padding: 0rem 1.875rem;
-        justify-content: space-between;
-        align-items: flex-start;
-        align-self: stretch;
-      }
-      #paying-hall-information {
-        display: flex;
-        width: 20.9375rem;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 13.125rem;
-      }
-      #paying-hall-content {
-        display: flex;
-        flex-direction: column-reverse;
+        margin: 1.56rem 0;
       }
     }
-    @media (max-width: 991px) {
-    }
-    @media (min-width: 991px) {
-      .main {
+    @media (min-width: 992px) {
+      .content {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4.625rem;
-        flex-shrink: 0;
-      }
-      #paying-hall-content {
-        display: flex;
-        padding: 0rem 1.875rem;
+        flex-direction: row;
         justify-content: space-between;
-        align-items: flex-start;
-        align-self: stretch;
-      }
-      #paying-hall-information {
-        display: flex;
-        width: 20.9375rem;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 13.125rem;
+        margin: 1.56rem;
       }
     }
   </style>
