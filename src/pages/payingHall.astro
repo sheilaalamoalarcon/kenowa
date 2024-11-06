@@ -18,14 +18,12 @@ import BagDetails from "@/components/BagDetails.astro";
     <Footer />
   </main>
   <style>
-    .main0 {
-      gap: 1.56rem;
-    }
     @media (min-width: 500px) and (max-width: 991px) {
       .content {
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
         margin: 1.56rem 0;
+        gap: 7.4rem;
       }
     }
     @media (min-width: 992px) {
@@ -34,6 +32,7 @@ import BagDetails from "@/components/BagDetails.astro";
         flex-direction: row;
         justify-content: space-between;
         margin: 1.56rem;
+        gap: 7.4rem;
       }
     }
   </style>
