@@ -4,14 +4,20 @@ import ProductCard from "./ProductCard.astro";
 
 interface Props {
   productsData: CProduct[];
+  counter?: boolean;
 }
-const { productsData } = Astro.props;
+const { productsData, counter } = Astro.props;
 ---
 
 <div id="container">
   {
     productsData.map(({ src, title, subtitle }: CProduct) => (
-      <ProductCard src={src} title={title} subtitle={subtitle} />
+      <ProductCard
+        src={src}
+        title={title}
+        subtitle={subtitle}
+        counter={counter}
+      />
     ))
   }
 </div>

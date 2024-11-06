@@ -1,14 +1,15 @@
 ---
 import Image from "astro/components/Image.astro";
 import Arrow from "./Arrow.astro";
-
+import Counter from "./Counter";
 interface Props {
   src: string;
   title: string;
   subtitle: string;
   horizontal?: boolean;
+  counter?: boolean;
 }
-const { src, title, subtitle, horizontal } = Astro.props;
+const { src, title, subtitle, horizontal, counter } = Astro.props;
 const productCardClass = horizontal ? "product-card-big" : "product-card";
 ---
 
@@ -16,7 +17,7 @@ const productCardClass = horizontal ? "product-card-big" : "product-card";
   <Image
     width={880}
     height={100}
-    loading={"eager"}
+    loading={"lazy"}
     src={src}
     alt={productCardClass}
     id=`${productCardClass}-image`
@@ -24,6 +25,7 @@ const productCardClass = horizontal ? "product-card-big" : "product-card";
   <p id=`${productCardClass}-text`>{title}</p>
   <p id=`${productCardClass}-additional-text`>{subtitle}</p>
   {horizontal && <Arrow color="#FEDE71" width={"100%"} />}
+  {counter ? <Counter client:load maxValue={3} /> : null}
 </div>
 <style>
   #product-card {
