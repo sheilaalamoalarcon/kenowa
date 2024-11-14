@@ -1,26 +1,35 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
-import ProductCard from "../components/ProductCard.astro";
-import CustomButton from "@/components/CustomButton";
-import Footer from "../components/Footer.astro";
-import { HeaderTypeEnum } from "@/constants/enums";
+import Card from "../components/ProductCard.astro";
+import {
+  ClickActions,
+  HeaderTypeEnum,
+  ModalChildrens,
+} from "@/constants/enums";
+import Modal from "@/components/Modal/index";
+import Button from "@/components/CustomButton";
+import Footer from "@/components/Footer/Footer.astro";
 ---
 
 <Layout title="global-chat">
-  <main>
+  <main id="container">
     <Header headerType={HeaderTypeEnum.USER} />
     <div id="content">
-      <CustomButton client:load title="Create new message" />
-
+      <Button
+        title="Create new message"
+        clickAction={ClickActions.OPEN_MODULE}
+        client:load
+      />
+      <Modal type={ModalChildrens.NEW_MESSAGE} client:visible />
       <div id="messages-container">
-        <ProductCard
+        <Card
           src="/public/stock-image-aiony-haust.svg"
           title="Bolso Faux Leather"
           subtitle="Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend. Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh enim est arcu diam."
           horizontal
         />
-        <ProductCard
+        <Card
           src="/public/stock-image-aiony-haust.svg"
           title="Bolso Faux Leather"
           subtitle="Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend. Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh enim est arcu diam."
@@ -48,7 +57,6 @@ import { HeaderTypeEnum } from "@/constants/enums";
           display: flex;
           flex-direction: column;
         }
-
         #messages-container {
           display: grid;
           grid-template-columns: 1fr 1fr;

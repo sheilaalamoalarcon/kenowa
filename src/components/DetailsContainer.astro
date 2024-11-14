@@ -1,4 +1,5 @@
 ---
+import { ClickActions } from "@/constants/enums";
 import CustomButton from "./CustomButton";
 
 interface Props {
@@ -16,7 +17,11 @@ const warning = "Return up to 30 days";
 <div id="product-details-container" class="row">
   <h1 id="product-name">{productName}</h1>
   <h2 id="product-cost">{productCost}</h2>
-  <CustomButton title={buttonTitle} client:load />
+  <CustomButton
+    title={buttonTitle}
+    clickAction={ClickActions.NONE}
+    client:load
+  />
   <div id="product-information">
     <p id="product-information-vendor">Selled by {vendor}</p>
     <p id="product-information-warning">{warning}</p>
