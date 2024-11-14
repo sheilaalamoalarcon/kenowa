@@ -2,10 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import LandingImages from "../components/LandingImages.astro";
-import Footer from "../components/Footer.astro";
-import CustomButton from "../components/CustomButton.tsx";
+import Footer from "@/components/Footer/Footer.astro";
 import Image from "astro/components/Image.astro";
-import { HeaderTypeEnum, WebRoutesEnum } from "@/constants/enums";
+import { HeaderTypeEnum } from "@/constants/enums";
 import ParagraphGroup from "@/components/ParagraphGroup.astro";
 import {
   landingCopies,
@@ -28,11 +27,7 @@ import {
       />
       <div id="copy">
         <p class="instructions">{welcomeMessage}</p>
-        <CustomButton
-          title="Start sharing"
-          href={WebRoutesEnum.GLOBAL_CHAT}
-          client:load
-        />
+        <a href="/globalChat">Start Sharing</a>
       </div>
     </div>
 
