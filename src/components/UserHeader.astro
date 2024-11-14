@@ -8,35 +8,33 @@ interface Props {
 const { src, text } = Astro.props;
 ---
 
-<div id="user-header">
+<div id="container">
   <Image
     width={100}
     height={100}
-    loading={"lazy"}
+    loading={"eager"}
     src={src}
-    alt="user-header"
-    id="user-header-img"
+    alt="container"
+    id="img"
   />
-  <p id="user-header-text">{text}</p>
+  <p id="text">{text}</p>
   <style>
-    #user-header {
+    #container {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      align-self: stretch;
     }
-    #user-header-img {
-      width: 6.25rem;
-      height: 6.25rem;
-
-      border-radius: 100%;
+    #img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
       background: url(<path-to-image>) lightgray 50% / cover no-repeat;
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
+      border-radius: var(--Corner-Medium, 0.75rem);
       object-fit: cover;
       object-position: top;
     }
-    #user-header-text {
+    #text {
       color: var(--PURE_BLACK, #0d0708);
       text-align: center;
 
@@ -46,19 +44,8 @@ const { src, text } = Astro.props;
       font-weight: 400;
       line-height: 110%; /* 1.375rem */
     }
-    @media (max-width: 700px) {
-      #user-header-img {
-        width: 6.25rem;
-        height: 6.25rem;
-
-        border-radius: 100%;
-        background: url(<path-to-image>) lightgray 50% / cover no-repeat;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
-        object-fit: cover;
-        object-position: top;
-      }
-      #user-header-text {
+    @media (min-width: 500px) and (max-width: 991px) {
+      #text {
         color: var(--PURE_BLACK, #0d0708);
         text-align: center;
 
@@ -68,6 +55,8 @@ const { src, text } = Astro.props;
         font-weight: 400;
         line-height: 110%; /* 1.375rem */
       }
+    }
+    @media (min-width: 992px) {
     }
   </style>
 </div>

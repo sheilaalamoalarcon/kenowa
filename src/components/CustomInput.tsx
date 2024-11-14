@@ -1,12 +1,14 @@
 import type { HTMLInputTypeAttribute } from "preact/compat";
 import { useLayoutEffect, useState } from "preact/hooks";
 import styles from "../styles/CInput.module.css";
+
 interface CustomInputProps {
   name: string;
   placeholder: string;
   type: HTMLInputTypeAttribute;
   required: boolean;
 }
+
 export default function CustomInput({
   name,
   placeholder,
@@ -22,6 +24,7 @@ export default function CustomInput({
       required,
       placeholder,
       name,
+      label: name,
     };
     switch (type) {
       case "file":
@@ -45,7 +48,6 @@ export default function CustomInput({
 
         return setProps({
           ...basicProps,
-          pattern: ".+@example.com",
           className: styles.input,
         });
       case "text":
@@ -65,9 +67,9 @@ export default function CustomInput({
     switchProps();
   }, [type]);
   return (
-    <div className={className}>
-      <p className={styles.title}>{name}</p>
+    <label className={className}>
+      {name}
       <input {...props} />
-    </div>
+    </label>
   );
 }
