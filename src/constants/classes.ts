@@ -8,6 +8,7 @@ export class CUser {
   image?: Blob;
   username?: string;
   lastname?: string;
+  bag?: string[]; //id de cada producto
 
   constructor(
     email: string,
