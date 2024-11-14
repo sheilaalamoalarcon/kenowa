@@ -1,34 +1,8 @@
 ---
-import CustomInput from "../components/CustomInput";
 import AuthLayout from "@/layouts/AuthLayout.astro";
-import CustomButton from "@/components/CustomButton";
+import Form from "@/components/LogInForm/LogInForm";
 ---
 
 <AuthLayout title="Log in">
-  <CustomInput
-    placeholder="Enter your email"
-    name="email"
-    type="email"
-    client:load
-    required
-  />
-  <CustomInput
-    placeholder="Enter your password"
-    name="password"
-    type="password"
-    required
-    client:load
-  />
-  <script>
-    import { CUser } from "@/constants/classes";
-
-    const inputs = document.getElementsByClassName("custom-input");
-    const email = inputs[0] as HTMLInputElement;
-    const password = inputs[1] as HTMLInputElement;
-    const user = new CUser(email.value, password.value);
-
-    const button = document.getElementById("custom-button");
-    button?.addEventListener("click", user.LogIn);
-  </script>
-  <CustomButton title={"log in"} style="margin:5rem 0rem" client:load />
+  <Form client:load />
 </AuthLayout>
