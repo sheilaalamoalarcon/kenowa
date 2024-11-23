@@ -1,20 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Card from "../components/ProductCard.astro";
-import {
-  ClickActions,
-  HeaderTypeEnum,
-  ModalChildrens,
-} from "@/constants/enums";
+import { ClickActions, ModalChildrens } from "@/constants/enums";
 import Modal from "@/components/Modal/index";
-import Button from "@/components/CustomButton";
+import Button from "@/components/Button";
 import Footer from "@/components/Footer/Footer.astro";
+import CardGroupRenderer from "@/components/CardGroupRenderer";
+import Header from "@/components/Header";
 ---
 
 <Layout title="global-chat">
   <main id="container">
-    <Header headerType={HeaderTypeEnum.USER} />
+    <Header client:only="react" />
     <div id="content">
       <Button
         title="Create new message"
@@ -22,32 +18,19 @@ import Footer from "@/components/Footer/Footer.astro";
         client:load
       />
       <Modal type={ModalChildrens.NEW_MESSAGE} client:visible />
-      <div id="messages-container">
-        <Card
-          src="/public/stock-image-aiony-haust.svg"
-          title="Bolso Faux Leather"
-          subtitle="Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend. Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh enim est arcu diam."
-          horizontal
-        />
-        <Card
-          src="/public/stock-image-aiony-haust.svg"
-          title="Bolso Faux Leather"
-          subtitle="Lorem ipsum dolor sit amet consectetur. At nunc massa sed eleifend. Facilisis dolor sem amet purus sagittis odio. Adipiscing tempus nibh enim est arcu diam."
-          horizontal
-        />
-      </div>
+      <CardGroupRenderer client:only="react" />
     </div>
     <Footer />
     <style>
+      main {
+        display: grid;
+        min-height: 100dvh;
+        grid-template-rows: auto 1fr auto;
+      }
       @media (min-width: 500px) and (max-width: 740px) /*/mobile size*/ {
         #content {
           display: flex;
           flex-direction: column;
-        }
-        #messages-container {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 4.625rem;
         }
       }
       @media (min-width: 741px) {
@@ -56,11 +39,6 @@ import Footer from "@/components/Footer/Footer.astro";
         #content {
           display: flex;
           flex-direction: column;
-        }
-        #messages-container {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 4.625rem;
         }
       }
     </style>
