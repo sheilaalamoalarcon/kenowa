@@ -1,11 +1,11 @@
-import Input from "../CustomInput";
-import Button from "../CustomButton";
+import Input from "../Input";
+import Button from "../Button";
 import { useState } from "preact/hooks";
 import styles from "../LogInForm/styles.module.css";
-import { ClickActions } from "@/constants/enums";
+import { API_ROUTES, ClickActions, WebRoutesEnum } from "@/constants/enums";
 
 export default function SignInForm() {
-  const [responseMessage, setResponseMessage] = useState("");
+  const [message, setMessage] = useState("");
 
   async function submit(e: SubmitEvent) {
     const formData = new FormData(e.target as HTMLFormElement);
@@ -13,19 +13,21 @@ export default function SignInForm() {
     try {
       e.preventDefault();
 
-      const response = await fetch("http://localhost:3600/api/auth/register", {
+      const response = await fetch(API_ROUTES.REGISTER, {
         method: "POST",
         body: formData,
         mode: "cors",
       });
       const data = await response.json();
 
-      if (data.message) {
-        setResponseMessage(data.message);
+      if (response.status === 201) {
+        window.location.href = WebRoutesEnum.GLOBAL_CHAT;
+      } else {
+        setMessage(data.message);
       }
     } catch (error) {
       const err = error as Error;
-      setResponseMessage("Error en la solicitud " + err.message);
+      setMessage("Error en la solicitud " + err.message);
     }
   }
 
@@ -66,7 +68,7 @@ export default function SignInForm() {
         clickAction={ClickActions.NONE}
         style="margin:5rem 0rem"
       />
-      {responseMessage && <p>{responseMessage}</p>}
+      {message && <p>{message}</p>}
     </form>
   );
 }
