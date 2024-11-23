@@ -1,36 +1,44 @@
-import CustomInput from "../CustomInput";
-import CustomButton from "../CustomButton";
-import { useState } from "preact/hooks";
+import CustomInput from "../Input";
+import CustomButton from "../Button";
+import { useEffect, useState } from "preact/hooks";
 import styles from "@/components/LogInForm/styles.module.css";
-import { ClickActions } from "@/constants/enums";
+import { API_ROUTES, ClickActions } from "@/constants/enums";
 
 export default function MessageForm() {
-  const [responseMessage, setResponseMessage] = useState("");
+  const [message, setMessage] = useState<string | null>(null);
+  const [token, setToken] = useState<string>("");
+
+  useEffect(() => {
+    const localToken = window.localStorage.getItem("token");
+    setToken(localToken ?? "");
+  }, [token]);
 
   async function submit(e: SubmitEvent) {
-    e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
 
-    const email = formData.get("email");
-    const password = formData.get("password");
+    try {
+      e.preventDefault();
 
-    const response = await fetch("http://localhost:3600/api/messages/post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-      mode: "cors",
-    });
-    const data = await response.json();
-    if (data.message) {
-      setResponseMessage(data.message);
+      const response = await fetch(API_ROUTES.POST_MESSAGE, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+        mode: "cors",
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setMessage(data.message);
+      } else {
+        setMessage("Could not upload messsage: " + response.statusText);
+      }
+    } catch (error) {
+      const err = error as Error;
+      setMessage("Could not upload messsage: " + err.message);
     }
   }
-
   return (
     <form
       className={styles.lowerSection}
@@ -58,7 +66,7 @@ export default function MessageForm() {
         clickAction={ClickActions.NONE}
       />
 
-      {responseMessage && <p>{responseMessage}</p>}
+      {message && <p>{message}</p>}
     </form>
   );
 }
