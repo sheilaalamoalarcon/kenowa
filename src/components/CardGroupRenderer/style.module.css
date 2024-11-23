@@ -1,0 +1,15 @@
+@media (min-width: 500px) and (max-width: 740px) /*/mobile size*/ {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4.625rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4.625rem;
+  }
+}
