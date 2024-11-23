@@ -3,13 +3,14 @@ import type { CParagraph } from "@/constants/classes";
 
 interface Props extends CParagraph {}
 
-const { title, description } = Astro.props;
+const { title, description, subtitle } = Astro.props;
 ---
 
-<section class="container">
-  <h4 class="title">{title}</h4>
+<div class="container">
+  <p class="title">{title}</p>
+  <p class="subtitle">{subtitle}</p>
   <p class="text">{description}</p>
-</section>
+</div>
 <style>
   @media (max-width: 700px) /*/mobile size*/ {
   }
@@ -20,8 +21,6 @@ const { title, description } = Astro.props;
       display: flex;
       width: 19rem;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 2.25rem;
     }
     .title {
       color: var(--PRIMARY, #f36337);
