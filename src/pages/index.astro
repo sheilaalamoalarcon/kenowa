@@ -1,21 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
+import Header from "@/components/Header/index";
 import LandingImages from "../components/LandingImages.astro";
 import Footer from "@/components/Footer/Footer.astro";
 import Image from "astro/components/Image.astro";
-import { HeaderTypeEnum } from "@/constants/enums";
+import { ClickActions, WebRoutesEnum } from "@/constants/enums";
 import ParagraphGroup from "@/components/ParagraphGroup.astro";
 import {
   landingCopies,
   landingImages,
   welcomeMessage,
 } from "@/constants/constants";
+import CustomButton from "@/components/Button";
 ---
 
 <Layout title="Kenowa">
   <main>
-    <Header headerType={HeaderTypeEnum.PASSENGER} />
+    <Header client:only="react" />
     <div id="welcome-message">
       <Image
         src="/landing-top-image.svg"
@@ -27,7 +28,12 @@ import {
       />
       <div id="copy">
         <p class="instructions">{welcomeMessage}</p>
-        <a href="/globalChat">Start Sharing</a>
+        <CustomButton
+          title="start sharing"
+          clickAction={ClickActions.NAVIGATE}
+          navigateTo={WebRoutesEnum.GLOBAL_CHAT}
+          client:only="react"
+        />
       </div>
     </div>
 
