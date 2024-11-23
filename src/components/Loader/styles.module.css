@@ -1,0 +1,23 @@
+.loader {
+  position: relative;
+  top: 0;
+  left: 50%;
+  border: 16px solid var(--white, #fff); /* Light grey */
+  border-top: 16px solid var(--light-yellow, #3498db); /* Blue */
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+  animation: spin 2s linear infinite;
+}
+.none {
+  display: none;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
