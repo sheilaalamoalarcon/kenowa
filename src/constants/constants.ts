@@ -1,4 +1,4 @@
-import { ClickActions, WebRoutesEnum } from "./enums";
+import { ClickActions, ImagesSourceEnum, WebRoutesEnum } from "./enums";
 import type { CParagraph, CProduct, ImageType } from "./classes";
 import { type CastleImage } from "@/components/LandingImages.astro";
 import { atom } from "nanostores";
@@ -102,12 +102,6 @@ export const landingCopies: CParagraph[] = [
 export const welcomeMessage: string =
   "Welcome to your go-to space for genuine insights and creative inspiration. Explore trusted reviews, share your own experiences, and find fresh style ideas, all in one place. Dive into our global chat to connect with a vibrant community, exchange opinions, and spark new conversations. Whether you're searching for the best recommendations or looking to inspire others, this is where real voices meet innovative ideas. Join the conversation and start exploring now!";
 
-export enum ImagesSourceEnum {
-  STOCK_IMAGE_1 = "/stock-image-katsiaryna-endruszkiewicz.png",
-  STOCK_IMAGE_2 = "/stock-image-dom-hill.png",
-  STOCK_IMAGE_3 = "/stock-image-ave-calvar.png",
-  STOCK_IMAGE_4 = "/stock-image-aiony-haust.png",
-}
 export const landingImages: CastleImage[] = [
   {
     src: ImagesSourceEnum.STOCK_IMAGE_1,

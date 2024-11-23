@@ -1,9 +1,4 @@
-import {
-  $token,
-  defaultBttns,
-  userBttns,
-  type INav,
-} from "@/constants/constants";
+import { defaultBttns, userBttns, type INav } from "@/constants/constants";
 import styles from "./styles.module.css";
 import CustomButton from "../Button";
 import { ClickActions } from "@/constants/enums";

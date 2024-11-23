@@ -49,7 +49,7 @@ export enum ModalChildrens {
   NEW_MESSAGE,
   NONE,
 }
-enum ImagesSourceEnum {
+export enum ImagesSourceEnum {
   STOCK_IMAGE_1 = "/stock-image-katsiaryna-endruszkiewicz.png",
   STOCK_IMAGE_2 = "/stock-image-dom-hill.png",
   STOCK_IMAGE_3 = "/stock-image-ave-calvar.png",

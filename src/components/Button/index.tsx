@@ -3,20 +3,6 @@ import styles from "./styles.module.css";
 import { $isOpen, $token } from "@/constants/constants";
 import { API_ROUTES, ClickActions, WebRoutesEnum } from "@/constants/enums";
 import { useEffect, useState } from "preact/hooks";
-
-class Button {
-  title: string = "";
-  clickAction: ClickActions = ClickActions.NONE;
-  style!: string;
-  type!: string;
-  navigateTo!: string;
-
-  constructor(title: string, clickAction: ClickActions) {
-    this.title = title;
-    this.clickAction = clickAction;
-  }
-}
-
 interface Props {
   title: string;
   clickAction: ClickActions;
