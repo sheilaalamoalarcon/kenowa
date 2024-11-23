@@ -1,70 +1,54 @@
-import { API_ROUTES } from "./enums";
-
 export class CUser {
   _id?: string;
   email: string = "user@anon.com";
   _password: string = "anonPassword@123";
+  image: ImageType = new ImageType(new ArrayBuffer(0), "");
+  username: string = "";
 
-  image?: Blob;
-  username?: string;
-  lastname?: string;
   bag?: string[]; //id de cada producto
 
   constructor(
     email: string,
     _password: string,
-    image?: Blob,
-    username?: string,
-    lastname?: string
+    image: ImageType,
+    username: string
   ) {
     this.email = email;
     this._password = _password;
     this.image = image;
     this.username = username;
-    this.lastname = lastname;
-  }
-  async CreateUser() {
-    try {
-      await fetch(API_ROUTES.REGISTER, {
-        headers: {
-          "Content-Type": "application/form-data",
-        },
-        method: "POST",
-        body: JSON.stringify({
-          email: this.email,
-          password: this._password,
-          image: this.image,
-          username: this.username,
-          lastname: this.lastname,
-        }),
-      });
-    } catch {
-      throw new Error("There was an issue with your registration");
-    }
-  }
-
-  async LogIn() {
-    try {
-      await fetch(API_ROUTES.LOGIN, {
-        method: "POST",
-        body: JSON.stringify({
-          email: this.email,
-          _password: this._password,
-        }),
-      });
-    } catch {
-      throw new Error("There was an issue with your log in");
-    }
   }
 }
-export class CMessages {
-  _id?: string;
-  content?: string;
-  propietary?: string;
 
-  constructor(content: string, propietary: string) {
+export class ImageType {
+  data: ArrayBufferLike = new ArrayBuffer(0);
+  type: string = "";
+
+  constructor(data: ArrayBufferLike, type: string) {
+    this.data = data;
+    this.type = type;
+  }
+}
+
+export class CMessage {
+  _id: string = "";
+  content: string = "";
+  propietary: string = ""; //propietary id
+  image: ImageType = new ImageType(new ArrayBuffer(0), "");
+  created_at: string = "";
+
+  constructor(
+    _id: string,
+    content: string,
+    propietary: string,
+    image: ImageType,
+    created_at: string
+  ) {
+    this._id = _id;
     this.content = content;
     this.propietary = propietary;
+    this.image = image;
+    this.created_at = created_at;
   }
 }
 
@@ -80,6 +64,13 @@ export class CProduct {
   }
 }
 export class CParagraph {
-  title!: string;
-  description!: string;
+  title: string = "";
+  subtitle: string = "";
+  description: string = "";
+
+  constructor(title: string, subtitle: string, description: string) {
+    this.title = title;
+    this.subtitle = subtitle;
+    this.description = description;
+  }
 }

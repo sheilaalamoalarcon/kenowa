@@ -1,12 +1,7 @@
 ---
+import type { ImagesSourceEnum } from "@/constants/constants";
 import Image from "astro/components/Image.astro";
 
-export enum ImagesSourceEnum {
-  STOCK_IMAGE_1 = "/stock-image-katsiaryna-endruszkiewicz.svg",
-  STOCK_IMAGE_2 = "/stock-image-dom-hill.svg",
-  STOCK_IMAGE_3 = "/stock-image-ave-calvar.svg",
-  STOCK_IMAGE_4 = "/stock-image-aiony-haust.svg",
-}
 export interface CastleImage {
   src: ImagesSourceEnum;
   isRound: boolean;
