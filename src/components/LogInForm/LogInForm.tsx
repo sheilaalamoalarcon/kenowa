@@ -2,30 +2,33 @@ import Input from "../Input";
 import Button from "../Button";
 import { useEffect, useState } from "preact/hooks";
 import styles from "./styles.module.css";
-import { API_ROUTES, ClickActions, WebRoutesEnum } from "@/constants/enums";
-import { $isFetching, $token, $userEmail } from "@/constants/constants";
+import {
+  AlertType,
+  API_ROUTES,
+  ClickActions,
+  WebRoutesEnum,
+} from "@/constants/enums";
 import Loader from "../Loader";
+import Alert from "../Alert";
+import { type IAlert } from "@/constants/classes";
 
 export default function LoginForm() {
-  const [responseMessage, setResponseMessage] = useState("");
+  const [res, setRes] = useState<IAlert | null>(null);
   const [isFetching, setIsFetching] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
   const [token, setToken] = useState<string>("");
+  const [ID, setID] = useState<string>("");
 
   useEffect(() => {
-    $isFetching.set(isFetching);
     localStorage.setItem("isFetching", isFetching.toString());
   }, [isFetching]);
 
   useEffect(() => {
-    localStorage.setItem("userEmail", email);
-    $userEmail.set(email);
-  }, [email]);
-
-  useEffect(() => {
-    $token.set(token);
     localStorage.setItem("token", token);
   }, [token]);
+
+  useEffect(() => {
+    localStorage.setItem("ID", ID);
+  }, [ID]);
 
   async function submit(e: SubmitEvent) {
     e.preventDefault();
@@ -51,17 +54,26 @@ export default function LoginForm() {
 
       if (response.ok) {
         const token = data.token;
+        const userID = data._id;
+
         setToken(token);
+        setID(userID);
         setIsFetching(false);
-        setEmail(email?.toString() ?? "");
+
         window.location.href = WebRoutesEnum.GLOBAL_CHAT;
       } else {
         setIsFetching(false);
-        setResponseMessage(data.message || "Login failed");
+        setRes({
+          type: AlertType.WARNING,
+          message: data.message || "Login failed",
+        });
       }
     } catch (error) {
       setIsFetching(false);
-      setResponseMessage("An error occurred. Please try again. " + error);
+      setRes({
+        type: AlertType.ERROR,
+        message: "An error occurred. Please try again. " + error,
+      });
     }
   }
 
@@ -88,9 +100,10 @@ export default function LoginForm() {
         title={"Log In"}
         clickAction={ClickActions.NONE}
         style="margin:5rem 0rem"
+        background
       />
 
-      {responseMessage && <p>{responseMessage}</p>}
+      {res && <Alert {...res} />}
       <Loader />
     </form>
   );

@@ -4,7 +4,14 @@
   justify-content: center;
   padding: 0.5625rem 7rem;
   border-radius: var(--Corner-Extra-small, 0.25rem);
-  background: var(--TEXT, #45362f);
+  background: var(--text);
+}
+.withoutBackground {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--transparent);
+  border: var(--transparent) solid;
 }
 .anchor {
   display: flex;
@@ -12,7 +19,7 @@
   justify-content: center;
   padding: 0.5625rem 7rem;
   border-radius: var(--Corner-Extra-small, 0.25rem);
-  background: var(--TEXT, #45362f);
+  background: var(--transparent, rgba(250, 250, 250, 0));
 }
 .title {
   color: var(--SECONDARY, #fede71);
@@ -21,4 +28,8 @@
   font-weight: 400;
   line-height: normal;
   text-transform: capitalize;
+}
+.icon {
+  display: flex;
+  align-items: center;
 }

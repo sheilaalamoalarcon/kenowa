@@ -1,3 +1,5 @@
+import type { AlertType } from "./enums";
+
 export class CUser {
   _id?: string;
   email: string = "user@anon.com";
@@ -5,7 +7,7 @@ export class CUser {
   image: ImageType = new ImageType(new ArrayBuffer(0), "");
   username: string = "";
 
-  bag?: string[]; //id de cada producto
+  messages?: string[]; //id de cada mensaje
 
   constructor(
     email: string,
@@ -51,7 +53,15 @@ export class CMessage {
     this.created_at = created_at;
   }
 }
+export class CSavedMessage {
+  user_id: string = "";
+  message_id: string = "";
 
+  constructor(user_id: string, message_id: string) {
+    this.user_id = user_id;
+    this.message_id = message_id;
+  }
+}
 export class CProduct {
   src: string = "";
   title: string = "";
@@ -73,4 +83,9 @@ export class CParagraph {
     this.subtitle = subtitle;
     this.description = description;
   }
+}
+
+export interface IAlert {
+  type: AlertType;
+  message: string;
 }

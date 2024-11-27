@@ -1,5 +1,5 @@
-import CustomInput from "../Input";
-import CustomButton from "../Button";
+import Input from "../Input";
+import Button from "../Button";
 import { useEffect, useState } from "preact/hooks";
 import styles from "@/components/LogInForm/styles.module.css";
 import { API_ROUTES, ClickActions } from "@/constants/enums";
@@ -7,18 +7,27 @@ import { API_ROUTES, ClickActions } from "@/constants/enums";
 export default function MessageForm() {
   const [message, setMessage] = useState<string | null>(null);
   const [token, setToken] = useState<string>("");
+  const [userID, setUserID] = useState<string>("");
 
   useEffect(() => {
     const localToken = window.localStorage.getItem("token");
     setToken(localToken ?? "");
   }, [token]);
 
+  useEffect(() => {
+    const userID = window.localStorage.getItem("ID");
+    setUserID(userID ?? "");
+  }, [userID]);
+
   async function submit(e: SubmitEvent) {
     const formData = new FormData(e.target as HTMLFormElement);
+
+    formData.append("propietary", userID);
 
     try {
       e.preventDefault();
 
+      //there is no propietary
       const response = await fetch(API_ROUTES.POST_MESSAGE, {
         method: "POST",
         headers: {
@@ -36,7 +45,7 @@ export default function MessageForm() {
       }
     } catch (error) {
       const err = error as Error;
-      setMessage("Could not upload messsage: " + err.message);
+      setMessage("Error creating message: " + err.message);
     }
   }
   return (
@@ -46,24 +55,27 @@ export default function MessageForm() {
       method="post"
       encType="multipart/form-data"
       onSubmit={submit}
+      action={"/uploads/posts"}
     >
-      <CustomInput
+      <Input
         placeholder="Enter your email"
         name="content"
         type="text"
         required
       />
-      <CustomInput
+      <Input
         placeholder="Enter your password"
-        name="message-image"
+        name="myFile"
+        title="image"
         type="file"
         required
       />
-      <CustomButton
+      <Button
         title={"Send Message"}
         type="submit"
         style="margin:5rem 0rem"
         clickAction={ClickActions.NONE}
+        background
       />
 
       {message && <p>{message}</p>}

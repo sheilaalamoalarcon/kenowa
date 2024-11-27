@@ -11,7 +11,7 @@ import {
   landingImages,
   welcomeMessage,
 } from "@/constants/constants";
-import CustomButton from "@/components/Button";
+import Button from "@/components/Button";
 ---
 
 <Layout title="Kenowa">
@@ -21,18 +21,21 @@ import CustomButton from "@/components/Button";
       <Image
         src="/landing-top-image.svg"
         alt="landing-top"
-        id="landing-top-image"
+        class="top-image"
         loading={"eager"}
         width={697}
         height={464}
       />
       <div id="copy">
-        <p class="instructions">{welcomeMessage}</p>
-        <CustomButton
+        <p class="body" style="text-align: center; padding: 5dvh 0;">
+          {welcomeMessage}
+        </p>
+        <Button
           title="start sharing"
           clickAction={ClickActions.NAVIGATE}
           navigateTo={WebRoutesEnum.GLOBAL_CHAT}
           client:only="react"
+          background
         />
       </div>
     </div>
@@ -44,7 +47,7 @@ import CustomButton from "@/components/Button";
   </main>
 
   <style>
-    @media (min-width: 500px) and (max-width: 740px) /*/mobile size*/ {
+    @media (min-width: 500px) and (max-width: 991px) /*/mobile size*/ {
       main {
         display: flex;
         flex-direction: column;
@@ -55,35 +58,19 @@ import CustomButton from "@/components/Button";
       #welcome-message {
         flex-direction: column;
       }
-      #landing-top-image {
-        width: 80vw;
+      .top-image {
+        width: 100%;
       }
       #copy {
         max-width: 100%;
       }
     }
 
-    @media (min-width: 741px) {
-      main {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        gap: 4.625rem;
-      }
-      #landing-top-image {
-        width: 100vw;
-      }
-      #copy {
-        max-width: 100%;
-      }
-    }
     @media (min-width: 992px) {
       main {
         display: flex;
         flex-direction: column;
-        color: var(-text-light);
-        overflow: hidden;
+        color: var(--text);
         align-items: center;
         gap: 4.625rem;
       }
@@ -97,17 +84,9 @@ import CustomButton from "@/components/Button";
       #copy {
         max-width: 50%;
       }
-      .instructions {
-        color: var(--TEXT, #45362f);
-        text-align: right;
-        /* BODY_BIG_REGULAR */
-        font-size: 1rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
-      #landing-top-image {
-        width: 697px;
+
+      .top-image {
+        width: 100%;
       }
     }
   </style>

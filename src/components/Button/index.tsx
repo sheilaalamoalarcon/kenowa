@@ -1,14 +1,17 @@
-import { useStore } from "@nanostores/preact";
 import styles from "./styles.module.css";
-import { $isOpen, $token } from "@/constants/constants";
 import { API_ROUTES, ClickActions, WebRoutesEnum } from "@/constants/enums";
+import { Delete } from "@/constants/methods";
 import { useEffect, useState } from "preact/hooks";
+import type { JSX } from "preact/jsx-runtime";
+
 interface Props {
   title: string;
   clickAction: ClickActions;
+  background: boolean;
   style?: string;
   type?: string;
   navigateTo?: string;
+  icon?: JSX.Element;
 }
 
 export default function CustomButton({
@@ -17,63 +20,57 @@ export default function CustomButton({
   type,
   clickAction,
   navigateTo,
+  icon,
+  background,
 }: Props) {
-  const isOpen = useStore($isOpen);
   const [email, setEmail] = useState<string>("");
 
   useEffect(() => {
     setEmail(localStorage.getItem("userEmail") ?? "");
   }, [email]);
 
-  async function logOut() {
-    const response = await fetch(API_ROUTES.LOGOUT, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-      }),
-      mode: "cors",
-    });
+  async function LogOut() {
+    Delete(API_ROUTES.LOGOUT + `/${localStorage.getItem("ID") ?? ""}`).then(
+      (result) => {
+        if (typeof result === "number") {
+          localStorage.removeItem("isFetching");
+          localStorage.removeItem("userEmail");
+          localStorage.removeItem("ID");
+          localStorage.removeItem("token");
 
-    if (response.status === 201) {
-      $token.set(null);
-      localStorage.removeItem("token");
-      localStorage.removeItem("email");
+          window.location.href = WebRoutesEnum.LANDING;
+        } else {
+          return;
+        }
+      }
+    );
+  }
 
-      window.location.href = WebRoutesEnum.LANDING;
-    }
-    return;
+  function navigateToLocation(location: string) {
+    return (window.location.href = location);
   }
 
   function SwitchClickAction(type: ClickActions) {
     switch (type) {
-      case ClickActions.OPEN_MODULE:
-        return $isOpen.set(!isOpen);
       case ClickActions.LOG_OUT:
-        return logOut();
+        return LogOut();
+      case ClickActions.NAVIGATE:
+        return navigateToLocation(navigateTo ?? "/");
+
       default:
         break;
     }
   }
-  return clickAction != ClickActions.NAVIGATE ? (
+  return (
     <button
       type={type}
-      id="custom-button"
       style={style}
-      className={styles.container}
+      className={background ? styles.container : styles.withoutBackground}
       onClick={() => SwitchClickAction(clickAction)}
     >
-      <p id="custom-button-title" className={styles.title}>
-        {title}
-      </p>
+      {icon && <span className={styles.icon}>{icon}</span>}
+
+      <p className={styles.title}>{title}</p>
     </button>
-  ) : (
-    <a id="custom-button" className={styles.anchor} href={navigateTo}>
-      <p id="custom-button-title" className={styles.title}>
-        {title}
-      </p>
-    </a>
   );
 }

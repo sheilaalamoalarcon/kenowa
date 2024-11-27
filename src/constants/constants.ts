@@ -1,13 +1,14 @@
 import { ClickActions, ImagesSourceEnum, WebRoutesEnum } from "./enums";
 import type { CParagraph, CProduct, ImageType } from "./classes";
 import { type CastleImage } from "@/components/LandingImages.astro";
-import { atom } from "nanostores";
+import type { JSX } from "preact/jsx-runtime";
+import { AddIcon, LogOutIcon, MessageIcon, UserIcon } from "@/components/Icons";
 
 export interface INav {
   title: string;
+  icon: JSX.Element;
+  action: ClickActions;
   href?: WebRoutesEnum;
-  icon?: HTMLElement;
-  action?: ClickActions;
 }
 export interface CustomCardClass {
   content: string;
@@ -17,30 +18,41 @@ export interface CustomCardClass {
 export const defaultBttns: INav[] = [
   {
     title: "log in",
+    action: ClickActions.NAVIGATE,
     href: WebRoutesEnum.LOG_IN,
+    icon: LogOutIcon("var(--terciary)"),
   },
   {
     title: "sign in",
+    action: ClickActions.NAVIGATE,
     href: WebRoutesEnum.SIGN_IN,
+    icon: AddIcon("var(--terciary)"),
   },
   {
     title: "global chat",
+    action: ClickActions.NAVIGATE,
     href: WebRoutesEnum.GLOBAL_CHAT,
+    icon: MessageIcon("var(--terciary)"),
   },
 ];
 
 export const userBttns: INav[] = [
   {
     title: "profile",
+    action: ClickActions.NAVIGATE,
     href: WebRoutesEnum.PROFILE,
+    icon: UserIcon("var(--terciary)"),
   },
   {
     title: "global chat",
+    action: ClickActions.NAVIGATE,
     href: WebRoutesEnum.GLOBAL_CHAT,
+    icon: MessageIcon("var(--terciary)"),
   },
   {
     title: "log out",
     action: ClickActions.LOG_OUT,
+    icon: LogOutIcon("var(--terciary)"),
   },
 ];
 
@@ -120,9 +132,3 @@ export const landingImages: CastleImage[] = [
     isRound: false,
   },
 ];
-export const $isOpen = atom<boolean>(false);
-export const $isLogged = atom<boolean>(false);
-export const $token = atom<string | null>(null);
-
-export const $isFetching = atom<boolean>(false);
-export const $userEmail = atom<string>("");

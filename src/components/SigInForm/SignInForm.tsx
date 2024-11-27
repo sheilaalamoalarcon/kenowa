@@ -54,6 +54,7 @@ export default function SignInForm() {
       <Input
         placeholder="Enter your image"
         name="myFile"
+        title="image"
         type="file"
         required
       />
@@ -67,6 +68,7 @@ export default function SignInForm() {
         title={"sign in"}
         clickAction={ClickActions.NONE}
         style="margin:5rem 0rem"
+        background
       />
       {message && <p>{message}</p>}
     </form>

@@ -5,10 +5,10 @@ enum BASE_ROUTES {
   MESSAGES = BASE_ROUTES.API_HEAD_ROUTE + "/messages",
 
   POST = "/post",
-  GET = "/get",
+  GET = "/get/",
   ALL = "/all",
   DELETE = "/delete",
-  UPDATE = "/update",
+  UPDATE = "/put",
   GET_ID = "/get/",
   DELETE_ID = "/delete/:id",
   UPDATE_ID = "/update/:id",
@@ -20,7 +20,11 @@ export enum API_ROUTES {
   REGISTER = BASE_ROUTES.AUTH + "/register",
 
   GET_USER = BASE_ROUTES.USERS + BASE_ROUTES.GET_ID,
+  SAVE_MESSAGE = BASE_ROUTES.USERS + BASE_ROUTES.POST,
   GET_ALL_MESSAGES = BASE_ROUTES.MESSAGES + BASE_ROUTES.ALL,
+  GET_SAVED_MESSAGES = BASE_ROUTES.MESSAGES + "/saved" + BASE_ROUTES.GET,
+  GET_MESSAGES_ID = BASE_ROUTES.MESSAGES + BASE_ROUTES.GET,
+  PUT_MESSAGE = BASE_ROUTES.MESSAGES + BASE_ROUTES.UPDATE,
   POST_MESSAGE = BASE_ROUTES.MESSAGES + BASE_ROUTES.POST,
 }
 
@@ -44,6 +48,7 @@ export enum ClickActions {
   NAVIGATE,
   NONE,
   LOG_OUT,
+  SAVE_POST,
 }
 export enum ModalChildrens {
   NEW_MESSAGE,
@@ -54,4 +59,10 @@ export enum ImagesSourceEnum {
   STOCK_IMAGE_2 = "/stock-image-dom-hill.png",
   STOCK_IMAGE_3 = "/stock-image-ave-calvar.png",
   STOCK_IMAGE_4 = "/stock-image-aiony-haust.png",
+}
+export enum AlertType {
+  SUCCESS,
+  INFO,
+  WARNING,
+  ERROR,
 }

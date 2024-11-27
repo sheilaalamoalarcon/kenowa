@@ -7,12 +7,14 @@ interface CustomInputProps {
   placeholder: string;
   type: HTMLInputTypeAttribute;
   required: boolean;
+  title?: string;
 }
 
 export default function CustomInput({
   name,
   placeholder,
   type,
+  title = name,
   required = false,
 }: CustomInputProps) {
   const [props, setProps] = useState({});
@@ -63,12 +65,14 @@ export default function CustomInput({
         break;
     }
   }
+
   useLayoutEffect(() => {
     switchProps();
   }, [type]);
+
   return (
     <label className={className}>
-      {name}
+      {title}
       <input {...props} />
     </label>
   );

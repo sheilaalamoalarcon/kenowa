@@ -125,6 +125,18 @@
   }
   .inputFile {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 2.5rem;
+  }
+
+  .inputFile::-webkit-file-upload-button {
+    display: flex;
+    background: var(--secondary);
+    border: var(--secondary);
+    border-radius: 0.3125rem;
+    padding: 0.5dvh 1dvw;
+    color: var(--yellow);
     height: 2.5rem;
   }
 }
