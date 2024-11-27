@@ -5,7 +5,6 @@ import Button from "@/components/Button";
 import Footer from "@/components/Footer/Footer.astro";
 import CardGroupRenderer from "@/components/CardGroupRenderer";
 import Header from "@/components/Header";
-import { AddIcon } from "@/components/Icons";
 ---
 
 <Layout title="global-chat">
@@ -16,9 +15,8 @@ import { AddIcon } from "@/components/Icons";
         title="Create new message"
         clickAction={ClickActions.NAVIGATE}
         navigateTo="/createMessage"
-        icon={AddIcon("var(--primary)")}
         client:load
-        background={false}
+        background
       />
       <CardGroupRenderer client:only="react" />
     </div>
