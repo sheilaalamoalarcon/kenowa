@@ -3,9 +3,13 @@ import styles from "./styles.module.css";
 import { useEffect, useState } from "preact/hooks";
 import { API_ROUTES } from "@/constants/enums";
 import CardHeader from "./CardHeader";
-import { arrayBufferToBase64 } from "@/constants/methods";
+import { arrayBufferToBase64, Get, parseDate } from "@/constants/methods";
+import { ArrowIcon } from "../Icons";
 
-export default function Card(params: CMessage) {
+interface ICard extends CMessage {
+  isDelete?: boolean;
+}
+export default function Card(params: ICard) {
   const [user, setUser] = useState<CUser | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [token, setToken] = useState<string>("");
@@ -14,47 +18,48 @@ export default function Card(params: CMessage) {
     setToken(localStorage.getItem("token") ?? "");
   }, [token]);
 
-  const { image, content, created_at, propietary } = params;
+  const { image, content, created_at, propietary, _id, isDelete } = params;
 
   const imageUrl = `data:image/jpeg;base64,${arrayBufferToBase64(image.data)}`;
 
-  async function getUser(id: string) {
-    try {
-      const result = await fetch(API_ROUTES.GET_USER + id.toString(), {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data: CUser = await result.json();
-
-      if (result.ok) {
-        return setUser(data);
-      } else {
-        return setError("could not get user: " + result.statusText);
-      }
-    } catch (error) {
-      const err = error as Error;
-      setError(err.message);
-    }
-  }
   useEffect(() => {
-    getUser(propietary);
+    Get<CUser[]>(token, `${API_ROUTES.GET_USER}${propietary}`).then(
+      (result) => {
+        if (typeof result === "string") {
+          setError(result);
+        } else {
+          setUser(result[0]);
+        }
+      }
+    );
   }, [propietary]);
 
   return (
     <div className={styles.card}>
-      {user && <CardHeader {...user} />}
+      <div className={styles.mainInfo}>
+        {user && (
+          <CardHeader {...user} message_id={_id} isDelete={isDelete ?? false} />
+        )}
+      </div>
       <img
         width={100}
         height={100}
-        id="card-image"
+        className={styles.image}
         src={imageUrl}
         alt={"card"}
         loading="lazy"
       />
-      <p className={styles.text}>{content}</p>
-      <p className={styles.description}>{created_at}</p>
-      {error && <p>{error}</p>}
+      <div style={"width:100%;align-items: flex-start;"}>
+        <p className={styles.text}>{content}</p>
+        <p
+          class={"body"}
+          style={"text-transform:capitalize; font-size:0.74rem; opacity:0.74"}
+        >
+          {parseDate(created_at)}
+        </p>
+        {error && <p>{error}</p>}
+      </div>
+      {ArrowIcon}
     </div>
   );
 }
