@@ -1,0 +1,22 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer/Footer.astro";
+import MessageForm from "@/components/MessageForm/MessageForm";
+---
+
+<Layout title="Create Message">
+  <main>
+    <Header client:only="react" />
+    <p class={"main-title"}>Create new message</p>
+    <MessageForm client:only="react" />
+    <Footer />
+  </main>
+</Layout>
+<style>
+  main {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
+  }
+</style>
