@@ -1,7 +1,9 @@
-import { API_ROUTES } from "@/constants/enums";
+import { AlertType, API_ROUTES } from "@/constants/enums";
 import { Put } from "@/constants/methods";
 import { DeleteIcon, SaveIcon } from "../Icons";
 import { useEffect, useState } from "preact/hooks";
+import Alert from "../Alert";
+import type { IAlert } from "@/constants/classes";
 
 interface ISaveButton {
   propietary: string;
@@ -13,7 +15,7 @@ export default function SaveButton({
   message_id,
   isDelete,
 }: ISaveButton) {
-  const [error, setError] = useState<string | null>(null); //This error should be in a error modal
+  const [res, setRes] = useState<IAlert | null>(null); //This res should be in a res modal
   const [token, setToken] = useState<string | null>(null);
   const [color, setColor] = useState<string>("var(--black)");
 
@@ -27,7 +29,10 @@ export default function SaveButton({
       token ?? "",
       `${API_ROUTES.PUT_MESSAGE}/${propietary}/${message_id}`
     ).then((result) => {
-      return setError(result.toString());
+      const isString: boolean = typeof result === "string";
+      return isString
+        ? setRes({ type: AlertType.SUCCESS, message: result.toString() })
+        : setRes({ type: AlertType.ERROR, message: result.toString() });
     });
   }
 
@@ -41,6 +46,7 @@ export default function SaveButton({
       >
         {isDelete ? DeleteIcon(color, 37) : SaveIcon(24, color)}
       </button>
+      {res && <Alert {...res} />}
     </>
   );
 }

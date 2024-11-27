@@ -1,4 +1,3 @@
-import type { TypeOf } from "astro:schema";
 import { API_ROUTES } from "./enums";
 
 export const arrayBufferToBase64 = (buffer: ArrayBufferLike) => {
