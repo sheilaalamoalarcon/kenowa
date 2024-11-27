@@ -1,15 +1,16 @@
-@media (min-width: 500px) and (max-width: 740px) /*/mobile size*/ {
-  .container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 4.625rem;
-  }
-}
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
 
-@media (min-width: 992px) {
+  padding: 10dvh 5dvw;
+  gap: 24dvh;
+}
+@media (min-width: 500px) and (max-width: 991px) {
   .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4.625rem;
+    display: flex;
+    flex-direction: column;
+    padding: 10dvh 5dvw;
+    gap: 24dvh;
   }
 }
