@@ -1,8 +1,13 @@
 import { type CUser } from "@/constants/classes";
 import styles from "./styles.module.css";
+import SaveButton from "../SaveButton";
 
-export default function CardHeader(params: CUser) {
-  const { image, username } = params;
+interface ICardHeader extends CUser {
+  message_id: string;
+  isDelete: boolean;
+}
+export default function CardHeader(params: ICardHeader) {
+  const { image, username, _id, message_id, isDelete } = params;
 
   const arrayBufferToBase64 = (buffer: ArrayBufferLike) => {
     let binary = "";
@@ -26,7 +31,21 @@ export default function CardHeader(params: CUser) {
         loading="lazy"
         className={styles.headerImage}
       />
-      <p>{username}</p>
+      <div
+        style={"display: flex;align-items: flex-end;flex-direction: column;"}
+      >
+        <p
+          class={"body"}
+          style={"text-transform:capitalize; opacity:0.74;font-weight:700"}
+        >
+          {username}
+        </p>
+        <SaveButton
+          propietary={_id ?? ""}
+          message_id={message_id}
+          isDelete={isDelete}
+        />
+      </div>
     </div>
   );
 }
