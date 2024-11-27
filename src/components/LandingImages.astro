@@ -37,7 +37,7 @@ const { images } = Astro.props;
       justify-content: space-between;
       padding: 4.375rem 3.125rem;
 
-      background: var(--TEXT, #45362f);
+      background: var(--secondary, #45362f);
     }
     .shadow {
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -64,12 +64,13 @@ const { images } = Astro.props;
   @media (max-width: 991px) {
     .container {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      /* width: 100%; */
+      align-self: stretch;
       justify-content: space-between;
-      padding: 4.375rem 3.125rem;
-      gap: 7.56rem;
-
-      background: var(--TEXT, #45362f);
+      padding: 4.375rem 3dvw;
+      /* gap: 7.56rem; */
+      background: var(--secondary, #45362f);
     }
     .shadow {
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -97,12 +98,12 @@ const { images } = Astro.props;
     .container {
       display: flex;
       flex-direction: row;
-      width: 100%;
+      /* width: 100%; */
+      align-self: stretch;
       justify-content: space-between;
-      padding: 4.375rem 3.125rem;
-      gap: 7.56rem;
-
-      background: var(--TEXT, #45362f);
+      padding: 4.375rem 3dvw;
+      /* gap: 7.56rem; */
+      background: var(--secondary, #45362f);
     }
     .shadow {
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
