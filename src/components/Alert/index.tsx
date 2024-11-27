@@ -19,28 +19,21 @@ gap: 1rem;border-radius:0.4rem;padding:1rem 1rem 1rem 1rem;background:var(--soft
   };
 
   useEffect(() => {
-    switch (type) {
-      case AlertType.SUCCESS:
-        setColor("green");
-        setIcon(SuccessIcon(`var(--${color})`));
-        return;
-      case AlertType.ERROR:
-        setColor("red");
-        setIcon(ErrorIcon(`var(--${color})`));
-
-        return;
-      case AlertType.INFO:
-        setColor("blue");
-        setIcon(InfoIcon(`var(--${color})`));
-
-        return;
-      default:
-        setColor("yellow");
-        setIcon(WarningIcon(`var(--${color})`));
-
-        return;
+    if (type === AlertType.SUCCESS) {
+      setColor("green");
+      setIcon(SuccessIcon(`var(--${color})`));
+    } else if (type === AlertType.ERROR) {
+      setColor("red");
+      setIcon(ErrorIcon(`var(--${color})`));
+    } else if (type === AlertType.INFO) {
+      setColor("blue");
+      setIcon(InfoIcon(`var(--${color})`));
+    } else {
+      setColor("yellow");
+      setIcon(WarningIcon(`var(--${color})`));
     }
-  }, []);
+  }, [color, icon]);
+
   return (
     <div style={baseStyle(color ?? "")}>
       {icon}
