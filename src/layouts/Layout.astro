@@ -49,6 +49,10 @@ const { title } = Astro.props;
     --blue: rgb(67, 151, 229);
     --dark-blue: rgb(67, 97, 128);
     --soft-blue: rgba(67, 151, 229, 0.24);
+
+    /*/roundness/*/
+    --Corner-Extra-small: 0.25rem;
+    --Corner-Full: 62.5rem;
   }
   html {
     font-family:
@@ -75,7 +79,7 @@ const { title } = Astro.props;
     gap: 24dvh;
   }
   .main-title {
-    color: var(--PRIMARY, #f36337);
+    color: var(--orange, #f36337);
     text-align: center;
     text-transform: capitalize;
 
