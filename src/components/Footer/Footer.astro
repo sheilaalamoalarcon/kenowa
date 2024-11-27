@@ -1,5 +1,5 @@
 <footer>
-  <p>
+  <p class="body">
     This website is a prototype created as an extension of the main design
     project. Please note that the platform is currently in testing and is
     subject to changes. All interactions and chat messages are temporary and
@@ -9,56 +9,60 @@
     timeframe. Thank you for your understanding and cooperation as we work to
     refine and enhance the final product experience.
   </p>
-  <ul id="anchors">
+  <ul>
     <li><a href="/project">Go to see project</a></li>
-    <li><a href="https://www.linkedin.com/in/sheila-álamo/">Contact me</a></li>
+    <li>
+      <a
+        href="https://www.linkedin.com/in/sheila-álamo/"
+        rel="noopener noreferrer"
+        target="_blank">Contact me</a
+      >
+    </li>
   </ul>
 </footer>
+
 <style>
+  :root {
+    --secondary-color: #fede71;
+    --orange-color: #f36337;
+    --text-color: #45362f;
+  }
+
+  footer {
+    background: var(--text-color);
+    padding: 2rem 5rem;
+  }
+
+  p {
+    color: var(--secondary-color);
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    color: var(--orange-color);
+  }
+
+  a {
+    color: var(--orange-color);
+    text-decoration: none;
+  }
+
   @media (min-width: 500px) and (max-width: 991px) {
     footer {
       display: flex;
       flex-direction: column-reverse;
-
-      background: var(--TEXT, #45362f);
-      padding: 2rem 5rem;
-    }
-    p {
-      color: var(--SECONDARY, #fede71);
-
-      /* BODY_BIG_REGULAR */
-      font-size: 1rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-      text-align: center;
+      align-items: center;
     }
   }
+
   @media (min-width: 992px) {
     footer {
       display: flex;
-      padding: 3.53125rem 5.3125rem 3.78125rem 6.5rem;
       justify-content: flex-end;
       align-items: flex-start;
       gap: 25.1875rem;
-      align-self: stretch;
-
-      background: var(--TEXT, #45362f);
-    }
-    p {
-      color: var(--SECONDARY, #fede71);
-
-      /* BODY_BIG_REGULAR */
-      font-size: 1rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-      max-width: 60%;
-    }
-    #anchors {
-      display: flex;
-      flex-direction: column;
-      color: var(--SECONDARY, #fede71);
+      padding: 3.53125rem 5.3125rem 3.78125rem 6.5rem;
     }
   }
 </style>
