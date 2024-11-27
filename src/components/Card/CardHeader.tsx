@@ -31,9 +31,7 @@ export default function CardHeader(params: ICardHeader) {
         loading="lazy"
         className={styles.headerImage}
       />
-      <div
-        style={"display: flex;align-items: flex-end;flex-direction: column;"}
-      >
+      <div style={"display: flex;align-items: flex-end;flex-direction: column"}>
         <p
           class={"body"}
           style={"text-transform:capitalize; opacity:0.74;font-weight:700"}

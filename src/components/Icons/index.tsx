@@ -99,14 +99,7 @@ export const SaveIcon = (size: number, color: string) => {
     </svg>
   );
 };
-export const ArrowIcon = (
-  <svg width="576" height="12" viewBox="0 0 876 12" fill="none">
-    <path
-      d="M1.5 5C0.947715 5 0.5 5.44772 0.5 6C0.5 6.55228 0.947715 7 1.5 7V5ZM875.273 6L869.5 0.226497L863.726 6L869.5 11.7735L875.273 6ZM1.5 7H869.5V5H1.5V7Z"
-      fill="#FEDE71"
-    />
-  </svg>
-);
+
 export const DeleteIcon = (color: string, size: number) => {
   return (
     <svg

@@ -4,11 +4,20 @@ import { useEffect, useState } from "preact/hooks";
 import { API_ROUTES } from "@/constants/enums";
 import CardHeader from "./CardHeader";
 import { arrayBufferToBase64, Get, parseDate } from "@/constants/methods";
-import { ArrowIcon } from "../Icons";
 
 interface ICard extends CMessage {
   isDelete?: boolean;
 }
+
+export const ArrowIcon = (width: string, color: string) => (
+  <svg width={width} height="12" viewBox="0 0 876 12" fill="none">
+    <path
+      d="M1.5 5C0.947715 5 0.5 5.44772 0.5 6C0.5 6.55228 0.947715 7 1.5 7V5ZM875.273 6L869.5 0.226497L863.726 6L869.5 11.7735L875.273 6ZM1.5 7H869.5V5H1.5V7Z"
+      fill={color}
+    />
+  </svg>
+);
+
 export default function Card(params: ICard) {
   const [user, setUser] = useState<CUser | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -59,7 +68,7 @@ export default function Card(params: ICard) {
         </p>
         {error && <p>{error}</p>}
       </div>
-      {ArrowIcon}
+      {ArrowIcon("100%", "var(--orange)")}
     </div>
   );
 }

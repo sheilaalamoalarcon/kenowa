@@ -17,14 +17,14 @@ export default function SaveButton({
 }: ISaveButton) {
   const [res, setRes] = useState<IAlert | null>(null); //This res should be in a res modal
   const [token, setToken] = useState<string | null>(null);
-  const [color, setColor] = useState<string>("var(--black)");
+  const [color, setColor] = useState<string>("var(--primary)");
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
   }, [token]);
 
   function SavePost() {
-    setColor("var(--orange)");
+    setColor(isDelete ? "var(--red)" : "var(--orange)");
     Put(
       token ?? "",
       `${API_ROUTES.PUT_MESSAGE}/${propietary}/${message_id}`
