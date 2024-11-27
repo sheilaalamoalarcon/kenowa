@@ -1,0 +1,123 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer/Footer.astro";
+import Description from "@/components/Project/Description.astro";
+import Justifications from "@/components/Project/Justifications.astro";
+import Goals from "@/components/Project/Goals.astro";
+import Branding from "@/components/Project/Branding.astro";
+import DevelopmentDetails from "@/components/Project/DevelopmentDetails.astro";
+import Conclusion from "@/components/Project/Conclusion.astro";
+---
+
+<Layout title="Project">
+  <main>
+    <Header client:only="react" />
+    <h1 class="main-title" style="font-size:x-large;">Project</h1>
+    <Description />
+    <div class="row">
+      <Justifications />
+      <Goals />
+    </div>
+    <Branding />
+
+    <h3 class="main-title">Logo</h3>
+    <div class="row">
+      <div class="black-bckgnd">
+        <img
+          src="/project/bigLogoWhite.png"
+          alt="Big logo design in white"
+          loading="lazy"
+        />
+      </div>
+      <div class="white-bckgnd">
+        <img
+          src="/project/bigLogoBlack.png"
+          alt="Big logo design in black"
+          loading="lazy"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="black-bckgnd">
+        <img
+          src="/project/smallLogoWhite.png"
+          alt="Small logo design in white"
+          loading="lazy"
+        />
+      </div>
+      <div class="white-bckgnd">
+        <img
+          src="/project/smallLogoBlack.png"
+          alt="Small logo design in black"
+          loading="lazy"
+        />
+      </div>
+    </div>
+    <h3 class="main-title">Ready for development</h3>
+
+    <div class="row">
+      <img
+        src="/project/colorPalette.png"
+        alt="final color palette"
+        class="image"
+        loading="lazy"
+      />
+      <img
+        src="/project/types.png"
+        alt="final chosen types"
+        class="image"
+        loading="lazy"
+      />
+    </div>
+    <div class="row">
+      <DevelopmentDetails />
+      <Conclusion />
+    </div>
+    <Footer />
+  </main>
+
+  <style>
+    :root {
+      --primary-font-size: x-large;
+      --secondary-bg-color: var(--secondary);
+      --white-bg-color: var(--white);
+    }
+
+    main {
+      display: grid;
+      min-height: 100dvh;
+      grid-template-rows: auto 1fr auto;
+      text-align: start;
+    }
+    h1,
+    h2 {
+      text-align: start;
+    }
+    .black-bckgnd {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--secondary-bg-color);
+      width: 100%;
+      align-items: center;
+      margin: 5dvh 0;
+      padding: 9dvh 0;
+    }
+    .white-bckgnd {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--white-bg-color);
+      width: 100%;
+      align-items: center;
+      margin: 5dvh 0;
+      padding: 9dvh 0;
+    }
+    @media (min-width: 500px) and (max-width: 991px) {
+      .image {
+        width: 100%;
+      }
+    }
+    @media (min-width: 992px) {
+    }
+  </style>
+</Layout>
