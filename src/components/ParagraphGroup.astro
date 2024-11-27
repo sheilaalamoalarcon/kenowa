@@ -1,6 +1,5 @@
 ---
 import type { CParagraph } from "@/constants/classes";
-import Paragraph from "./Paragraph.astro";
 
 interface Props {
   content: CParagraph[];
@@ -10,16 +9,32 @@ const { content } = Astro.props;
 ---
 
 <div class="landing-info">
-  {content.map((paragraph: CParagraph) => <Paragraph {...paragraph} />)}
+  {
+    content.map((paragraph: CParagraph) => {
+      const { title, description, subtitle } = paragraph;
+      return (
+        <div class="container">
+          <p class={"main-title"}>{title}</p>
+          <p class="subtitle">{subtitle}</p>
+          <p class={"body"}>{description}</p>
+        </div>
+      );
+    })
+  }
 </div>
 <style>
-  @media (max-width: 700px) /*/mobile size*/ {
+  .container {
+    display: flex;
+    width: 19rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  @media (min-width: 500px) and (max-width: 991px) {
     .landing-info {
       flex-direction: column;
       align-self: center;
     }
-  }
-  @media (max-width: 991px) {
   }
   @media (min-width: 992px) {
     .landing-info {
