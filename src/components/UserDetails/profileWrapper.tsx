@@ -65,7 +65,7 @@ export default function ProfileWrapper() {
     <div>
       <h1 className={styles.text}>Saved Posts</h1>
       {res && <Alert {...res} />}
-      <div className={"cardRenderer"}>
+      <div className={"card-renderer"}>
         {messages &&
           messages.map((message: CMessage) => {
             return <Card {...message} isDelete={true} />;
