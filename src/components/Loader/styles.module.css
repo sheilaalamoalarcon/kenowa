@@ -3,7 +3,7 @@
   top: 0;
   left: 50%;
   border: 16px solid var(--white, #fff); /* Light grey */
-  border-top: 16px solid var(--light-yellow, #3498db); /* Blue */
+  border-top: 16px solid var(--terciary, #3498db); /* Blue */
   border-radius: 50%;
   height: 120px;
   width: 120px;

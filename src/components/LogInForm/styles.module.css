@@ -1,6 +1,11 @@
 @media (min-width: 500px) and (max-width: 991px) {
   .lowerSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3.1rem;
     width: 100%;
+    padding: 0 5dvw;
   }
 }
 
@@ -8,7 +13,8 @@
   .lowerSection {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 3.1rem;
-    width: 100%;
+    padding: 0 5dvw;
   }
 }
