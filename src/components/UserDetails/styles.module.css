@@ -1,5 +1,5 @@
 .text {
-  color: var(--PRIMARY, #f36337);
+  color: var(--orange, #f36337);
   text-align: center;
 
   /* HEADING_3 */

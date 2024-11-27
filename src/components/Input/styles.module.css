@@ -4,7 +4,7 @@
     flex-direction: column;
     width: 100%;
 
-    color: var(--PRIMARY, #f36337);
+    color: var(--orange, #f36337);
     text-align: start;
     font-family:
       system-ui,
@@ -40,7 +40,7 @@
   }
 
   .title {
-    color: var(--PRIMARY, #f36337);
+    color: var(--orange, #f36337);
     text-align: start;
     font-family:
       system-ui,
@@ -75,7 +75,7 @@
     justify-content: space-between;
     align-items: baseline;
 
-    color: var(--PRIMARY, #f36337);
+    color: var(--orange, #f36337);
     text-align: start;
     font-family:
       system-ui,
@@ -96,7 +96,7 @@
     text-transform: capitalize;
   }
   .title {
-    color: var(--PRIMARY, #f36337);
+    color: var(--orange, #f36337);
     text-align: start;
     font-family:
       system-ui,
