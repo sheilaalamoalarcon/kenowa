@@ -57,9 +57,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/node": "^8.3.4",
     "@astrojs/preact": "^3.5.4",
-    "@nanostores/preact": "^0.5.2",
     "astro": "^4.16.14",
-    "nanostores": "^0.11.3",
     "preact": "^10.24.3",
     "typescript": "^5.6.3"
   },
