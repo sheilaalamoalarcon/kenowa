@@ -1,0 +1,110 @@
+---
+import { getSession } from "auth-astro/server";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { Image } from "astro:assets";
+import { CloseIcon } from "./Icons";
+import { SignOut } from "auth-astro/components";
+import CreatePostForm from "./CreatePostForm.astro";
+import {
+  ChatIcon,
+  CreatePostIcon,
+  HeaderIcon,
+  LogOutIcon,
+} from "./Icons/HeaderIcons";
+
+const session = await getSession(Astro.request);
+const lang = getLangFromUrl(Astro.url);
+const t = await useTranslations(lang);
+---
+
+<script>
+  const dialog = document.getElementById("form-dialog") as HTMLDialogElement;
+  const openButton = document.getElementById("open");
+  const closeButton = document.getElementById("close");
+
+  openButton?.addEventListener("click", () => dialog.showModal());
+  closeButton?.addEventListener("click", () => dialog.close());
+</script>
+
+<header
+  class="flex flex-col gap-4 sticky top-0 items-center bg-orange-600 shadow-md p-6 px-16 h-fit sm:flex-row justify-between dark:bg-stone-800"
+>
+  <HeaderIcon />
+  {
+    !session ? (
+      <nav>
+        <a
+          href={"/logIn"}
+          class={
+            "flex w-full justify-center items-center p-2 rounded bg-transparent h5 gap-1 text-white capitalize font-regular dark:text-white"
+          }
+        >
+          {t("nav.logIn")}
+        </a>
+      </nav>
+    ) : (
+      <nav class="flex gap-12 items-center">
+        <a
+          href={"/globalChat"}
+          class={
+            "flex w-fit justify-center items-center gap-1 flex items-center"
+          }
+        >
+          <ChatIcon />
+          <p
+            class={
+              "text-white text-center font-normal capitalize text-xs dark:text-white"
+            }
+          >
+            {t("nav.chat")}
+          </p>
+        </a>
+        <button
+          class={"flex w-fit justify-center items-center gap-1"}
+          id="open"
+        >
+          <CreatePostIcon />
+          <p
+            class={
+              "text-white text-center font-normal capitalize text-xs dark:text-white"
+            }
+          >
+            {t("nav.create")}
+          </p>
+        </button>
+        <a
+          href="/profile"
+          class={"flex w-fit justify-center items-center gap-1"}
+        >
+          <p class="text-white text-center font-normal capitalize text-xs">
+            {session.user?.name}
+          </p>
+          <Image
+            width={30}
+            height={30}
+            layout="responsive"
+            src={session?.user?.image ?? ""}
+            alt={session?.user?.name ?? "User Image"}
+            class="rounded shadow-lg drop-shadow-md"
+          />
+        </a>
+        <SignOut
+          class={"flex w-fit justify-center items-center gap-1"}
+          id="log-out"
+        >
+          <LogOutIcon />
+          <p class={"text-white text-center font-normal capitalize text-xs"}>
+            {t("nav.logOut")}
+          </p>
+        </SignOut>
+      </nav>
+    )
+  }
+
+  <dialog class="open:flex flex-col items-end rounded p-2" id="form-dialog">
+    <button id="close">
+      <CloseIcon />
+    </button>
+    <CreatePostForm lang={lang} user_id={session?.user?.id ?? ""} />
+  </dialog>
+</header>

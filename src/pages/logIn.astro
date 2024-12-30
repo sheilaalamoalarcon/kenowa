@@ -1,8 +1,61 @@
 ---
-import AuthLayout from "@/layouts/AuthLayout.astro";
-import Form from "@/components/LogInForm/LogInForm";
+import { GoogleIcon } from "@/components/Icons";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import Layout from "@/layouts/Layout.astro";
+import { SignIn } from "auth-astro/components";
+import { getSession } from "auth-astro/server";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const session = await getSession(Astro.request);
+
+if (session) {
+  return Astro.redirect("/globalChat");
+}
 ---
 
-<AuthLayout title="Log in">
-  <Form client:only="react" />
-</AuthLayout>
+<Layout title="Log In">
+  <script>
+    //todo esto se renderiza solo cuando se renderiza el cliente
+    const image = document.getElementById("logo");
+    image?.setAttribute(
+      "src",
+      document.body.clientWidth < 640
+        ? "/public/small-logo.svg"
+        : "/public/big-logo.svg"
+    );
+    image?.setAttribute("class", "w-22 h-13");
+  </script>
+  <main class="flex flex-col p-6 sm:flex-row items-center sm:p-0">
+    <section
+      class="h-fit justify-center sm:flex gap-6 flex-col bg-orange-600 w-full sm:h-screen p-10 items-center"
+    >
+      <img id="logo" alt="logo" />
+      <h1 class="hidden sm:flex font-regular text-2xl text-white mt-1 mb-4">
+        {t("logIn.copy.big")}
+      </h1>
+      <ul class="hidden sm:flex flex-col gap-2 list-disc">
+        <li class="font-regular text-lg text-white">
+          {t("logIn.copy.small.1")}
+        </li>
+        <li class="font-regular text-lg text-white">
+          {t("logIn.copy.small.2")}
+        </li>
+        <li class="font-regular text-lg text-white">
+          {t("logIn.copy.small.3")}
+        </li>
+      </ul>
+    </section>
+
+    <SignIn
+      provider="google"
+      class="my-6 flex w-full justify-center m-6 p-2 rounded bg-green-600/50 h5 shadow-lg items-center gap-5"
+    >
+      <GoogleIcon />
+      <p class="text-white capitalize font-regular">
+        {t("logIn.google")}
+      </p></SignIn
+    >
+  </main>
+</Layout>

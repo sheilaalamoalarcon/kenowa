@@ -1,46 +1,22 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { ClickActions } from "@/constants/enums";
-import Button from "@/components/Button";
-import Footer from "@/components/Footer/Footer.astro";
-import CardGroupRenderer from "@/components/CardGroupRenderer";
-import Header from "@/components/Header";
+import AllPostsGroup from "@/components/AllPostsGroup";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getSession } from "auth-astro/server";
+
+const session = await getSession(Astro.request);
+
+if (!session) {
+  return Astro.redirect("/");
+}
+export const prerender = false;
 ---
 
-<Layout title="global-chat">
-  <main id="container">
-    <Header client:only="react" />
-    <div id="content">
-      <Button
-        title="Create new message"
-        clickAction={ClickActions.NAVIGATE}
-        navigateTo="/createMessage"
-        client:load
-        background
-      />
-      <CardGroupRenderer client:only="react" />
-    </div>
-    <Footer />
-    <style>
-      main {
-        display: grid;
-        min-height: 100dvh;
-        grid-template-rows: auto 1fr auto;
-      }
-      @media (min-width: 500px) and (max-width: 740px) /*/mobile size*/ {
-        #content {
-          display: flex;
-          flex-direction: column;
-        }
-      }
-      @media (min-width: 741px) {
-      }
-      @media (min-width: 992px) {
-        #content {
-          display: flex;
-          flex-direction: column;
-        }
-      }
-    </style>
+<Layout title="Chat">
+  <Header />
+  <main>
+    <AllPostsGroup user_id={session?.user?.id ?? ""} client:load />
   </main>
+  <Footer />
 </Layout>

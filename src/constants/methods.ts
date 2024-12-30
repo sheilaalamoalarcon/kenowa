@@ -1,120 +1,5 @@
-import { API_ROUTES } from "./enums";
+import type { CMessage } from "./classes";
 
-export const arrayBufferToBase64 = (buffer: ArrayBufferLike) => {
-  let binary = "";
-  const bytes = new Uint8Array(buffer);
-  const len = bytes.byteLength;
-  for (let i = 0; i < len; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return window.btoa(binary);
-};
-export async function LogOut(email: string, token: string) {
-  try {
-    const result = await fetch(API_ROUTES.LOGOUT, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ email }),
-    });
-
-    if (result.ok) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("userEmail");
-      localStorage.removeItem("isFetching");
-      return result.statusText;
-    } else {
-      return result.statusText;
-    }
-  } catch (error) {
-    const err = error as Error;
-    return err;
-  }
-}
-
-export async function Get<T>(token: string, url?: string) {
-  try {
-    const result = await fetch(url ?? "", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      mode: "cors",
-    });
-    const data: T = await result.json();
-    if (result.ok) {
-      return data;
-    } else {
-      return "could not get: " + result.status + result.statusText;
-    }
-  } catch (error) {
-    const err = error as Error;
-    return err.message;
-  }
-}
-export async function Post(token: string, body: BodyInit, url?: string) {
-  try {
-    const result = await fetch(url ?? "", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: body,
-      mode: "cors",
-    });
-
-    if (result.ok) {
-      return "created correctly";
-    } else {
-      return "could not create: " + result.status;
-    }
-  } catch (error) {
-    const err = error as Error;
-    return err.message;
-  }
-}
-export async function Put(token: string, body: BodyInit, url?: string) {
-  try {
-    const result = await fetch(url ?? "", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: body,
-      mode: "cors",
-    });
-
-    if (result.ok) {
-      return "updated correctly";
-    } else {
-      return result.status;
-    }
-  } catch (error) {
-    const err = error as Error;
-    return err.message;
-  }
-}
-export async function Delete(url?: string, token?: string) {
-  try {
-    const response = await fetch(url ?? "", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token ? `Bearer ${token}` : "",
-      },
-      mode: "cors",
-    });
-
-    return response.status;
-  } catch (error) {
-    const err = error as Error;
-    return err.message;
-  }
-}
 export function parseDate(value: string) {
   const now = new Date();
   const date = new Date(value);
@@ -144,4 +29,17 @@ export function parseDate(value: string) {
     return `Just Uploaded`;
   }
   return `${daysParsed} días, ${hoursParsed} horas, ${minutesParsed} minutos`;
+}
+
+export function sortByDate(messages: CMessage[]): CMessage[] {
+  return messages.sort((a, b) => {
+    const dateA = new Date(a.created_at).getTime();
+    const dateB = new Date(b.created_at).getTime();
+    return dateA - dateB;
+  });
+}
+export function filterByUser(messages: CMessage[], id: string): CMessage[] {
+  //deprecated
+  const sortedMessagesByDate = sortByDate(messages);
+  return sortedMessagesByDate.filter((message) => message.propietary === id);
 }

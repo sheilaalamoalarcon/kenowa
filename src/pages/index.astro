@@ -1,93 +1,61 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "@/components/Header/index";
-import LandingImages from "../components/LandingImages.astro";
-import Footer from "@/components/Footer/Footer.astro";
-import Image from "astro/components/Image.astro";
-import { ClickActions, WebRoutesEnum } from "@/constants/enums";
-import ParagraphGroup from "@/components/ParagraphGroup.astro";
-import {
-  landingCopies,
-  landingImages,
-  welcomeMessage,
-} from "@/constants/constants";
-import Button from "@/components/Button";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Layout from "@/layouts/Layout.astro";
+import { IndexLogo } from "@/components/Icons";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+export const prerender = false;
+
+const copy = [
+  {
+    title: t("p.copy.title.2"),
+    subtitle: t("p.copy.subtitle.2"),
+    description: t("p.copy.description.2"),
+  },
+  {
+    title: t("p.copy.title.1"),
+    subtitle: t("p.copy.subtitle.1"),
+    description: t("p.copy.description.1"),
+  },
+  {
+    title: t("p.copy.title.3"),
+    subtitle: t("p.copy.subtitle.3"),
+    description: t("p.copy.description.3"),
+  },
+];
 ---
 
 <Layout title="Kenowa">
+  <Header />
   <main>
-    <Header client:only="react" />
-    <div id="welcome-message">
-      <Image
-        src="/landing-top-image.svg"
-        alt="landing-top"
-        class="top-image"
-        loading={"eager"}
-        width={697}
-        height={464}
-      />
-      <div id="copy">
-        <p class="body" style="text-align: center; padding: 5dvh 0;">
-          {welcomeMessage}
-        </p>
-        <Button
-          title="start sharing"
-          clickAction={ClickActions.NAVIGATE}
-          navigateTo={WebRoutesEnum.GLOBAL_CHAT}
-          client:only="react"
-          background
-        />
-      </div>
+    <figure
+      class="flex flex-col sm:flex-row sm:justify-between items-center p-6 px-16"
+    >
+      <IndexLogo />
+      <figcaption class="body text-center p-5 w-96">
+        {t("copy.welcomeMessage")}
+      </figcaption>
+    </figure>
+
+    <div
+      class="flex flex-col sm:flex-row items-center justify-between gap-5 w-full px-16 py-10 bg-orange-500/20 dark:bg-orange-500/80"
+    >
+      {
+        copy.map(({ title, description, subtitle }) => (
+          <section class="flex flex-col w-full sm:w-72 gap-1 text-center">
+            <h2 class="main-title text-xl dark:text-white">{title}</h2>
+            <h3 class="text-md text-black/70 capitalize dark:text-white/70">
+              {subtitle}
+            </h3>
+            <p class="body my-4">{description}</p>
+          </section>
+        ))
+      }
     </div>
-
-    <LandingImages images={landingImages} />
-    <ParagraphGroup content={landingCopies} />
-
-    <Footer />
   </main>
-
-  <style>
-    @media (min-width: 500px) and (max-width: 991px) /*/mobile size*/ {
-      main {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        gap: 4.625rem;
-      }
-      #welcome-message {
-        flex-direction: column;
-      }
-      .top-image {
-        width: 100%;
-      }
-      #copy {
-        max-width: 100%;
-      }
-    }
-
-    @media (min-width: 992px) {
-      main {
-        display: flex;
-        flex-direction: column;
-        color: var(--text);
-        align-items: center;
-        gap: 4.625rem;
-      }
-      #welcome-message {
-        display: flex;
-        padding: 0rem 3.125rem;
-        justify-content: space-between;
-        align-items: center;
-        align-self: stretch;
-      }
-      #copy {
-        max-width: 50%;
-      }
-
-      .top-image {
-        width: 100%;
-      }
-    }
-  </style>
+  <Footer />
 </Layout>

@@ -1,21 +1,37 @@
 ---
+import { getSession } from "auth-astro/server";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer/Footer.astro";
-import ProfileWrapper from "@/components/UserDetails/profileWrapper.tsx";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import SavedGroup from "@/components/SavedGroup";
+import { UserPostsGroup } from "@/components/UserPostsGroup";
+
+const session = await getSession(Astro.request);
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+if (!session) {
+  return Astro.redirect("/");
+}
+export const prerender = false;
 ---
 
-<Layout title={`Your Profile`}>
-  <main>
-    <Header client:only="react" />
-    <ProfileWrapper client:only="react" />
-    <Footer />
+<Layout title={`${session?.user?.name} Profile`}>
+  <Header />
+  <main class="grid h-full grid-rows-[auto,1fr,auto]">
+    <section>
+      <h2 class="text-black text-start text-lg font-bold dark:text-stone-50/75">
+        {t("profile.saved.title")}
+      </h2>
+      <SavedGroup _id={session?.user?.id} client:load />
+    </section>
+    <section>
+      <h2 class="text-black text-start text-lg font-bold dark:text-stone-50/75">
+        {t("profile.post.title")}
+      </h2>
+      <UserPostsGroup user_id={session?.user?.id ?? ""} client:load />
+    </section>
   </main>
-  <style>
-    main {
-      display: grid;
-      min-height: 100dvh;
-      grid-template-rows: auto 1fr auto;
-    }
-  </style>
+  <Footer />
 </Layout>

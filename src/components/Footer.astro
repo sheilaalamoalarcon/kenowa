@@ -1,0 +1,23 @@
+---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<footer
+  class="flex flex-col-reverse h-fit items-start gap-6 bg-orange-600 p-12 px-16 h-fit dark:bg-stone-800"
+>
+  <ul
+    class="flex flex-col text-white list-disc decoration-current no-underline capitalize dark:text-white"
+  >
+    <li>
+      <a href="/project">{t("footer.nav")}</a>
+    </li>
+    <li>
+      <a href="https://www.linkedin.com/in/sheila-álamo/"
+        >{t("footer.nav.contact")}</a
+      >
+    </li>
+  </ul>
+</footer>

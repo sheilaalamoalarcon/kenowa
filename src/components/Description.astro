@@ -1,0 +1,47 @@
+---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div class="grid grid-cols-1 gap-6 my-6 sm:grid-cols-2">
+  <section>
+    <h2 class={"main-title text-start"}>{t("project.develpment.title")}</h2>
+    <ul>
+      <h3>
+        <strong>{t("project.develpment.choosenStack")}</strong>
+      </h3>
+      <li class={"body"}>
+        <strong> {t("project.develpment.front.title")}</strong>
+        {t("project.develpment.front")}
+      </li>
+      <li class={"body"}>
+        <strong> {t("project.develpment.back.title")}</strong>
+        {t("project.develpment.back")}
+      </li>
+      <h3>
+        <strong>{t("project.develpment.justification")}</strong>
+      </h3>
+      <p class="body">
+        {t("project.develpment.justification.text")}
+      </p>
+
+      <h3>
+        <strong>{t("project.develpment.complications")}</strong>
+      </h3>
+      <p class="body">
+        {t("project.develpment.complications.text")}
+      </p>
+    </ul>
+  </section>
+  <section>
+    <h2 class={"main-title text-start"}>{t("project.description.title")}</h2>
+    <strong>
+      {t("project.description.strong")}
+    </strong>
+    <p class={"body"}>
+      {t("project.description")}
+    </p>
+  </section>
+</div>

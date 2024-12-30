@@ -1,8 +1,8 @@
-enum BASE_ROUTES {
+enum BaseRoutes {
   API_HEAD_ROUTE = "http://localhost:3600/api",
-  AUTH = BASE_ROUTES.API_HEAD_ROUTE + "/auth",
-  USERS = BASE_ROUTES.API_HEAD_ROUTE + "/users",
-  MESSAGES = BASE_ROUTES.API_HEAD_ROUTE + "/messages",
+  AUTH = BaseRoutes.API_HEAD_ROUTE + "/auth",
+  USERS = BaseRoutes.API_HEAD_ROUTE + "/users",
+  MESSAGES = BaseRoutes.API_HEAD_ROUTE + "/messages",
 
   POST = "/post",
   GET = "/get/",
@@ -14,47 +14,28 @@ enum BASE_ROUTES {
   UPDATE_ID = "/update/:id",
 }
 
-export enum API_ROUTES {
-  LOGIN = BASE_ROUTES.AUTH + "/login",
-  LOGOUT = BASE_ROUTES.AUTH + "/logout",
-  REGISTER = BASE_ROUTES.AUTH + "/register",
-
-  GET_USER = BASE_ROUTES.USERS + BASE_ROUTES.GET_ID,
-  SAVE_MESSAGE = BASE_ROUTES.USERS + BASE_ROUTES.POST,
-  GET_ALL_MESSAGES = BASE_ROUTES.MESSAGES + BASE_ROUTES.ALL,
-  GET_SAVED_MESSAGES = BASE_ROUTES.MESSAGES + "/saved" + BASE_ROUTES.GET,
-  GET_MESSAGES_ID = BASE_ROUTES.MESSAGES + BASE_ROUTES.GET,
-  PUT_MESSAGE = BASE_ROUTES.MESSAGES + BASE_ROUTES.UPDATE,
-  POST_MESSAGE = BASE_ROUTES.MESSAGES + BASE_ROUTES.POST,
+export enum FetchRoutes {
+  GET_ALL_MESSAGES = BaseRoutes.MESSAGES + BaseRoutes.ALL,
+  GET_SAVED_MESSAGES = BaseRoutes.MESSAGES + "/saved" + BaseRoutes.GET,
+  PUT_MESSAGE = BaseRoutes.MESSAGES + BaseRoutes.UPDATE,
 }
 
-export enum WebRoutesEnum {
-  LOG_IN = "/logIn",
+export enum Routes {
   LOG_OUT = "/logOut",
-  SIGN_IN = "/signIn",
-  RESET_PASSWORD = "/resetPassword",
+  LOG_IN = "/logIn",
   GLOBAL_CHAT = "/globalChat",
-  PAYING_HALL = "/payingHall",
   PROFILE = "/profile",
-  SHOP = "/shop",
   LANDING = "/",
-}
-export enum HeaderTypeEnum {
-  USER, //is logged in
-  PASSENGER,
 }
 export enum ClickActions {
   OPEN_MODULE,
   NAVIGATE,
   NONE,
   LOG_OUT,
+  LOG_IN,
   SAVE_POST,
 }
-export enum ModalChildrens {
-  NEW_MESSAGE,
-  NONE,
-}
-export enum ImagesSourceEnum {
+export enum ImageSource {
   STOCK_IMAGE_1 = "/stock-image-katsiaryna-endruszkiewicz.png",
   STOCK_IMAGE_2 = "/stock-image-dom-hill.png",
   STOCK_IMAGE_3 = "/stock-image-ave-calvar.png",
@@ -65,4 +46,8 @@ export enum AlertType {
   INFO,
   WARNING,
   ERROR,
+}
+export enum ContentTypes {
+  JSON = "application/json",
+  FORM_DATA = "multipart/form-data",
 }
