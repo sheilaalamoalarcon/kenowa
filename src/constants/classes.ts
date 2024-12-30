@@ -1,91 +1,72 @@
 import type { AlertType } from "./enums";
 
-export class CUser {
+export interface CUser {
   _id?: string;
-  email: string = "user@anon.com";
-  _password: string = "anonPassword@123";
-  image: ImageType = new ImageType(new ArrayBuffer(0), "");
-  username: string = "";
+  email: string;
+  _password: string;
+  image?: string;
+  username: string;
 
   messages?: string[]; //id de cada mensaje
-
-  constructor(
-    email: string,
-    _password: string,
-    image: ImageType,
-    username: string
-  ) {
-    this.email = email;
-    this._password = _password;
-    this.image = image;
-    this.username = username;
-  }
 }
 
-export class ImageType {
-  data: ArrayBufferLike = new ArrayBuffer(0);
-  type: string = "";
+export interface CMessage {
+  id: string;
+  text: string;
+  propietary: string; //propietary id
+  created_at: string;
 
-  constructor(data: ArrayBufferLike, type: string) {
-    this.data = data;
-    this.type = type;
-  }
+  image?: string;
 }
-
-export class CMessage {
-  _id: string = "";
-  content: string = "";
-  propietary: string = ""; //propietary id
-  image: ImageType = new ImageType(new ArrayBuffer(0), "");
-  created_at: string = "";
-
-  constructor(
-    _id: string,
-    content: string,
-    propietary: string,
-    image: ImageType,
-    created_at: string
-  ) {
-    this._id = _id;
-    this.content = content;
-    this.propietary = propietary;
-    this.image = image;
-    this.created_at = created_at;
-  }
-}
-export class CSavedMessage {
-  user_id: string = "";
-  message_id: string = "";
-
-  constructor(user_id: string, message_id: string) {
-    this.user_id = user_id;
-    this.message_id = message_id;
-  }
-}
-export class CProduct {
-  src: string = "";
-  title: string = "";
-  subtitle: string = "";
-
-  constructor(src: string, title: string, subtitle: string) {
-    this.src = src;
-    this.title = title;
-    this.subtitle = subtitle;
-  }
-}
-export class CParagraph {
-  title: string = "";
-  subtitle: string = "";
-  description: string = "";
-
-  constructor(title: string, subtitle: string, description: string) {
-    this.title = title;
-    this.subtitle = subtitle;
-    this.description = description;
-  }
-}
-
 export interface IAlert {
   type: AlertType;
   message: string;
 }
+export interface Saved {
+  id: string;
+  user_id: string;
+  message_id: string;
+  created_at: Date;
+}
+export interface APIResponse<T> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  code?: string;
+}
+
+export function createResponse<T>(options: {
+  success: boolean;
+  data?: T;
+  status?: number;
+}) {
+  return new Response(
+    JSON.stringify({
+      success: options.success,
+      data: options.data,
+    }),
+    {
+      status: options.status || (options.success ? 200 : 400),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+}
+export class AppError extends Error {
+  constructor(
+    public code: string,
+    message: string,
+    public status: number = 500
+  ) {
+    super(message);
+    this.name = "AppError";
+  }
+}
+
+export const ErrorHandler = {
+  AUTH: (message = "No autorizado") => new AppError("AUTH_ERROR", message, 401),
+  VALIDATION: (message: string) =>
+    new AppError("VALIDATION_ERROR", message, 400),
+  RATE_LIMIT: () => new AppError("RATE_LIMIT", "Demasiadas peticiones", 429),
+};
