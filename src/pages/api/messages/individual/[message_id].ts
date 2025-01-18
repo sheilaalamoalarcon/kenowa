@@ -1,4 +1,4 @@
-import { createResponse, ErrorHandler } from "@/constants/classes";
+import { ApiRes, ErrorHandler } from "@/constants/classes";
 import type { APIRoute } from "astro";
 import { db, eq, Messages } from "astro:db";
 
@@ -14,7 +14,7 @@ export const GET: APIRoute = async ({ params }) => {
       .from(Messages)
       .where(eq(Messages.id, message_id));
 
-    return createResponse({
+    return ApiRes({
       success: true,
       data: data,
     });

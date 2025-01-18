@@ -1,13 +1,15 @@
 import { db, Saved, eq } from "astro:db";
 import type { APIRoute } from "astro";
-import { createResponse, ErrorHandler } from "@/constants/classes";
+import { ApiRes, ErrorHandler } from "@/constants/classes";
 
-export const DELETE: APIRoute = async ({ params }) => {
+//To delete the saved post the user must be the creator of that saved post
+export const DELETE: APIRoute = async ({ params, locals }) => {
   try {
     const { message_id } = params;
+    const { userId } = locals;
 
     if (!message_id) {
-      throw ErrorHandler.VALIDATION("Message need a text");
+      return ErrorHandler.VALIDATION("Message need a text");
     }
 
     const deleteValue = await db
@@ -15,14 +17,14 @@ export const DELETE: APIRoute = async ({ params }) => {
       .where(eq(Saved.message_id, message_id));
 
     if (deleteValue) {
-      return createResponse({
+      return ApiRes({
         success: true,
         data: "Post deleted correctly",
       });
     }
-    throw ErrorHandler.VALIDATION("Could not create post");
+    return ErrorHandler.VALIDATION("Could not create post");
   } catch (error) {
     const err = error as Error;
-    throw ErrorHandler.VALIDATION(err.message);
+    return ErrorHandler.VALIDATION(err.message);
   }
 };

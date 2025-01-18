@@ -1,4 +1,4 @@
-import { createResponse, ErrorHandler } from "@/constants/classes";
+import { ApiRes, ErrorHandler } from "@/constants/classes";
 import type { APIRoute } from "astro";
 import { db, Messages } from "astro:db";
 
@@ -6,14 +6,14 @@ export const GET: APIRoute = async () => {
   try {
     const data = await db.select().from(Messages);
     if (data.length === 0) {
-      throw ErrorHandler.VALIDATION("No messages found");
+      return ErrorHandler.VALIDATION("No messages found");
     }
-    return createResponse({
+    return ApiRes({
       success: true,
       data: data,
     });
   } catch (error) {
     const err = error as Error;
-    throw ErrorHandler.VALIDATION(err.message);
+    return ErrorHandler.VALIDATION(err.message);
   }
 };

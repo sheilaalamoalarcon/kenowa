@@ -1,6 +1,6 @@
 import { db, Saved } from "astro:db";
 import type { APIRoute } from "astro";
-import { createResponse, ErrorHandler } from "@/constants/classes";
+import { ApiRes, ErrorHandler } from "@/constants/classes";
 
 export const GET: APIRoute = async () => {
   try {
@@ -10,7 +10,7 @@ export const GET: APIRoute = async () => {
       throw ErrorHandler.VALIDATION("Could not get saved posts");
     }
 
-    return createResponse({
+    return ApiRes({
       success: true,
       data: result,
     });
