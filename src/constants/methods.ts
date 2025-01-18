@@ -38,8 +38,23 @@ export function sortByDate(messages: CMessage[]): CMessage[] {
     return dateA - dateB;
   });
 }
-export function filterByUser(messages: CMessage[], id: string): CMessage[] {
-  //deprecated
-  const sortedMessagesByDate = sortByDate(messages);
-  return sortedMessagesByDate.filter((message) => message.propietary === id);
-}
+
+export const setupScrollAnimation = (selector: string) => {
+  const elements = document.querySelectorAll(selector);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-fadeIn"); // Añade la clase de animación
+          entry.target.classList.remove("opacity-0", "translate-y-4");
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "50px",
+    }
+  );
+
+  elements.forEach((elemnt) => observer.observe(elemnt));
+};

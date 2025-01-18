@@ -1,22 +1,51 @@
-import type { AlertType } from "./enums";
+/*
+How To Create Good TypeScript Classes
 
-export interface CUser {
-  _id?: string;
-  email: string;
-  _password: string;
-  image?: string;
-  username: string;
+basic class structure
 
-  messages?: string[]; //id de cada mensaje
+class TestClass {
+  age:number; //basic property
+  age:number; //basic property
+
+  constructor(
+    name:string, 
+    age:number
+  ){
+    this.name = name //asign class property value to constructor parameter
+    this.age = age //asign class property value to constructor parameter
+  }
 }
+class TestClass {
+  extraInfo!:string //makes this property available even without initialization
+  constructor(
+    public readonly name:string, 
+    public age:number,
+    private position:string,
+    protected salary:number
+  ){
+    this.name = name //asign class property value to constructor parameter
+    this.age = age //asign class property value to constructor parameter
+    this.position = position //asign class property value to constructor parameter
+    this.salary = salary //asign class property value to constructor parameter
+  }
 
+  public getPosition(){
+    return this.position
+  }
+
+  public getSalary(){
+    return this.salary
+  }
+}
+*/
+
+import { StylesTypes, type AlertType } from "./enums";
 export interface CMessage {
   id: string;
   text: string;
   propietary: string; //propietary id
+  propietary_name: string;
   created_at: string;
-
-  image?: string;
 }
 export interface IAlert {
   type: AlertType;
@@ -31,42 +60,177 @@ export interface Saved {
 export interface APIResponse<T> {
   success: boolean;
   data?: T;
-  error?: string;
-  code?: string;
+  error?: {
+    code: string;
+    message: string;
+    status: number;
+  };
 }
 
-export function createResponse<T>(options: {
+export function ApiRes<T>(options: {
   success: boolean;
   data?: T;
   status?: number;
+  message?: string;
+  code?: string;
 }) {
-  return new Response(
-    JSON.stringify({
-      success: options.success,
-      data: options.data,
-    }),
-    {
-      status: options.status || (options.success ? 200 : 400),
-      headers: {
-        "Content-Type": "application/json",
+  const response = {
+    success: options.success,
+    data: options.data,
+    ...(options.message && {
+      error: {
+        code: options.code || "ERROR",
+        message: options.message,
+        status: options.status || 400,
       },
-    }
-  );
-}
-export class AppError extends Error {
-  constructor(
-    public code: string,
-    message: string,
-    public status: number = 500
-  ) {
-    super(message);
-    this.name = "AppError";
-  }
+    }),
+  };
+
+  return new Response(JSON.stringify(response), {
+    status: options.status || (options.success ? 200 : 400),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }
 
 export const ErrorHandler = {
-  AUTH: (message = "No autorizado") => new AppError("AUTH_ERROR", message, 401),
+  AUTH: (message = "No autorizado") =>
+    ApiRes({
+      success: false,
+      message,
+      status: 401,
+      code: "AUTH_ERROR",
+    }),
   VALIDATION: (message: string) =>
-    new AppError("VALIDATION_ERROR", message, 400),
-  RATE_LIMIT: () => new AppError("RATE_LIMIT", "Demasiadas peticiones", 429),
+    ApiRes({
+      success: false,
+      message,
+      status: 400,
+      code: "VALIDATION_ERROR",
+    }),
+  RATE_LIMIT: () =>
+    ApiRes({
+      success: false,
+      message: "Demasiadas peticiones",
+      status: 429,
+      code: "RATE_LIMIT_ERROR",
+    }),
 };
+
+//class components
+export class DialogManager {
+  private dialog!: HTMLDialogElement;
+  private openBtn: HTMLElement | null = null;
+  private closeBtn: HTMLElement | null = null;
+
+  constructor() {
+    this.dialog = document.getElementById("form-dialog") as HTMLDialogElement;
+    this.openBtn = document.getElementById("open");
+    this.closeBtn = document.getElementById("close");
+    this.init();
+  }
+
+  private init(): void {
+    this.openBtn?.addEventListener("click", () => this.dialog?.showModal());
+    this.closeBtn?.addEventListener("click", () => this.dialog?.close());
+
+    this.dialog.addEventListener("keydown", (e) => {
+      //close dialog with keyboard
+      if (e.key === "Escape") {
+        this.dialog.close();
+      }
+    });
+  }
+}
+export class EditorManager {
+  private editor!: HTMLDivElement;
+  private hiddenInput: HTMLInputElement | null = null;
+  private selectedStyle: StylesTypes;
+
+  constructor(editorID: string, hiddenInputID: string) {
+    this.editor = document.getElementById(editorID) as HTMLDivElement;
+    this.hiddenInput = document.getElementById(
+      hiddenInputID
+    ) as HTMLInputElement;
+    this.selectedStyle = StylesTypes.REGULAR;
+    this.init();
+  }
+
+  private init(): void {
+    this.setEventListener();
+  }
+  private createWrapper(text: string | null, desiredStyle: StylesTypes) {
+    console.log(`desiredStyle: ${desiredStyle}`);
+    switch (desiredStyle) {
+      case StylesTypes.ITALIC:
+        const em = document.createElement("em");
+        em.id = `italic-wrapper`;
+        em.textContent = text ?? "there isn't text";
+        return em;
+      case StylesTypes.BOLD:
+        const strong = document.createElement("strong");
+        strong.id = `strong-wrapper`;
+        strong.textContent = text ?? "there isn't text";
+        return strong;
+      case StylesTypes.UNDERLINE:
+        const wrapper = document.createElement("p");
+        wrapper.id = `underlined-wrapper`;
+        wrapper.textContent = text ?? "there isn't text";
+        wrapper.classList.add("underline");
+        return wrapper;
+      case StylesTypes.TITLE:
+        const title = document.createElement("h1");
+        title.id = `title-wrapper`;
+        title.textContent = text ?? "there isn't text";
+        title.classList.replace("underline", "no-underline");
+        title.classList.add("text-2xl", "font-bold");
+        return title;
+      case StylesTypes.SUBTITLE:
+        const subtitle = document.createElement("h2");
+        subtitle.id = `subtitle-wrapper`;
+        subtitle.textContent = text ?? "there isn't text";
+        subtitle.classList.replace("underline", "no-underline");
+        subtitle.classList.add("text-xl", "font-semibold");
+        subtitle.classList.add("subtitle");
+        return subtitle;
+      default:
+        const textWrapper = document.createElement("p");
+        textWrapper.id = `paragraph-wrapper`;
+        textWrapper.textContent = text ?? "there isn't text";
+        textWrapper.classList.replace("underline", "no-underline");
+        textWrapper.classList.add("font-normal");
+        return textWrapper;
+    }
+  }
+  private handleInput(): void {
+    if (!this.hiddenInput || !this.editor) return;
+    this.hiddenInput.value = this.editor.innerHTML;
+  }
+  private handleSection(): void {
+    const selection = window.getSelection();
+    if (!selection?.toString()) return;
+
+    const range = selection.getRangeAt(0);
+    const wrapper = this.createWrapper(
+      selection.toString(),
+      this.selectedStyle
+    );
+
+    range.deleteContents();
+    range.insertNode(wrapper);
+  }
+  private setEventListener(): void {
+    this.editor.addEventListener("input", this.handleInput.bind(this));
+    this.editor.addEventListener("mouseup", this.handleSection.bind(this));
+
+    document.addEventListener("astro:before-swap", () => {
+      this.editor.removeEventListener("input", this.handleInput.bind(this));
+      this.editor.addEventListener("mouseup", this.handleSection.bind(this));
+    });
+  }
+
+  setStyle(selected: StylesTypes) {
+    this.selectedStyle = selected;
+  }
+}
