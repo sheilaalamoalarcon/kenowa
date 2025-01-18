@@ -44,9 +44,9 @@ export function SaveButton({ propietary, message_id }: Props) {
   return (
     <button
       onClick={() => SavePost()}
-      class={`aspect-square items-center justify-center bg-orange-500 border-transparent rounded p-1 w-fit active:animate-once animate-ease-in-out animate-normal animate-fill-both`}
+      class="aspect-square items-center justify-center bg-stone-600 border-transparent rounded p-1 w-fit hover:bg-orange-600 active:bg-orange-700"
     >
-      {SaveIcon(15, "white")}
+      <SaveIcon />
     </button>
   );
 }

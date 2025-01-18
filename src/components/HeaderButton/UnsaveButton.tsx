@@ -39,9 +39,9 @@ export function UnsaveButton({ message_id }: Props) {
   return (
     <button
       onClick={UnsavePost}
-      class={`aspect-square items-center justify-center bg-orange-500 border-transparent rounded p-1 w-fit hover:animation-pulse`}
+      class={`aspect-square items-center justify-center border-transparent rounded p-1 w-fit bg-stone-600 border-transparent rounded p-1 w-fit hover:bg-orange-600 active:bg-orange-700`}
     >
-      {DeleteIcon("white", 15)}
+      <DeleteIcon color="white" />
     </button>
   );
 }
