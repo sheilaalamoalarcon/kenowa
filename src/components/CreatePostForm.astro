@@ -1,125 +1,136 @@
 ---
 import { useTranslations } from "@/i18n/utils";
-import { v2 as cloudinary } from "cloudinary";
+import { StylesTypes } from "@/constants/enums";
+import TextButtonGroup from "./TextButtonGroup.astro";
 
 interface Props {
   user_id: string;
+  username: string;
   lang: "en" | "es";
 }
-const { user_id, lang } = Astro.props;
-let uploadedImage: any | undefined;
+const { user_id, username, lang } = Astro.props;
 const t = useTranslations(lang);
-
-cloudinary.config({
-  cloud_name: import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME,
-  api_key: import.meta.env.PUBLIC_CLOUDINARY_API_KEY,
-  api_secret: import.meta.env.CLOUDINARY_API_SECRET,
-});
-
-const uploadToCloud = async (buffer: Uint8Array, options: any) => {
-  return new Promise((resolve, reject) => {
-    cloudinary.uploader
-      .upload_stream(options, (err, res) => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(res);
-      })
-      .end(buffer);
-  });
-};
 
 if (Astro.request.method == "POST") {
   try {
     const data = await Astro.request.formData();
 
     const text = data.get("text");
-    const image = data.get("myFile") as File;
 
-    if (image.size > 0) {
-      //transform File to Uint8array
-      const arrayBuffer = await image.arrayBuffer();
-      const int8arr = new Uint8Array(arrayBuffer);
-      const res = await uploadToCloud(int8arr, {
-        folder: "folder-name",
-      });
-      uploadedImage = res;
-
-      const response = await fetch(
-        `${import.meta.env.PUBLIC_URL}/api/messages/new`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            propietary: user_id,
-            text: text,
-            image: image,
-          }),
-          credentials: "include",
-        }
-      );
-      if (response.ok) {
-        window.location.href = "/globalChat";
-      }
-    }
-
-    const response = await fetch(
-      `${import.meta.env.PUBLIC_URL}/api/messages/new`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          propietary: user_id,
-          text: text ?? "",
-        }),
-      }
-    );
-
-    if (response.ok) {
-      window.location.href = "/globalChat";
-    } else {
-      return new Error("Error could not create post");
-    }
+    await fetch(`${import.meta.env.PUBLIC_URL}/api/messages/new`, {
+      method: "POST",
+      body: JSON.stringify({
+        propietary: user_id,
+        propietary_name: username,
+        text: text ?? "",
+      }),
+    });
   } catch (error) {
     return error;
   }
 }
+
+const basicButtons = [
+  {
+    value: StylesTypes.BOLD,
+    disabled: false,
+    title: "bold",
+  },
+  {
+    value: StylesTypes.ITALIC,
+    disabled: false,
+    title: "italic",
+  },
+  {
+    value: StylesTypes.UNDERLINE,
+    disabled: false,
+    title: "underlined",
+  },
+];
+
+const articleButtons = [
+  {
+    value: StylesTypes.TITLE,
+    disabled: false,
+    title: "title",
+  },
+  {
+    value: StylesTypes.SUBTITLE,
+    disabled: false,
+    title: "subtitle",
+  },
+  {
+    value: StylesTypes.REGULAR,
+    disabled: false,
+    title: "regular",
+  },
+];
 ---
 
+<TextButtonGroup basic={basicButtons} article={articleButtons} />
 <form
-  class={"flex flex-col justify-between gap-12 p-8 sm: w-fit"}
+  class="flex flex-col items-center gap-12 w-full"
   id="form"
   enctype="multipart/form-data"
   method="post"
 >
-  <label class="flex flex-col w-full capitalize main-title text-start">
-    {t("input.image")}
-  </label>
-  <input
-    placeholder={t("input.image.placeholder")}
-    title={t("input.image")}
-    name="myFile"
-    type="file"
-    required={false}
-    class="border-orange-500 text-black text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:text-orange-700 hover:file:bg-orange-100 invalid:border-red-500"
-  />
-  <label class="flex flex-col w-full capitalize main-title text-start">
-    {t("input.content")}
-  </label>
-  <textarea
-    placeholder={t("input.content.placeholder")}
-    title={t("input.content")}
-    name={"text"}
-    maxlength={250}
-    minlength={1}
-    required
-    class="border-orange-500 text-black text-sm invalid:border-red-500"
-  ></textarea>
+  <div class="flex flex-col gap-6 w-full">
+    <label class="flex flex-col w-full capitalize main-title text-start">
+      {t("input.content")}
+    </label>
+    <textarea
+      id="hidden-textarea"
+      placeholder={t("input.content.placeholder")}
+      title={t("input.content")}
+      name={"text"}
+      maxlength={250}
+      minlength={1}
+      required
+      class="hidden"></textarea>
+    <div
+      contenteditable="true"
+      role="application"
+      id="editor"
+      title={t("input.content")}
+      class="border-orange-500 h-96 invalid:border-red-500 dark:text-white"
+    >
+    </div>
+  </div>
 
   <button
     type="submit"
-    class="flex w-fit justify-center p-2 rounded bg-green-600 h5 shadow-lg mx-16 dark:bg-orange-500"
+    class="flex max-w-sm p-6 rounded bg-orange-500 h5 shadow-lg items-center justify-center gap-5 hover:bg-orange-600 active:bg-orange-700"
   >
     <p class={"text-white capitalize font-regular"}>
       {t("button.sendMessage")}
     </p>
   </button>
 </form>
+<script>
+  import { EditorManager } from "@/constants/classes";
+  import { StylesTypes } from "@/constants/enums";
+
+  const editor = new EditorManager("editor", "hidden-textarea");
+
+  function setSelectedStyle(button: HTMLElement | null, selected: StylesTypes) {
+    button?.addEventListener("click", () => editor.setStyle(selected));
+  }
+
+  const blackBtn = document.getElementById("font-action-bold");
+  setSelectedStyle(blackBtn, StylesTypes.BOLD);
+
+  const underlinedBtn = document.getElementById("font-action-underlined");
+  setSelectedStyle(underlinedBtn, StylesTypes.UNDERLINE);
+
+  const italicBtn = document.getElementById("font-action-italic");
+  setSelectedStyle(italicBtn, StylesTypes.ITALIC);
+
+  const titleBtn = document.getElementById("font-action-title");
+  setSelectedStyle(titleBtn, StylesTypes.TITLE);
+
+  const subtitleBtn = document.getElementById("font-action-subtitle");
+  setSelectedStyle(subtitleBtn, StylesTypes.SUBTITLE);
+
+  const regularBtn = document.getElementById("font-action-regular");
+  setSelectedStyle(regularBtn, StylesTypes.REGULAR);
+</script>
