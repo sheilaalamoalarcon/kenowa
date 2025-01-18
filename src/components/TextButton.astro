@@ -1,0 +1,19 @@
+---
+interface Props {
+  value: string;
+  title: string;
+  disabled: boolean;
+}
+const { value, disabled, title } = Astro.props;
+---
+
+<button
+  type="button"
+  value={value}
+  id={`font-action-${title}`}
+  aria-label={`change font to ${value}`}
+  disabled={disabled}
+  class="capitalize text-sm bg-stone-100 text-stone-600 font-semibold p-3 rounded hover:bg-orange-600 hover:text-white hover:dark:text-stone-600 active:bg-orange-700 dark:bg-stone-600 dark:text-white"
+>
+  {title.toString()}
+</button>
