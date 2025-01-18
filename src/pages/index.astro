@@ -3,14 +3,25 @@ import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import Layout from "@/layouts/Layout.astro";
-import { IndexLogo } from "@/components/Icons";
+import Description from "@/components/Description.astro";
+import IndexCard from "@/components/IndexCard.astro";
+
+interface CopyItem {
+  title: string;
+  subtitle: string;
+  description: string;
+}
+interface DeveloperInfo {
+  title: string;
+  platform: string;
+}
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 export const prerender = false;
 
-const copy = [
+const copy: CopyItem[] = [
   {
     title: t("p.copy.title.2"),
     subtitle: t("p.copy.subtitle.2"),
@@ -27,35 +38,88 @@ const copy = [
     description: t("p.copy.description.3"),
   },
 ];
+const developerInfo: DeveloperInfo[] = [
+  {
+    title: "CV & Work info",
+    platform: "linkedin",
+  },
+  {
+    title: "Web Code",
+    platform: "github",
+  },
+  {
+    title: "Other Works",
+    platform: "portfolio",
+  },
+];
 ---
 
 <Layout title="Kenowa">
   <Header />
-  <main>
-    <figure
-      class="flex flex-col sm:flex-row sm:justify-between items-center p-6 px-16"
-    >
-      <IndexLogo />
-      <figcaption class="body text-center p-5 w-96">
-        {t("copy.welcomeMessage")}
-      </figcaption>
-    </figure>
-
-    <div
-      class="flex flex-col sm:flex-row items-center justify-between gap-5 w-full px-16 py-10 bg-orange-500/20 dark:bg-orange-500/80"
+  <main class="align-center flex flex-col items-center justify-center py-12">
+    <section class="py-12 text-center">
+      <div class="reveal-on-scroll max-w-5xl mx-auto">
+        <h1 class="title">
+          {t("landing.title")}
+        </h1>
+        <p class="mt-4 text-stone-600 dark:text-stone-50">
+          {t("copy.welcomeMessage")}
+        </p>
+      </div>
+    </section>
+    <section
+      class="flex flex-col items-center justify-between gap-5 max-w-2xl px-16 py-10 my-20 gap-12"
     >
       {
         copy.map(({ title, description, subtitle }) => (
-          <section class="flex flex-col w-full sm:w-72 gap-1 text-center">
-            <h2 class="main-title text-xl dark:text-white">{title}</h2>
-            <h3 class="text-md text-black/70 capitalize dark:text-white/70">
-              {subtitle}
-            </h3>
-            <p class="body my-4">{description}</p>
-          </section>
+          <IndexCard
+            title={title}
+            subtitle={subtitle}
+            description={description}
+            variant="highlight"
+          />
         ))
       }
-    </div>
+    </section>
+
+    <section
+      id="scroll-animate"
+      class="flex flex-col w-full sm:items-center justify-between h-fit px-16 py-10 bg-stone-600/5"
+    >
+      <Description />
+    </section>
+    <section class="flex w-full justify-evenly px-12">
+      {
+        developerInfo.map((info) => (
+          <IndexCard
+            title={info.title}
+            subtitle={info.platform}
+            variant="highlight"
+          />
+        ))
+      }
+    </section>
+    <section
+      id="scroll-animate"
+      class="flex flex-col w-full justify-evenly px-12"
+    >
+      <h2 class="subtitle">Figma Design</h2>
+      <iframe
+        loading="lazy"
+        title="Kenowa Figma Design"
+        width="800"
+        height="450"
+        class="w-full h-96 px-12 rounded-3xl"
+        src="https://embed.figma.com/design/vchKAP63D4inZc2YMm3sCq/Kenowa?node-id=501-1599&embed-host=share"
+        allowfullscreen></iframe>
+    </section>
   </main>
   <Footer />
 </Layout>
+<script>
+  import { setupScrollAnimation } from "@/constants/methods";
+
+  document.addEventListener("DOMContentLoaded", () =>
+    setupScrollAnimation("#scroll-animate")
+  );
+</script>
