@@ -6,8 +6,19 @@ export default {
 			colors: {
 				'accent': '#FAFAFA',
 			},
-			gridTemplateRows: {
-				'layout': '1fr 1fr 1fr',
+			keyframes: {
+				fadeIn: {
+					'0%': { opacity: 0 },
+					'100%': { opacity: 1 },
+				},
+				fadeOut: {
+					'100%': { opacity: 0 },
+					'0%': { opacity: 1 },
+				}
+			},
+			animation: {
+				fadeIn: 'fadeIn 0.5s linear forwards',
+				fadeOut: 'fadeOut 0.5s linear forwards'
 			}
 		}
 	},

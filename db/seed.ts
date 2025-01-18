@@ -6,6 +6,7 @@ export default async function seed() {
     {
       id: "0",
       propietary: "0",
+      propietary_name: "Sheila Álamo",
       text: "new message created by seed",
       created_at: NOW,
     },

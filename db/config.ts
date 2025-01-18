@@ -4,6 +4,7 @@ const Messages = {
   columns: {
     id: column.text({ primaryKey: true, unique: true }),
     propietary: column.text({}),
+    propietary_name: column.text({}),
     image: column.text({ optional: true }),
     text: column.text({ optional: false }),
     created_at: column.date({}),
