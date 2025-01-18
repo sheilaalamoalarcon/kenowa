@@ -1,5 +1,4 @@
 ---
-import Head from "@/components/Head.astro";
 import { getLangFromUrl } from "@/i18n/utils";
 interface Props {
   title: string;
@@ -12,23 +11,47 @@ const lang = getLangFromUrl(Astro.url);
 
 <!doctype html>
 <html lang={lang}>
-  <Head title={title} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Social platform dedicated to fashion" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>{title}</title>
+    <meta name="description" content="Welcome to my new Astro site!" />
+
+    <!-- Web analytics -->
+    <script
+      data-goatcounter="https://my-account.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"></script>
+
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="My New Astro Website" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://www.example.com/" />
+    <meta property="og:description" content="Welcome to my new Astro site!" />
+    <meta
+      property="og:image"
+      content="https://www.example.com/_astro/seo-banner.BZD7kegZ.webp"
+    />
+    <meta property="og:image:alt" content="" />
+  </head>
+
   <body class="h-dvh">
     <slot />
   </body>
 </html>
+
 <style is:global>
   @import url("https://fonts.googleapis.com/css2?family=Anton&family=Anton+SC&display=swap");
   @tailwind base;
   @tailwind components;
   @tailwind utilities;
-  @font-face {
-    font-family: "Anton";
-    src: url("/fonts/AntonSC-Regular.ttf") format("ttf");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
+
   * {
     box-sizing: border-box;
   }
@@ -41,47 +64,38 @@ const lang = getLangFromUrl(Astro.url);
     body {
       @apply grid h-full grid-rows-[auto,1fr,auto];
     }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --dark-red: rgba(128, 67, 66, 1);
-        --soft-red: rgba(229, 70, 67, 0.24);
-
-        --dark-yellow: rgb(161, 128, 36);
-        --soft-yellow: rgba(229, 186, 67, 0.24);
-
-        --dark-green: rgb(67, 128, 91);
-        --soft-green: rgba(67, 229, 91, 0.24);
-
-        --dark-blue: rgb(67, 97, 128);
-        --soft-blue: rgba(67, 151, 229, 0.24);
-      }
-    }
-    @media (prefers-color-scheme: light) {
-      :root {
-        --dark-red: rgba(128, 67, 66, 1);
-        --soft-red: rgba(229, 70, 67, 0.24);
-
-        --dark-yellow: rgb(161, 128, 36);
-        --soft-yellow: rgba(229, 186, 67, 0.24);
-
-        --dark-green: rgb(67, 128, 91);
-        --soft-green: rgba(67, 229, 91, 0.24);
-
-        --dark-blue: rgb(67, 97, 128);
-        --soft-blue: rgba(67, 151, 229, 0.24);
-      }
-    }
   }
 
   @layer components {
+    .title {
+      @apply text-5xl font-extrabold text-stone-700 dark:text-stone-50;
+    }
     .main-title {
       @apply text-orange-500 text-center capitalize text-lg;
-      /*add font anton */
     }
-
     .body {
       @apply text-black font-sans text-sm dark:text-white;
+    }
+    .header {
+      @apply flex flex-col gap-4 sticky top-0 items-center bg-orange-600 
+           shadow-md p-6 px-16 h-fit sm:flex-row justify-between 
+           dark:bg-stone-800;
+    }
+    .header__nav-link {
+      @apply flex w-fit justify-center items-center gap-1 
+           text-white text-center font-normal capitalize text-xs 
+           dark:text-white hover:text-orange-200;
+    }
+    .post-group-base {
+    }
+    .card {
+      @apply flex flex-col justify-between h-64 aspect-square rounded p-12 bg-stone-400/10 shadow-xl drop-shadow-sm;
+    }
+    .appear-enter {
+      @apply opacity-0 translate-y-4 transition-all duration-500;
+    }
+    .subtitle {
+      @apply mt-4 text-3xl text-start sm:text-4xl font-extrabold tracking-tight text-stone-900 dark:text-stone-50;
     }
   }
 </style>
