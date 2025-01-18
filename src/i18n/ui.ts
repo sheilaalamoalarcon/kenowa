@@ -10,10 +10,9 @@ export const ui = {
     "nav.logIn": "Log In",
     "nav.logOut": "Log Out",
     "nav.chat": "Chat",
-    "nav.profile": "Profile",
     "nav.create": "Create Post",
     "copy.welcomeMessage":
-      "Welcome to your go-to space for genuine insights and creative inspiration. Explore trusted reviews, share your own experiences, and find fresh style ideas, all in one place. Dive into our global chat to connect with a vibrant community, exchange opinions, and spark new conversations. Whether you're searching for the best recommendations or looking to inspire others, this is where real voices meet innovative ideas. Join the conversation and start exploring now!",
+      "Welcome to your go-to space for genuine insights and creative inspiration. Explore trusted reviews, share your own experiences, and find fresh style ideas, all in one place. Dive into our global chat to connect with a vibrant community, exchange opinions, and spark new conversations. Whether you're searching for the best recommendations or looking to inspire others, this is where real voices meet innovative ideas.",
     "p.copy.title.1": "Share All Your Visions",
     "p.copy.subtitle.1": "Connect, Share, and Collaborate",
     "p.copy.description.1":
@@ -32,7 +31,6 @@ export const ui = {
     "footer.nav.contact": "Developer info",
 
     /* project page*/
-    "project.title": " Kenowa by Sheila Álamo",
     "project.description.title": "Description",
     "project.description.strong":
       " An online platform connecting young and middle-aged women passionate about fashion, allowing them to share styles and opinions within the industry.",
@@ -49,8 +47,7 @@ export const ui = {
     "profile.saved.title": "Saved",
 
     "logIn.google": "Log in with Google",
-    "logIn.copy.big":
-      "Whether you're searching for the best recommendations or looking to inspire others, this is where real voices meet innovative ideas. Join the conversation and start exploring now!",
+    "logIn.copy.big": "Welcome to Kenowa",
     "logIn.copy.small.1": "Connect, Share, and Collaborate",
     "logIn.copy.small.2": "Find Genuine Insights",
     "logIn.copy.small.3": "Get Style Inspiration",
@@ -67,15 +64,15 @@ export const ui = {
     "project.develpment.complications": "Complications",
     "project.develpment.complications.text":
       "One of the challenges we faced was ensuring the platform could handle a high volume of user-generated content while maintaining performance. We also needed to implement effective moderation tools to keep the community safe and welcoming.",
+    "landing.title": "Join the conversation and start exploring now!",
   },
   es: {
     "nav.logIn": "Iniciar Sesión",
     "nav.logOut": "Cerrar Sesión",
     "nav.chat": "Chat",
-    "nav.profile": "Tu Perfil",
     "nav.create": "Crear Post",
     "copy.welcomeMessage":
-      "Bienvenido a tu espacio de referencia para obtener ideas genuinas e inspiración creativa. Explora reseñas confiables, comparte tus propias experiencias y encuentra nuevas ideas de estilo, todo en un solo lugar. Sumérgete en nuestro chat global para conectarte con una comunidad vibrante, intercambiar opiniones y generar nuevas conversaciones. Ya sea que estés buscando las mejores recomendaciones o quieras inspirar a otros, aquí es donde las voces reales se encuentran con ideas innovadoras. ¡Únete a la conversación y comienza a explorar ahora!",
+      "Bienvenido a tu espacio de referencia para obtener ideas genuinas e inspiración creativa. Explora reseñas confiables, comparte tus propias experiencias y encuentra nuevas ideas de estilo, todo en un solo lugar. Sumérgete en nuestro chat global para conectarte con una comunidad vibrante, intercambiar opiniones y generar nuevas conversaciones. Ya sea que estés buscando las mejores recomendaciones o quieras inspirar a otros, aquí es donde las voces reales se encuentran con ideas innovadoras.",
     "p.copy.title.1": "Comparte Todas Tus Visiones",
     "p.copy.subtitle.1": "Conéctate, Comparte y Colabora",
     "p.copy.description.1":
@@ -94,7 +91,6 @@ export const ui = {
     "footer.nav.contact": "Información del desarrollador",
 
     /* project page*/
-    "project.title": " Kenowa by Sheila Álamo",
     "project.description.title": "Descripción",
     "project.description.strong":
       "Una plataforma online que conecta a mujeres jóvenes y de mediana edad apasionadas por la moda, permitiéndoles compartir estilos y opiniones dentro de la industria.",
@@ -109,9 +105,8 @@ export const ui = {
     "button.startsharing": "empieza a compartir",
     "profile.post.title": "Tus Publicaciones",
     "profile.saved.title": "Guardados",
-    "logIn.google": "Log in con Google",
-    "logIn.copy.big":
-      "Ya sea que esté buscando las mejores recomendaciones o buscando inspirar a otros, aquí es donde las voces reales se encuentran con ideas innovadoras. ¡Únase a la conversación y comience a explorar ahora!",
+    "logIn.google": "Continuar con Google",
+    "logIn.copy.big": "Bienvenido a Kenowa",
     "logIn.copy.small.1": "Conéctate, comparte y colabora",
     "logIn.copy.small.2": "Encuentre información genuina",
     "logIn.copy.small.3": "Obtén inspiración sobre estilo",
@@ -128,5 +123,6 @@ export const ui = {
     "project.develpment.complications": "Complicaciones",
     "project.develpment.complications.text":
       "Uno de los desafíos que enfrentamos fue garantizar que la plataforma pudiera manejar un gran volumen de contenido generado por el usuario mientras mantenía el rendimiento. También necesitábamos implementar herramientas de moderación efectivas para mantener a la comunidad segura y acogedora",
+    "landing.title": "¡Únete a la conversación y comienza a explorar ahora!",
   },
 } as const;
