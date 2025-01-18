@@ -5,17 +5,17 @@ import {
   type CMessage,
   type IAlert,
 } from "@/constants/classes";
-import Alert from "@/components/Alert";
 import { sortByDate } from "@/constants/methods";
-import { PostGroupBase } from "./PostGroupBase";
+import PostGroupBase from "./PostGroupBase";
 
 interface Props {
   user_id: string;
+  ID: string;
 }
 
-export function UserPostsGroup({ user_id }: Props) {
+export function UserPostsGroup({ user_id, ID }: Props) {
   const [messages, setMessages] = useState<CMessage[]>([]);
-  const [res, setRes] = useState<IAlert | null>(null);
+  const [res, setRes] = useState<IAlert | null>(null); //this res should be sended as prop to the componente base group
 
   async function GetUserPost(url: string) {
     try {
@@ -47,14 +47,12 @@ export function UserPostsGroup({ user_id }: Props) {
   }, []);
 
   return (
-    <div>
-      {res && <Alert {...res} />}
-      <PostGroupBase
-        data={messages}
-        _id={user_id}
-        isDelete={false}
-        scroll={false}
-      />
-    </div>
+    <PostGroupBase
+      ID={ID}
+      data={messages}
+      _id={user_id}
+      isDelete={false}
+      scroll={false}
+    />
   );
 }

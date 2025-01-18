@@ -7,7 +7,7 @@ import {
   type Saved,
 } from "@/constants/classes";
 import { sortByDate } from "@/constants/methods";
-import { PostGroupBase } from "./PostGroupBase";
+import PostGroupBase from "@/components/PostGroupBase";
 
 interface Props {
   _id?: string;

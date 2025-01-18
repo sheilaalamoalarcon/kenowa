@@ -5,9 +5,8 @@ import {
   type CMessage,
   type IAlert,
 } from "@/constants/classes";
-import Alert from "@/components/Alert";
 import { sortByDate } from "@/constants/methods";
-import { PostGroupBase } from "./PostGroupBase";
+import PostGroupBase from "./PostGroupBase";
 
 interface Props {
   user_id: string;
@@ -28,6 +27,7 @@ export default function AllPostsGroup({ user_id }: Props) {
       throw new Error(err.message);
     }
   }
+
   async function GetAllPost(url: string) {
     try {
       await GetBase(url).then(async (response) => {
@@ -57,14 +57,11 @@ export default function AllPostsGroup({ user_id }: Props) {
   }, []);
 
   return (
-    <div>
-      {res && <Alert {...res} />}
-      <PostGroupBase
-        data={messages}
-        _id={user_id}
-        isDelete={false}
-        scroll={false}
-      />
-    </div>
+    <PostGroupBase
+      data={messages}
+      _id={user_id}
+      isDelete={false}
+      scroll={false}
+    />
   );
 }

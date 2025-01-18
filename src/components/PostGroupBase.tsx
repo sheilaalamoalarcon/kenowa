@@ -1,21 +1,23 @@
-import Card from "@/components/Card/index";
 import type { CMessage } from "@/constants/classes";
-import Alert from "./Alert";
+import Alert from "@/components/Alert.tsx";
 import { AlertType } from "@/constants/enums";
+import Card from "@/components/Card.tsx";
 
 interface Props {
+  ID?: string;
   data: Array<CMessage>;
   _id: string;
   isDelete: boolean;
   scroll: boolean;
 }
 
-export function PostGroupBase({ data, _id, isDelete, scroll }: Props) {
+const PostGroupBase = ({ data, _id, isDelete, scroll, ID }: Props) => {
   return (
     <div
-      className={`flex ${
-        scroll ? "flex-row overflow-x-scroll w-dvw h-96" : "flex-col w-full"
-      } h-fit p-4 gap-10`}
+      id={ID ?? "posts-base"}
+      className={`${
+        scroll ? "flex overflow-x-scroll h-full" : "grid grid-cols-2 "
+      } p-4 gap-10 w-dvw`}
     >
       {data.length > 0 ? (
         data.map((message) => (
@@ -23,7 +25,7 @@ export function PostGroupBase({ data, _id, isDelete, scroll }: Props) {
             key={message.id}
             user_id={_id}
             isDelete={!isDelete}
-            {...message}
+            message={message}
           />
         ))
       ) : (
@@ -31,4 +33,6 @@ export function PostGroupBase({ data, _id, isDelete, scroll }: Props) {
       )}
     </div>
   );
-}
+};
+
+export default PostGroupBase;
