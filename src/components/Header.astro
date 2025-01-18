@@ -2,7 +2,6 @@
 import { getSession } from "auth-astro/server";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import { Image } from "astro:assets";
-import { CloseIcon } from "./Icons";
 import { SignOut } from "auth-astro/components";
 import CreatePostForm from "./CreatePostForm.astro";
 import {
@@ -11,45 +10,32 @@ import {
   HeaderIcon,
   LogOutIcon,
 } from "./Icons/HeaderIcons";
+import { DeleteIcon } from "./Icons";
 
 const session = await getSession(Astro.request);
 const lang = getLangFromUrl(Astro.url);
 const t = await useTranslations(lang);
 ---
 
-<script>
-  const dialog = document.getElementById("form-dialog") as HTMLDialogElement;
-  const openButton = document.getElementById("open");
-  const closeButton = document.getElementById("close");
-
-  openButton?.addEventListener("click", () => dialog.showModal());
-  closeButton?.addEventListener("click", () => dialog.close());
-</script>
-
 <header
+  id="header"
   class="flex flex-col gap-4 sticky top-0 items-center bg-orange-600 shadow-md p-6 px-16 h-fit sm:flex-row justify-between dark:bg-stone-800"
 >
   <HeaderIcon />
   {
     !session ? (
-      <nav>
-        <a
-          href={"/logIn"}
-          class={
-            "flex w-full justify-center items-center p-2 rounded bg-transparent h5 gap-1 text-white capitalize font-regular dark:text-white"
-          }
-        >
+      <nav id="log-in-nav" class="header__nav" aria-label="Login navigation">
+        <a href={"/logIn"} class="header__nav-link" aria-label="Login button">
           {t("nav.logIn")}
         </a>
       </nav>
     ) : (
-      <nav class="flex gap-12 items-center">
-        <a
-          href={"/globalChat"}
-          class={
-            "flex w-fit justify-center items-center gap-1 flex items-center"
-          }
-        >
+      <nav
+        id="session-nav"
+        class="flex gap-12 items-center"
+        aria-label="Session navigation"
+      >
+        <a href="/globalChat" class="header__nav-link" aria-label="Chat button">
           <ChatIcon />
           <p
             class={
@@ -60,6 +46,7 @@ const t = await useTranslations(lang);
           </p>
         </a>
         <button
+          aria-label="Create post button"
           class={"flex w-fit justify-center items-center gap-1"}
           id="open"
         >
@@ -72,10 +59,7 @@ const t = await useTranslations(lang);
             {t("nav.create")}
           </p>
         </button>
-        <a
-          href="/profile"
-          class={"flex w-fit justify-center items-center gap-1"}
-        >
+        <a href="/profile" class="header__nav-link" aria-label="Profile button">
           <p class="text-white text-center font-normal capitalize text-xs">
             {session.user?.name}
           </p>
@@ -91,6 +75,7 @@ const t = await useTranslations(lang);
         <SignOut
           class={"flex w-fit justify-center items-center gap-1"}
           id="log-out"
+          aria-label="Log out button"
         >
           <LogOutIcon />
           <p class={"text-white text-center font-normal capitalize text-xs"}>
@@ -101,10 +86,30 @@ const t = await useTranslations(lang);
     )
   }
 
-  <dialog class="open:flex flex-col items-end rounded p-2" id="form-dialog">
-    <button id="close">
-      <CloseIcon />
-    </button>
-    <CreatePostForm lang={lang} user_id={session?.user?.id ?? ""} />
+  <dialog
+    class="open:flex flex-col w-7/12 items-end backdrop-blur-lg rounded p-8 gap-12 dark:bg-stone-300/15"
+    id="form-dialog"
+    hidden={true}
+    role="dialog"
+  >
+    <header class="flex flex-row justify-between w-full">
+      <h2 id="dialog-title" class="subtitle">Create Post</h2>
+      <button
+        id="close"
+        class="aspect-square items-center justify-center bg-stone-600 border-transparent rounded p-1 w-fit hover:bg-orange-600 active:bg-orange-700"
+      >
+        <DeleteIcon color="orange-600" customStyles="fill-stone-100" />
+      </button>
+    </header>
+    <CreatePostForm
+      lang={lang}
+      user_id={session?.user?.id ?? ""}
+      username={session?.user?.name ?? ""}
+    />
   </dialog>
 </header>
+<script>
+  import { DialogManager } from "@/constants/classes";
+
+  new DialogManager();
+</script>
