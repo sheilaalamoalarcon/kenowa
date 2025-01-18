@@ -26,3 +26,7 @@ pnpm-debug.log*
 .env.dev
 .env.stage
 .env.prod
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

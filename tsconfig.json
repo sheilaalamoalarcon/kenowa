@@ -3,6 +3,13 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
+    "verbatimModuleSyntax": false,
+    "types": [
+      "jest",
+      "@testing-library/jest-dom"
+    ],
+    "module": "ESNext", // or ES2022
+    "target": "ESNext",
     "baseUrl": ".",
     "paths": {
       "@/*": [
