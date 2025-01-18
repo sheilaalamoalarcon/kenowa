@@ -6,6 +6,7 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import SavedGroup from "@/components/SavedGroup";
 import { UserPostsGroup } from "@/components/UserPostsGroup";
+import { DeleteIcon } from "@/components/Icons";
 
 const session = await getSession(Astro.request);
 const lang = getLangFromUrl(Astro.url);
@@ -19,19 +20,204 @@ export const prerender = false;
 
 <Layout title={`${session?.user?.name} Profile`}>
   <Header />
-  <main class="grid h-full grid-rows-[auto,1fr,auto]">
+  <main class="grid h-full grid-rows-[auto,1fr,auto] gap-12 p-12">
     <section>
-      <h2 class="text-black text-start text-lg font-bold dark:text-stone-50/75">
-        {t("profile.saved.title")}
-      </h2>
+      <header class="flex gap-6 items-baseline">
+        <button
+          id="visibility-options"
+          class="flex bg-stone-600/50 aspect-square rounded h-12 items-center justify-center p-6 hover:bg-orange-600 active:bg-orange-700"
+        >
+          <svg width="10" height="35" xmlns="http://www.w3.org/2000/svg">
+            <circle
+              cx="5"
+              cy="10"
+              r="2.5"
+              class="fill-stone-600 dark:fill-stone-200"></circle>
+            <circle
+              cx="5"
+              cy="20"
+              r="2.5"
+              class="fill-stone-600 dark:fill-stone-200"></circle>
+            <circle
+              cx="5"
+              cy="30"
+              r="2.5"
+              class="fill-stone-600 dark:fill-stone-200"></circle>
+          </svg>
+        </button>
+        <h2 class="subtitle">
+          {t("profile.saved.title")}
+        </h2>
+      </header>
       <SavedGroup _id={session?.user?.id} client:load />
     </section>
     <section>
-      <h2 class="text-black text-start text-lg font-bold dark:text-stone-50/75">
-        {t("profile.post.title")}
-      </h2>
-      <UserPostsGroup user_id={session?.user?.id ?? ""} client:load />
+      <header class="flex gap-6 items-baseline">
+        <h2 class="subtitle">
+          {t("profile.post.title")}
+        </h2>
+      </header>
+      <div id="edit-profile_actions" class="flex gap-12 p-6">
+        <button
+          id="one-column-layout"
+          class="flex bg-stone-600/50 aspect-square rounded h-12 items-center justify-center p-6 hover:bg-orange-600 active:bg-orange-700"
+        >
+          <svg width="30" height="35" xmlns="http://www.w3.org/2000/svg">
+            <rect
+              x="0"
+              y="0"
+              width="25"
+              height="14"
+              rx="2"
+              class="fill-stone-600 dark:fill-stone-200"></rect>
+            <rect
+              x="0"
+              y="20"
+              width="25"
+              height="14"
+              rx="2"
+              class="fill-stone-600 dark:fill-stone-200"></rect>
+          </svg>
+        </button>
+        <button
+          id="bento-layout"
+          class="flex bg-stone-600/50 aspect-square rounded h-12 items-center justify-center p-6 hover:bg-orange-600 active:bg-orange-700"
+        >
+          <svg width="45" height="35" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <rect
+                x="0"
+                y="0"
+                width="25"
+                height="14"
+                rx="2"
+                class="fill-stone-600 dark:fill-stone-200"></rect>
+              <rect
+                x="30"
+                y="0"
+                width="14"
+                height="14"
+                rx="2"
+                class="fill-stone-600 dark:fill-stone-200"></rect>
+            </g>
+            <g>
+              <rect
+                x="0"
+                y="20"
+                width="14"
+                height="14"
+                rx="2"
+                class="fill-stone-600 dark:fill-stone-200"></rect>
+              <rect
+                x="20"
+                y="20"
+                width="25"
+                height="14"
+                rx="2"
+                class="fill-stone-600 dark:fill-stone-200"></rect>
+            </g>
+          </svg>
+        </button>
+      </div>
+
+      <UserPostsGroup
+        user_id={session?.user?.id ?? ""}
+        ID="user-post-group"
+        client:load
+      />
     </section>
   </main>
   <Footer />
 </Layout>
+
+<dialog
+  class="open:flex flex-col items-end backdrop-blur-lg rounded p-8 w-96 dark:bg-stone-300/15"
+  id="visibility-dialog"
+  hidden={true}
+  role="dialog"
+>
+  <header class="flex flex-row justify-between w-full">
+    <h2 id="dialog-title" class="subtitle">Change Saved Post Visibility</h2>
+    <button
+      id="close-dialog"
+      class={`aspect-square items-center justify-center border-transparent rounded p-1 w-fit bg-stone-600 border-transparent rounded p-1 w-fit hover:bg-orange-600 active:bg-orange-700`}
+    >
+      <DeleteIcon color="orange-600" customStyles="fill-stone-100" />
+    </button>
+  </header>
+  <form action="update" class="flex flex-col w-full items-center">
+    <fieldset>
+      <div>
+        <input
+          type="radio"
+          name="visibility"
+          id="public"
+          value="public"
+          checked
+        />
+        <label
+          for="public"
+          class="capitalize text-stone-700 dark:text-stone-100">public</label
+        >
+      </div>
+
+      <div>
+        <input type="radio" name="visibility" value="private" id="private" />
+        <label
+          for="private"
+          class="capitalize text-stone-700 dark:text-stone-100">private</label
+        >
+      </div>
+    </fieldset>
+  </form>
+</dialog>
+
+<script>
+  const oneColumnLayout = document.getElementById("one-column-layout");
+  const bentoLayout = document.getElementById("bento-layout");
+  const baseGroup = document.getElementById("user-post-group");
+  const dialog = document.getElementById(
+    "visibility-dialog"
+  ) as HTMLDialogElement;
+  const openBtn = document.getElementById("visibility-options");
+  const closeBtn = document.getElementById("close-dialog");
+
+  oneColumnLayout?.addEventListener("click", () => {
+    console.log("one column layout");
+    console.log(baseGroup);
+    baseGroup?.classList.remove(
+      "odd:grid-cols-[1fr,auto]",
+      "even:grid-cols-[auto,1fr]",
+      "grid",
+      "flex",
+      "grid-cols-4",
+      "flex-col"
+    );
+
+    baseGroup?.classList.add("flex", "flex-col");
+  });
+  bentoLayout?.addEventListener("click", () => {
+    console.log("one column layout");
+    console.log(baseGroup);
+
+    baseGroup?.classList.remove(
+      "odd:grid-cols-[1fr,auto]",
+      "even:grid-cols-[auto,1fr]",
+      "grid",
+      "flex",
+      "grid-cols-4",
+      "flex-col"
+    );
+    baseGroup?.classList.add("grid", "grid-cols-2");
+  });
+
+  openBtn?.addEventListener("click", () => {
+    dialog?.showModal();
+    console.log(closeBtn);
+  });
+
+  closeBtn?.addEventListener("click", () => {
+    console.log("close dialog");
+    dialog?.close();
+  });
+</script>
