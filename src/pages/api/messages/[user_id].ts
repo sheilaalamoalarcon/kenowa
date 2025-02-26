@@ -2,10 +2,9 @@ import { ApiRes, ErrorHandler } from "@/constants/classes";
 import type { APIRoute } from "astro";
 import { db, eq, Messages } from "astro:db";
 
-export const GET: APIRoute = async ({ params }) => {
+export const GET: APIRoute = async ({ params, locals }) => {
   try {
     const { user_id } = params;
-
     if (!user_id) {
       return ErrorHandler.VALIDATION("User id is required");
     }
@@ -13,7 +12,7 @@ export const GET: APIRoute = async ({ params }) => {
     const messages = await db
       .select()
       .from(Messages)
-      .where(eq(Messages.propietary, user_id));
+      .where(eq(Messages.proprietary, user_id));
 
     if (!messages) {
       ErrorHandler.VALIDATION("No messages found");

@@ -3,7 +3,7 @@ import { getSession } from "auth-astro/server";
 export async function validateSession(context: Request) {
   const session = await getSession(context);
 
-  if (!session?.user) {
+  if (!session?.user?.id) {
     return {
       success: false,
       response: new Response(
@@ -21,7 +21,6 @@ export async function validateSession(context: Request) {
 
   return {
     success: true,
-    session,
     userId: session.user.id,
   };
 }

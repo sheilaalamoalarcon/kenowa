@@ -27,8 +27,6 @@ export const ui = {
     "p.copy.subtitle.3": "Discover Your Next Look",
     "p.copy.description.3":
       "Unleash your creativity. Browse a curated selection of looks, ideas, and trends from real users and fashion enthusiasts. Whether you're updating your wardrobe or looking for fresh styling tips, this is your go-to space for discovering the latest trends and finding inspiration tailored to your taste. Start exploring and elevate your style game today!",
-    "footer.nav": "Project",
-    "footer.nav.contact": "Developer info",
 
     /* project page*/
     "project.description.title": "Description",
@@ -39,10 +37,13 @@ export const ui = {
 
     "input.content": "content",
     "input.content.placeholder": "Enter your message",
-    "input.image": "image",
-    "input.image.placeholder": "Select an image",
+    "input.title": "Title",
+    "input.subtitle": "Subtitle",
+    "input.title.placeholder": "Enter your title",
+    "input.subtitle.placeholder": "Enter your subtitle",
+
     "button.sendMessage": "Create Post",
-    "button.startsharing": "start sharing",
+    "button.start": "start sharing",
     "profile.post.title": "Your Posts",
     "profile.saved.title": "Saved",
 
@@ -52,19 +53,20 @@ export const ui = {
     "logIn.copy.small.2": "Find Genuine Insights",
     "logIn.copy.small.3": "Get Style Inspiration",
 
-    "project.develpment.title": "Development Details",
-    "project.develpment.choosenStack": "Choosen Stack",
-    "project.develpment.front": "Astro, TypeScript, CSS, HTML",
-    "project.develpment.back": "Astro, TypeScript, CSS, HTML",
-    "project.develpment.front.title": "Frontend: ",
-    "project.develpment.back.title": "Backend: ",
-    "project.develpment.justification": "Justification",
-    "project.develpment.justification.text":
+    "project.development.title": "Development Details",
+    "project.development.chosenStack": "Chosen Stack",
+    "project.development.front": "Astro, TypeScript, CSS, HTML",
+    "project.development.back": "Astro, TypeScript, CSS, HTML",
+    "project.development.front.title": "Frontend: ",
+    "project.development.back.title": "Backend: ",
+    "project.development.justification": "Justification",
+    "project.development.justification.text":
       "We chose Astro for the frontend due to its performance benefits and flexibility in building static websites, which is ideal for a content-rich platform. TypeScript enhances code reliability with type safety. For the backend, NodeJS with Express offers a robust and scalable solution, while SQL databases provide efficient data management for user content.",
-    "project.develpment.complications": "Complications",
-    "project.develpment.complications.text":
+    "project.development.complications": "Complications",
+    "project.development.complications.text":
       "One of the challenges we faced was ensuring the platform could handle a high volume of user-generated content while maintaining performance. We also needed to implement effective moderation tools to keep the community safe and welcoming.",
     "landing.title": "Join the conversation and start exploring now!",
+    "buttons.loading": "Loading...",
   },
   es: {
     "nav.logIn": "Iniciar Sesión",
@@ -87,8 +89,6 @@ export const ui = {
     "p.copy.subtitle.3": "Descubre Tu Próximo Look",
     "p.copy.description.3":
       "Desata tu creatividad. Explora una selección curada de looks, ideas y tendencias de usuarios reales y entusiastas de la moda. Ya sea que estés actualizando tu guardarropa o buscando nuevos consejos de estilo, este es tu espacio de referencia para descubrir las últimas tendencias y encontrar inspiración adaptada a tu gusto. ¡Comienza a explorar y eleva tu estilo hoy mismo!",
-    "footer.nav": "Proyecto",
-    "footer.nav.contact": "Información del desarrollador",
 
     /* project page*/
     "project.description.title": "Descripción",
@@ -98,11 +98,16 @@ export const ui = {
       "¿Alguna vez has intentado buscar consejos de moda o artículos de ropa, solo para perderte en medios no relacionados? Kenowa pretende ser una plataforma dedicada a personas conscientes del medio ambiente que aman o trabajan en la industria de la moda. Los usuarios pueden compartir sus opiniones y mostrar sus conjuntos. y crear un guardarropa digital.",
 
     "input.content": "contenido",
-    "input.content.placeholder": "Enter your message",
+    "input.content.placeholder": "Añade tu mensaje",
+    "input.title": "Titulo",
+    "input.subtitle": "Subtitulo",
+    "input.title.placeholder": "Añade tu titulo",
+    "input.subtitle.placeholder": "Añade tu subtitulo",
+
     "input.image": "imagen",
     "input.image.placeholder": "Selecciona una imagen",
     "button.sendMessage": "Crear Publicación",
-    "button.startsharing": "empieza a compartir",
+    "button.start": "empieza a compartir",
     "profile.post.title": "Tus Publicaciones",
     "profile.saved.title": "Guardados",
     "logIn.google": "Continuar con Google",
@@ -111,18 +116,26 @@ export const ui = {
     "logIn.copy.small.2": "Encuentre información genuina",
     "logIn.copy.small.3": "Obtén inspiración sobre estilo",
 
-    "project.develpment.title": "Development Details",
-    "project.develpment.choosenStack": "Choosen Stack",
-    "project.develpment.front": "Astro, TypeScript, CSS, HTML",
-    "project.develpment.back": "Astro, TypeScript, CSS, HTML",
-    "project.develpment.front.title": "Frontend: ",
-    "project.develpment.back.title": "Backend: ",
-    "project.develpment.justification": "Justificación",
-    "project.develpment.justification.text":
+    "project.development.title": "Development Details",
+    "project.development.chosenStack": "Chosen Stack",
+    "project.development.front": "Astro, TypeScript, CSS, HTML",
+    "project.development.back": "Astro, TypeScript, CSS, HTML",
+    "project.development.front.title": "Frontend: ",
+    "project.development.back.title": "Backend: ",
+    "project.development.justification": "Justificación",
+    "project.development.justification.text":
       "Elegimos Astro para el frontend debido a sus beneficios de rendimiento y flexibilidad en la creación de sitios web estáticos, lo cual es ideal para una plataforma rica en contenido. TypeScript mejora la confiabilidad del código con seguridad de tipos. Para el backend, NodeJS con Express ofrece una solución robusta y escalable , mientras que las bases de datos SQL proporcionan una gestión eficiente de los datos del contenido del usuario.",
-    "project.develpment.complications": "Complicaciones",
-    "project.develpment.complications.text":
+    "project.development.complications": "Complicaciones",
+    "project.development.complications.text":
       "Uno de los desafíos que enfrentamos fue garantizar que la plataforma pudiera manejar un gran volumen de contenido generado por el usuario mientras mantenía el rendimiento. También necesitábamos implementar herramientas de moderación efectivas para mantener a la comunidad segura y acogedora",
     "landing.title": "¡Únete a la conversación y comienza a explorar ahora!",
+
+    /*METHODS */
+    "methods.days": "días",
+    "methods.hours": "horas",
+    "methods.minutes": "minutos",
+
+    /*BUTTONS */
+    "buttons.loading": "Cargando...",
   },
 } as const;

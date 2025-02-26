@@ -4,25 +4,26 @@ import { v4 } from "uuid";
 import { ApiRes, ErrorHandler } from "@/constants/classes";
 
 interface MessagePayload {
-  propietary: string;
-  propietary_name: string;
-  text: string;
+  proprietary: string;
+  proprietary_name: string;
+  title: string;
+  subtitle: string;
+  html_content: string;
 }
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = (await request.json()) as MessagePayload;
-    const { propietary, text, propietary_name } = body;
-
-    if (!text) {
-      return ErrorHandler.VALIDATION("Text content is required");
-    }
+    const { proprietary, title, subtitle, proprietary_name, html_content } =
+      body;
 
     const message = {
       id: v4(),
-      propietary: propietary.trim(),
-      propietary_name: propietary_name.trim(),
-      text: text.trim(),
+      proprietary: proprietary.trim(),
+      proprietary_name: proprietary_name.trim(),
+      title: title.trim(),
+      subtitle: subtitle.trim(),
+      html_content: html_content.trim(),
       created_at: NOW,
     };
 

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const MessageSchema = z.object({
   id: z.string().uuid(),
-  propietary: z.string(), // ✅ Validación específica
+  proprietary: z.string(), // ✅ Validación específica
   text: z.string().min(1).max(280), // ✅ Límites claros
   image: z.string().url().optional(), // ✅ Campos opcionales
   createdAt: z.date().default(() => new Date()), // ✅ Valores por defecto

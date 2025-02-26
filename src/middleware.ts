@@ -22,7 +22,6 @@ export async function onRequest(
   if (!auth.success) {
     return auth.response;
   }
-
   // Añadir información de usuario al contexto
   context.locals = {
     userId: auth.userId,

@@ -3,10 +3,11 @@ import { column, defineDb } from "astro:db";
 const Messages = {
   columns: {
     id: column.text({ primaryKey: true, unique: true }),
-    propietary: column.text({}),
-    propietary_name: column.text({}),
-    image: column.text({ optional: true }),
-    text: column.text({ optional: false }),
+    proprietary: column.text({}),
+    proprietary_name: column.text({}),
+    title: column.text({ optional: false }),
+    subtitle: column.text({ optional: false }),
+    html_content: column.text({ optional: false, multiline: true }),
     created_at: column.date({}),
   },
 };

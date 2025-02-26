@@ -5,17 +5,17 @@ interface ButtonProps {
   value: string;
   title: string;
   disabled: boolean;
+  type: "bold" | "italic" | "underlined";
 }
 
 interface Props {
   basic: ButtonProps[];
-  article: ButtonProps[];
 }
-const { basic, article } = Astro.props;
+const { basic } = Astro.props;
 ---
 
-<aside id="basic-font-styles" class="flex flex-col gap-2 w-full">
-  <div class="flex flex-row w-full justify-between">
+<aside id="basic-font-styles" class="textarea-container">
+  <div class="post-editor__header">
     {
       basic.map((button) => {
         return (
@@ -23,19 +23,7 @@ const { basic, article } = Astro.props;
             value={button.value}
             disabled={button.disabled}
             title={button.title}
-          />
-        );
-      })
-    }
-  </div>
-  <div class="flex flex-row w-full justify-between">
-    {
-      article.map((button) => {
-        return (
-          <TextButton
-            value={button.value}
-            disabled={button.disabled}
-            title={button.title}
+            type={button.type}
           />
         );
       })

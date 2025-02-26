@@ -1,0 +1,40 @@
+---
+import { CMessage } from "@/constants/classes";
+import Alert from "@/components/Alert.astro";
+import { AlertType } from "@/constants/enums";
+import { getSession } from "auth-astro/server";
+import Post from "./Post.astro";
+
+interface Props {
+  ID: string;
+  data: Array<CMessage>;
+}
+
+const { ID, data } = Astro.props;
+
+const session = await getSession(Astro.request);
+if (!session) {
+  return Astro.redirect("http://localhost:4321/");
+}
+---
+
+<div id={ID} class="grid-group">
+  {
+    data.length > 0 ? (
+      data.map((message, index) => (
+        <Post
+          id={message.id}
+          title={message.title}
+          subtitle={message.subtitle}
+          timeStamp={message.created_at}
+          html_content={message.html_content}
+          proprietary_id={session.user?.id ?? ""}
+          proprietary_name={message.proprietary_name}
+          postIndex={index}
+        />
+      ))
+    ) : (
+      <Alert type={AlertType.WARNING} message="No hay posts" />
+    )
+  }
+</div>

@@ -1,6 +1,12 @@
 import type { CMessage } from "./classes";
 
 export function parseDate(value: string) {
+  //!Add the following translations to this method
+  /*
+    "methods.days": "días",
+    "methods.hours": "horas",
+    "methods.minutes": "minutos",
+  */
   const now = new Date();
   const date = new Date(value);
   const diffInMs = now.getTime() - date.getTime();
@@ -45,7 +51,7 @@ export const setupScrollAnimation = (selector: string) => {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("animate-fadeIn"); // Añade la clase de animación
+          entry.target.classList.add("animate-fadeIn"); // Add animation class
           entry.target.classList.remove("opacity-0", "translate-y-4");
         }
       });
@@ -56,5 +62,15 @@ export const setupScrollAnimation = (selector: string) => {
     }
   );
 
-  elements.forEach((elemnt) => observer.observe(elemnt));
+  elements.forEach((element) => observer.observe(element));
 };
+
+export function AddStyleInClassList(
+  element: HTMLElement | null,
+  stylesToRemove?: string[],
+  stylesToAdd?: string[]
+) {
+  if (!element) return console.error("Element is null");
+  if (stylesToRemove) element.classList.remove(...stylesToRemove);
+  if (stylesToAdd) element.classList.add(...stylesToAdd);
+}

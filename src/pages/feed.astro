@@ -1,7 +1,7 @@
 ---
-import AllPostsGroup from "@/components/AllPostsGroup";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import MyPosts, { PostType } from "@/components/MyPosts.astro";
 import Layout from "@/layouts/Layout.astro";
 import { getSession } from "auth-astro/server";
 
@@ -16,7 +16,11 @@ export const prerender = false;
 <Layout title="Chat">
   <Header />
   <main>
-    <AllPostsGroup user_id={session?.user?.id ?? ""} client:load />
+    <MyPosts
+      type={PostType.ALL}
+      ID="chat-posts"
+      user_id={session?.user?.id ?? ""}
+    />
   </main>
   <Footer />
 </Layout>

@@ -1,0 +1,36 @@
+---
+import Base from "./Base.astro";
+
+export enum PostType {
+  USER,
+  ALL,
+}
+interface Props {
+  user_id: string;
+  type: PostType;
+  ID?: string;
+}
+
+const { user_id, ID, type = PostType.ALL } = Astro.props;
+
+let messages;
+
+if (type === PostType.ALL) {
+  const response = await fetch("http://localhost:4321/api/messages", {
+    method: "GET",
+  });
+  const data = await response.json();
+  messages = data.data;
+} else {
+  const response = await fetch(
+    `http://localhost:4321/api/messages/${user_id}`,
+    {
+      method: "GET",
+    }
+  );
+  const data = await response.json();
+  messages = data.data;
+}
+---
+
+<Base ID={ID ? ID : "base-component"} data={messages} />

@@ -43,9 +43,12 @@ import { StylesTypes, type AlertType } from "./enums";
 export interface CMessage {
   id: string;
   text: string;
-  propietary: string; //propietary id
-  propietary_name: string;
+  title: string;
+  subtitle: string;
+  proprietary: string; //proprietary id
+  proprietary_name: string;
   created_at: string;
+  html_content: string;
 }
 export interface IAlert {
   type: AlertType;
@@ -155,13 +158,12 @@ export class EditorManager {
     ) as HTMLInputElement;
     this.selectedStyle = StylesTypes.REGULAR;
     this.init();
+    console.log(this.selectedStyle);
   }
-
   private init(): void {
     this.setEventListener();
   }
   private createWrapper(text: string | null, desiredStyle: StylesTypes) {
-    console.log(`desiredStyle: ${desiredStyle}`);
     switch (desiredStyle) {
       case StylesTypes.ITALIC:
         const em = document.createElement("em");
@@ -179,21 +181,6 @@ export class EditorManager {
         wrapper.textContent = text ?? "there isn't text";
         wrapper.classList.add("underline");
         return wrapper;
-      case StylesTypes.TITLE:
-        const title = document.createElement("h1");
-        title.id = `title-wrapper`;
-        title.textContent = text ?? "there isn't text";
-        title.classList.replace("underline", "no-underline");
-        title.classList.add("text-2xl", "font-bold");
-        return title;
-      case StylesTypes.SUBTITLE:
-        const subtitle = document.createElement("h2");
-        subtitle.id = `subtitle-wrapper`;
-        subtitle.textContent = text ?? "there isn't text";
-        subtitle.classList.replace("underline", "no-underline");
-        subtitle.classList.add("text-xl", "font-semibold");
-        subtitle.classList.add("subtitle");
-        return subtitle;
       default:
         const textWrapper = document.createElement("p");
         textWrapper.id = `paragraph-wrapper`;

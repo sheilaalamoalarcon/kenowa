@@ -1,0 +1,42 @@
+---
+import { AlertType } from "@/constants/enums";
+import {
+  SuccessIcon,
+  ErrorIcon,
+  InfoIcon,
+  WarningIcon,
+} from "@/components/Icons/AlertIcons";
+
+export interface Props {
+  type: AlertType;
+  message: string;
+}
+
+const { type, message } = Astro.props;
+
+const color =
+  type === AlertType.SUCCESS
+    ? "green"
+    : type === AlertType.ERROR
+      ? "red"
+      : type === AlertType.INFO
+        ? "blue"
+        : "amber";
+---
+
+<div
+  class={`flex flex-row items-center gap-4 rounded p-4 bg-${color}-500/50 text-${color}-500 `}
+>
+  {
+    type === AlertType.SUCCESS ? (
+      <SuccessIcon color={color} />
+    ) : type === AlertType.ERROR ? (
+      <ErrorIcon color={color} />
+    ) : type === AlertType.INFO ? (
+      <InfoIcon color={color} />
+    ) : (
+      <WarningIcon color={color} />
+    )
+  }
+  <p class={`alert-${type}`}>{message}</p>
+</div>

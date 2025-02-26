@@ -2,67 +2,9 @@
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 ---
 
 <footer class="pb-16 text-sm leading-6 items-center">
-  <article class="flex max-w-7xl justify-between mx-auto px-4 sm:px-6 md:px-8">
-    <section class="lg:flex-none lg:w-1/2">
-      <h2 class="font-semibold text-slate-900 dark:text-slate-100">
-        Getting Started
-      </h2>
-      <ul
-        class="flex flex-col text-stone-700 list-disc decoration-current no-underline capitalize dark:text-stone-50"
-      >
-        <li>
-          <a
-            class="hover:text-orange-900 dark:hover:text-orange-300"
-            href="/docs/installation">{t("footer.nav.contact")}</a
-          >
-        </li>
-        <li>
-          <a
-            class="hover:text-orange-900 dark:hover:text-orange-300"
-            href="/docs/installation">{t("footer.nav.contact")}</a
-          >
-        </li>
-        <li>
-          <a
-            class="hover:text-orange-900 dark:hover:text-orange-300"
-            href="/docs/installation">{t("footer.nav.contact")}</a
-          >
-        </li>
-      </ul>
-    </section>
-    <section class="lg:flex-none lg:w-1/2">
-      <h2 class="font-semibold text-slate-900 dark:text-slate-100">
-        Getting Started
-      </h2>
-      <ul
-        class="flex flex-col text-stone-700 list-disc decoration-current no-underline capitalize dark:text-stone-50"
-      >
-        <li>
-          <a
-            class="hover:text-orange-900 dark:hover:text-orange-300"
-            href="/docs/installation">{t("footer.nav.contact")}</a
-          >
-        </li>
-        <li>
-          <a
-            class="hover:text-orange-900 dark:hover:text-orange-300"
-            href="/docs/installation">{t("footer.nav.contact")}</a
-          >
-        </li>
-        <li>
-          <a
-            class="hover:text-orange-900 dark:hover:text-orange-300"
-            href="/docs/installation">{t("footer.nav.contact")}</a
-          >
-        </li>
-      </ul>
-    </section>
-  </article>
-
   <figure
     id="scroll-animate"
     class="flex flex-col w-96 sm:flex-row sm:justify-between items-center p-6 px-16"
