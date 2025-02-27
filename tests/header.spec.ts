@@ -75,22 +75,4 @@ test.describe("Header component", () => {
     expect(page.getByText("Create")).toBeTruthy();
     expect(page.getByText("Log Out")).toBeTruthy();
   });
-  /*
-  test("dialog opens", async ({ page }) => {
-    const dialog = page.getByRole("dialog");
-    const openButton = page.getByRole("button", {
-      name: "open",
-    });
-
-    expect(dialog).not.toBeVisible();
-
-    await openButton.click();
-    await expect(dialog).toBeVisible();
-  });
-  test("dialog opens and closes correctly", async ({ page }) => {
-    await page.locator("#form-dialog").first();
-    await page.getByRole("button", { name: "close" }).click();
-    await expect(page.getByRole("button", { name: "close" })).toBeHidden();
-  });
-   */
 });

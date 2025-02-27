@@ -10,8 +10,7 @@
     "preview": "astro preview --mode stage",
     "astro": "astro",
     "prepare": "husky",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test-play": "playwright test",
+    "test": "playwright test",
     "commit": "git-cz"
   },
   "config": {

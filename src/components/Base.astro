@@ -20,7 +20,7 @@ if (!session) {
 
 <div id={ID} class="grid-group">
   {
-    data.length > 0 ? (
+    data?.length > 0 ? (
       data.map((message, index) => (
         <Post
           id={message.id}
