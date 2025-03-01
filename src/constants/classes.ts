@@ -158,7 +158,6 @@ export class EditorManager {
     ) as HTMLInputElement;
     this.selectedStyle = StylesTypes.REGULAR;
     this.init();
-    console.log(this.selectedStyle);
   }
   private init(): void {
     this.setEventListener();

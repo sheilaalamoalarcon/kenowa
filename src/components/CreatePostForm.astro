@@ -8,6 +8,7 @@ interface Props {
   username: string;
   lang: "en" | "es";
 }
+
 const { user_id, username, lang } = Astro.props;
 const t = useTranslations(lang);
 
@@ -98,7 +99,7 @@ const bodyTextareaLabel = {
   class: "input-label",
 };
 const divTextareaProps = {
-  class: "input-base h-64 p-4",
+  class: "input-base min-h-96 p-4",
   id: "editor",
   contenteditable: "true",
   role: "application" as "application",

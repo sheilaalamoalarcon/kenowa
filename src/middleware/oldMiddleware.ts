@@ -1,3 +1,5 @@
+/*
+
 import type { APIContext } from "astro";
 import { getSession } from "auth-astro/server";
 
@@ -5,12 +7,7 @@ async function validateSession(context: Request) {
   try {
     const session = await getSession(context);
 
-    if (!session?.user?.id) {
-      console.log("❌ Sesión inválida:", {
-        session: !!session,
-        user: !!session?.user,
-      });
-
+    if (!session) {
       return {
         success: false,
         response: new Response(
@@ -31,14 +28,9 @@ async function validateSession(context: Request) {
       };
     }
 
-    console.log("✅ Sesión válida para:", {
-      userId: session.user.id,
-      timestamp: new Date().toISOString(),
-    });
-
     return {
       success: true,
-      userId: session.user.id,
+      userId: session?.user?.id,
       session,
     };
   } catch (error) {
@@ -75,8 +67,6 @@ export async function onRequest(
   const isPublicRoute = publicRoutes.includes(path);
 
   if (!isPublicRoute) {
-    console.log("🛣️ Ruta actual:", path);
-
     // Validar sesión para rutas protegidas
     const auth = await validateSession(context.request);
     if (!auth.success) {
@@ -97,10 +87,11 @@ export async function onRequest(
       // Añadir información de usuario al contexto
       context.locals.userId = auth.userId;
 
-      console.log("🔐 Sesión válida para:", context.locals);
       return next();
     }
   } else {
     return next();
   }
 }
+
+*/

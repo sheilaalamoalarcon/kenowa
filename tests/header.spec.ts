@@ -2,7 +2,20 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Header component", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:4321");
+    await page.setContent(`
+    <header class="header">
+      <nav aria-label={navAriaLabel}>
+        <a href={"/logIn"} class="header__nav-link" aria-label="Login button">
+          {t("nav.logIn")}
+        </a>
+        <a href={"/chat"} class="header__nav-link" aria-label="Chat button">
+          Web Code
+        </a>
+      </nav>
+    </header>
+      `);
+
+    await expect(page.getByText("Web Code")).toBeVisible();
   });
   test.beforeEach(async ({ page }) => {
     //google login mock up

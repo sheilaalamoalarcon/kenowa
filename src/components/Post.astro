@@ -74,8 +74,10 @@ const closeButtonIconSize = 24;
   <button
     data-post-id={postIndex}
     class="see-more-container post-timestamp w-full py-6"
-    id="see-more-container"><p class="see-more">see more...</p></button
+    id="see-more-container"
   >
+    <label for="see-more">see more...</label>
+  </button>
 </section>
 <dialog
   class="post-dialog"
@@ -100,6 +102,8 @@ const closeButtonIconSize = 24;
       </svg>
     </button>
   </header>
-  <h3 class="post-subtitle text-2xl font-bold capitalize">{subtitle}</h3>
-  <p set:html={html_content} class="post-text" />
+  <div>
+    <h3 class="post-subtitle text-2xl font-bold capitalize">{subtitle}</h3>
+    <p set:html={html_content} class="post-text" />
+  </div>
 </dialog>

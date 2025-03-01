@@ -9,14 +9,14 @@ import vercel from '@astrojs/vercel';
 
 import db from '@astrojs/db';
 
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from "@tailwindcss/vite";
 
-// https://astro.build/config
 export default defineConfig({
-  integrations: [preact(), auth(), db(), tailwind({
-    configFile: "./tailwind.config.mjs"
-  })],
+  integrations: [preact(), auth(), db()],
   site: 'http://localhost:4321',
   output: 'server',
-  adapter: vercel()
+  adapter: vercel(),
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });
