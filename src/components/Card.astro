@@ -12,14 +12,14 @@ const { title, subtitle, description, href } = Astro.props;
 {
   href ? (
     <a id="scroll-animate" class="link-container max-w-full" href={href}>
-      <h3 class="link-title">{title}</h3>
-      <p class="link-subtitle">{subtitle}</p>
+      <h3 class="post-title">{title}</h3>
+      <p class="post-subtitle">{subtitle}</p>
     </a>
   ) : (
     <article id="scroll-animate" class="card-container">
-      <h3 class="link-title">{title}</h3>
-      <p class="link-subtitle">{subtitle}</p>
-      {description && <p class="card-subtitle">{description}</p>}
+      <h3 class="post-title">{title}</h3>
+      <p class="post-subtitle">{subtitle}</p>
+      {description && <p class="post-text">{description}</p>}
     </article>
   )
 }

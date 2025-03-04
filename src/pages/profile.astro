@@ -1,10 +1,8 @@
 ---
 import { getSession } from "auth-astro/server";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
-import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import MyPosts, { PostType } from "@/components/MyPosts.astro";
+import { PostType } from "@/components/MyPosts.astro";
+import FeedLayout from "@/layouts/FeedLayout.astro";
 
 const session = await getSession(Astro.request);
 const lang = getLangFromUrl(Astro.url);
@@ -14,12 +12,6 @@ if (!session) {
   return Astro.redirect("/");
 }
 export const prerender = false;
-
-/*One Column Style Preference */
-const flexIconSVGProps = {
-  width: "30",
-  height: "35",
-};
 
 const flexIconRectBaseProps = {
   width: "25",
@@ -59,63 +51,8 @@ const gridIconSecondLineSquareBaseProps = {
 };
 ---
 
-<script>
-  import { AddStyleInClassList } from "@/constants/methods";
-
-  const oneColumnLayout = document.getElementById("one-column-layout");
-  const gridLayout = document.getElementById("grid-layout");
-  const baseGroup = document.getElementById("user-post-group");
-
-  oneColumnLayout?.addEventListener("click", () => {
-    AddStyleInClassList(baseGroup, ["grid-group"], ["one-column-group"]);
-  });
-  gridLayout?.addEventListener("click", () => {
-    AddStyleInClassList(baseGroup, ["one-column-group"], ["grid-group"]);
-  });
-</script>
-<Layout title={`${session?.user?.name} Profile`}>
-  <Header />
-  <main>
-    <header class="flex gap-6 items-baseline">
-      <h2 class="subtitle">
-        {t("profile.post.title")}
-      </h2>
-    </header>
-    <section id="edit-profile_actions" class="flex gap-12 p-6">
-      <button
-        role="button"
-        tabindex="0"
-        id="one-column-layout"
-        class="primary-button"
-      >
-        <svg {...flexIconSVGProps}>
-          <rect {...flexIconFirstRectProps}></rect>
-          <rect {...flexIconSecondRectProps}></rect>
-        </svg>
-      </button>
-      <button
-        role="button"
-        tabindex="0"
-        id="grid-layout"
-        class="primary-button"
-      >
-        <svg {...gridIconSvgProps}>
-          <g>
-            <rect {...gridIconSquareBaseProps} x="0"></rect>
-            <rect x="20" {...gridIconSquareBaseProps}></rect>
-          </g>
-          <g>
-            <rect x="0" {...gridIconSecondLineSquareBaseProps}></rect>
-            <rect x="20" {...gridIconSecondLineSquareBaseProps}></rect>
-          </g>
-        </svg>
-      </button>
-    </section>
-    <MyPosts
-      user_id={session?.user?.id ?? ""}
-      ID="user-post-group"
-      type={PostType.USER}
-    />
-  </main>
-  <Footer />
-</Layout>
+<FeedLayout
+  pageTitle={`${session?.user?.name} Profile`}
+  type={PostType.USER}
+  headerTitle={t("profile.post.title")}
+/>

@@ -1,15 +1,8 @@
 ---
-import TextButton from "@/components/TextButton.astro";
-
-interface ButtonProps {
-  value: string;
-  title: string;
-  disabled: boolean;
-  type: "bold" | "italic" | "underlined";
-}
+import TextButton, { TextButtonProps } from "@/components/TextButton.astro";
 
 interface Props {
-  basic: ButtonProps[];
+  basic: TextButtonProps[];
 }
 const { basic } = Astro.props;
 ---
@@ -22,7 +15,6 @@ const { basic } = Astro.props;
           <TextButton
             value={button.value}
             disabled={button.disabled}
-            title={button.title}
             type={button.type}
           />
         );

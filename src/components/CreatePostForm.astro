@@ -1,7 +1,7 @@
 ---
 import { useTranslations } from "@/i18n/utils";
 import { StylesTypes } from "@/constants/enums";
-import TextButton from "./TextButton.astro";
+import TextButton, { TextButtonProps } from "./TextButton.astro";
 
 interface Props {
   user_id: string;
@@ -15,7 +15,7 @@ const t = useTranslations(lang);
 if (Astro.request.method == "POST") {
   try {
     const data = await Astro.request.formData();
-    const htmlContent = data.get("html_content"); //get ll the html content
+    const htmlContent = data.get("html_content"); //get html content
     const title = data.get("title");
     const subtitle = data.get("subtitle");
 
@@ -34,24 +34,21 @@ if (Astro.request.method == "POST") {
   }
 }
 
-const basic = [
+const basic: TextButtonProps[] = [
   {
     value: StylesTypes.BOLD,
     disabled: false,
-    title: "bold",
-    type: "bold" as "bold",
+    type: StylesTypes.BOLD,
   },
   {
     value: StylesTypes.ITALIC,
     disabled: false,
-    title: "italic",
-    type: "italic" as "italic",
+    type: StylesTypes.ITALIC,
   },
   {
     value: StylesTypes.UNDERLINE,
     disabled: false,
-    title: "underlined",
-    type: "underlined" as "underlined",
+    type: StylesTypes.UNDERLINE,
   },
 ];
 
@@ -125,13 +122,13 @@ const hiddenTextareaProps = {
   const form = document.getElementById("form");
   const editor = new EditorManager("editor", "hidden-textarea");
 
+  //Si no hay texto seleccionado, se debe de wrappear todo el texto dentro del div
   function setSelectedStyle(button: HTMLElement | null, selected: StylesTypes) {
     if (!button) {
       return;
     } else {
       button.addEventListener("click", () => {
-        editor.setStyle(selected);
-        //editor.setStyle(button, !selected); //toggle selected style, when none of the styles are selected, bold, italic or underlined, the text go back to regular
+        document.execCommand(selected);
       });
     }
   }
@@ -144,9 +141,6 @@ const hiddenTextareaProps = {
 
   const italicBtn = document.getElementById("font-action-italic");
   setSelectedStyle(italicBtn, StylesTypes.ITALIC);
-
-  const regularBtn = document.getElementById("font-action-regular");
-  setSelectedStyle(regularBtn, StylesTypes.REGULAR);
 
   /*Get HTML content add it to message post */
   form?.addEventListener("submit", () => {
@@ -189,13 +183,13 @@ const hiddenTextareaProps = {
               <TextButton
                 value={button.value}
                 disabled={button.disabled}
-                title={button.title}
                 type={button.type}
               />
             );
           })
         }
       </div>
+
       <div {...divTextareaProps}></div>
       <textarea {...hiddenTextareaProps}> </textarea>
     </div>

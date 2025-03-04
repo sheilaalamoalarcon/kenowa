@@ -1,8 +1,6 @@
 ---
-import Footer from "@/components/Footer.astro";
-import Header from "@/components/Header.astro";
-import MyPosts, { PostType } from "@/components/MyPosts.astro";
-import Layout from "@/layouts/Layout.astro";
+import { PostType } from "@/components/MyPosts.astro";
+import FeedLayout from "@/layouts/FeedLayout.astro";
 import { getSession } from "auth-astro/server";
 
 const session = await getSession(Astro.request);
@@ -13,14 +11,4 @@ if (!session) {
 export const prerender = false;
 ---
 
-<Layout title="Chat">
-  <Header />
-  <main>
-    <MyPosts
-      type={PostType.ALL}
-      ID="chat-posts"
-      user_id={session?.user?.id ?? ""}
-    />
-  </main>
-  <Footer />
-</Layout>
+<FeedLayout pageTitle="Feed" type={PostType.ALL} headerTitle="Feed" />

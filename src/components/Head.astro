@@ -1,0 +1,35 @@
+---
+import "@/styles/global.css";
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Social platform dedicated to fashion" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+  <title>{title}</title>
+
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <title>{title}</title>
+  <meta name="description" content="Welcome to my new Astro site!" />
+
+  <!-- Web analytics -->
+  <script async src="//gc.zgo.at/count.js"></script>
+
+  <!-- Open Graph tags -->
+  <meta property="og:title" content="My New Astro Website" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://www.example.com/" />
+  <meta property="og:description" content="Welcome to my new Astro site!" />
+  <meta
+    property="og:image"
+    content="https://www.example.com/_astro/seo-banner.BZD7kegZ.webp"
+  />
+  <meta property="og:image:alt" content="" />
+</head>

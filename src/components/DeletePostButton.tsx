@@ -41,14 +41,14 @@ export function DeletePostButton({ proprietary, message_id }: Props) {
 
   const btnProps = {
     type: "button",
-    class: "primary-button",
+    class: "primary-button square-button",
   };
 
-  const iconSize = 24;
+  const iconSize = 14;
   const iconSVGProps = {
     width: iconSize,
     height: iconSize,
-    viewBox: `0 0 16 16`,
+    viewBox: `0 0 14 14`,
     class: "white-icon",
   };
 

@@ -1,11 +1,13 @@
 ---
-interface Props {
+import { StylesTypes } from "@/constants/enums";
+
+export interface TextButtonProps {
   value: string;
-  title: string;
   disabled: boolean;
-  type: "bold" | "italic" | "underlined";
+  type: StylesTypes;
 }
-const { value, disabled, title, type = "bold" } = Astro.props;
+interface Props extends TextButtonProps {}
+const { value, disabled, type = StylesTypes.BOLD } = Astro.props;
 
 const buttonProps = {
   type: "button" as "button",
@@ -27,7 +29,7 @@ const buttonIconProps = {
 ---
 
 {
-  type === "bold" && (
+  type === StylesTypes.BOLD && (
     <button {...buttonProps}>
       <svg {...buttonIconProps}>
         <path
@@ -40,7 +42,7 @@ const buttonIconProps = {
   )
 }
 {
-  type === "italic" && (
+  type === StylesTypes.ITALIC && (
     <button {...buttonProps}>
       <svg {...buttonIconProps}>
         <path
@@ -56,7 +58,7 @@ const buttonIconProps = {
   )
 }
 {
-  type === "underlined" && (
+  type === StylesTypes.UNDERLINE && (
     <button {...buttonProps}>
       <svg {...buttonIconProps}>
         <path

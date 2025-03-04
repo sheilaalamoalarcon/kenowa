@@ -13,8 +13,7 @@ export enum AlertType {
   ERROR,
 }
 export enum StylesTypes {
-  REGULAR = "regular",
   ITALIC = "italic",
   BOLD = "bold",
-  UNDERLINE = "underlined",
+  UNDERLINE = "underline",
 }

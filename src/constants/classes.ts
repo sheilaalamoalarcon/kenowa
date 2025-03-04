@@ -1,44 +1,3 @@
-/*
-How To Create Good TypeScript Classes
-
-basic class structure
-
-class TestClass {
-  age:number; //basic property
-  age:number; //basic property
-
-  constructor(
-    name:string, 
-    age:number
-  ){
-    this.name = name //asign class property value to constructor parameter
-    this.age = age //asign class property value to constructor parameter
-  }
-}
-class TestClass {
-  extraInfo!:string //makes this property available even without initialization
-  constructor(
-    public readonly name:string, 
-    public age:number,
-    private position:string,
-    protected salary:number
-  ){
-    this.name = name //asign class property value to constructor parameter
-    this.age = age //asign class property value to constructor parameter
-    this.position = position //asign class property value to constructor parameter
-    this.salary = salary //asign class property value to constructor parameter
-  }
-
-  public getPosition(){
-    return this.position
-  }
-
-  public getSalary(){
-    return this.salary
-  }
-}
-*/
-
 import { StylesTypes, type AlertType } from "./enums";
 export interface CMessage {
   id: string;
@@ -135,7 +94,10 @@ export class DialogManager {
   }
 
   private init(): void {
-    this.openBtn?.addEventListener("click", () => this.dialog?.showModal());
+    this.openBtn?.addEventListener("click", () => {
+      this.dialog?.showModal();
+      console.log("pressed open");
+    });
     this.closeBtn?.addEventListener("click", () => this.dialog?.close());
 
     this.dialog.addEventListener("keydown", (e) => {
@@ -150,6 +112,7 @@ export class EditorManager {
   private editor!: HTMLDivElement;
   private hiddenInput: HTMLInputElement | null = null;
   private selectedStyle: StylesTypes;
+  private currentSelection: Selection | null = null;
 
   constructor(editorID: string, hiddenInputID: string) {
     this.editor = document.getElementById(editorID) as HTMLDivElement;
@@ -157,41 +120,61 @@ export class EditorManager {
       hiddenInputID
     ) as HTMLInputElement;
     this.selectedStyle = StylesTypes.REGULAR;
+    this.currentSelection = null;
+
     this.init();
   }
+
   private init(): void {
     this.setEventListener();
   }
+
   private createWrapper(text: string | null, desiredStyle: StylesTypes) {
     switch (desiredStyle) {
       case StylesTypes.ITALIC:
         const em = document.createElement("em");
         em.id = `italic-wrapper`;
+
+        em.className = "regular-text";
         em.textContent = text ?? "there isn't text";
         return em;
       case StylesTypes.BOLD:
         const strong = document.createElement("strong");
         strong.id = `strong-wrapper`;
+
+        strong.className = "regular-text";
         strong.textContent = text ?? "there isn't text";
         return strong;
       case StylesTypes.UNDERLINE:
         const wrapper = document.createElement("p");
         wrapper.id = `underlined-wrapper`;
+
         wrapper.textContent = text ?? "there isn't text";
-        wrapper.classList.add("underline");
+        wrapper.classList.add("regular-text", "underline");
         return wrapper;
-      default:
+
+      default: //!Regular text
         const textWrapper = document.createElement("p");
         textWrapper.id = `paragraph-wrapper`;
+
+        textWrapper.className = "regular-text";
         textWrapper.textContent = text ?? "there isn't text";
         textWrapper.classList.replace("underline", "no-underline");
-        textWrapper.classList.add("font-normal");
         return textWrapper;
     }
+  }
+  private deleteWrapper(wrapper: HTMLElement) {
+    wrapper.remove();
   }
   private handleInput(): void {
     if (!this.hiddenInput || !this.editor) return;
     this.hiddenInput.value = this.editor.innerHTML;
+  }
+  private saveSelection(): void {
+    const selection = window.getSelection();
+    if (selection && selection.rangeCount > 0) {
+      this.currentSelection = selection;
+    }
   }
   private handleSection(): void {
     const selection = window.getSelection();
@@ -208,15 +191,24 @@ export class EditorManager {
   }
   private setEventListener(): void {
     this.editor.addEventListener("input", this.handleInput.bind(this));
-    this.editor.addEventListener("mouseup", this.handleSection.bind(this));
+
+    this.editor.addEventListener("mouseup", this.saveSelection.bind(this));
+    this.editor.addEventListener("keyup", this.saveSelection.bind(this));
 
     document.addEventListener("astro:before-swap", () => {
       this.editor.removeEventListener("input", this.handleInput.bind(this));
-      this.editor.addEventListener("mouseup", this.handleSection.bind(this));
+
+      this.editor.addEventListener("mouseup", this.saveSelection.bind(this));
+      this.editor.addEventListener("keyup", this.saveSelection.bind(this));
     });
   }
 
   setStyle(selected: StylesTypes) {
     this.selectedStyle = selected;
+  }
+  toggleStyle(selected: StylesTypes) {
+    this.selectedStyle =
+      this.selectedStyle === selected ? StylesTypes.REGULAR : selected;
+    console.log("selected style", selected);
   }
 }

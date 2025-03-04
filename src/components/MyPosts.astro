@@ -1,5 +1,9 @@
 ---
-import Base from "./Base.astro";
+import { CMessage } from "@/constants/classes";
+import Alert from "@/components/Alert/Alert.astro";
+import { AlertType } from "@/constants/enums";
+import { getSession } from "auth-astro/server";
+import Post from "@/components/Post.astro";
 
 export enum PostType {
   USER,
@@ -8,10 +12,9 @@ export enum PostType {
 interface Props {
   user_id: string;
   type: PostType;
-  ID?: string;
 }
 
-const { user_id, ID, type = PostType.ALL } = Astro.props;
+const { user_id, type = PostType.ALL } = Astro.props;
 
 let messages;
 
@@ -35,6 +38,30 @@ if (type === PostType.ALL) {
     messages = data.data;
   }
 }
+
+const session = await getSession(Astro.request);
+if (!session) {
+  return Astro.redirect("http://localhost:4321/");
+}
 ---
 
-<Base ID={ID ? ID : "base-component"} data={messages} />
+<div id="post-grid-group" class="grid-group">
+  {
+    messages?.length > 0 ? (
+      messages.map((message: CMessage, index: number) => (
+        <Post
+          id={message.id}
+          title={message.title}
+          subtitle={message.subtitle}
+          timeStamp={message.created_at}
+          html_content={message.html_content}
+          proprietary_id={session.user?.id ?? ""}
+          proprietary_name={message.proprietary_name}
+          postIndex={index}
+        />
+      ))
+    ) : (
+      <Alert type={AlertType.WARNING} message="No hay posts" />
+    )
+  }
+</div>

@@ -1,0 +1,128 @@
+---
+import { getSession } from "auth-astro/server";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header/Header.astro";
+import Footer from "@/components/Footer.astro";
+import MyPosts, { PostType } from "@/components/MyPosts.astro";
+
+interface Props {
+  headerTitle: string;
+  type: PostType;
+  pageTitle: string;
+}
+const { headerTitle, type, pageTitle } = Astro.props;
+
+const session = await getSession(Astro.request);
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+if (!session) {
+  return Astro.redirect("/");
+}
+export const prerender = false;
+
+/*One Column Style Preference */
+const flexIconSVGProps = {
+  width: "30",
+  height: "35",
+};
+
+const flexIconRectBaseProps = {
+  width: "25",
+  height: "14",
+  rx: "2",
+  x: "0",
+  class: "fill-stone-200",
+};
+const flexIconFirstRectProps = {
+  ...flexIconRectBaseProps,
+  y: "0",
+};
+const flexIconSecondRectProps = {
+  ...flexIconRectBaseProps,
+  y: "20",
+};
+
+/*Grid Style Preference */
+const gridIconSvgProps = {
+  width: "35",
+  height: "35",
+};
+
+const gridIconSquareBaseProps = {
+  y: "0",
+  width: "14",
+  height: "14",
+  rx: "2",
+  class: "fill-stone-200",
+};
+const gridIconSecondLineSquareBaseProps = {
+  width: "14",
+  height: "14",
+  rx: "2",
+  class: "fill-stone-200",
+  y: "20",
+};
+---
+
+<script>
+  import { AddStyleInClassList } from "@/constants/methods";
+
+  const oneColumnLayout = document.getElementById("one-column-layout");
+  const gridLayout = document.getElementById("grid-layout");
+  const baseGroup = document.getElementById("post-grid-group");
+
+  oneColumnLayout?.addEventListener("click", () => {
+    AddStyleInClassList(baseGroup, ["grid-group"], ["one-column-group"]);
+  });
+  gridLayout?.addEventListener("click", () => {
+    AddStyleInClassList(baseGroup, ["one-column-group"], ["grid-group"]);
+  });
+</script>
+<Layout title={pageTitle}>
+  <Header />
+  <main>
+    <header class="flex flex-col gap-6 items-baseline">
+      <h2 class="subtitle">{headerTitle}</h2>
+      <section id="edit-profile_actions" class="flex gap-12 p-6">
+        <button
+          role="button"
+          tabindex="0"
+          id="one-column-layout"
+          class="primary-button"
+        >
+          <svg {...flexIconSVGProps}>
+            <rect {...flexIconFirstRectProps}></rect>
+            <rect {...flexIconSecondRectProps}></rect>
+          </svg>
+        </button>
+        <button
+          role="button"
+          tabindex="0"
+          id="grid-layout"
+          class="primary-button"
+        >
+          <svg {...gridIconSvgProps}>
+            <g>
+              <rect {...gridIconSquareBaseProps} x="0"></rect>
+              <rect x="20" {...gridIconSquareBaseProps}></rect>
+            </g>
+            <g>
+              <rect x="0" {...gridIconSecondLineSquareBaseProps}></rect>
+              <rect x="20" {...gridIconSecondLineSquareBaseProps}></rect>
+            </g>
+          </svg>
+        </button>
+      </section>
+    </header>
+    {
+      type === PostType.ALL ? (
+        <MyPosts type={PostType.ALL} user_id={session?.user?.id ?? ""} />
+      ) : (
+        <MyPosts user_id={session?.user?.id ?? ""} type={PostType.USER} />
+      )
+    }
+  </main>
+  <Footer />
+</Layout>
