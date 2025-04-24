@@ -1,0 +1,366 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Anton+SC&display=swap");
+@import "tailwindcss";
+@import "tailwindcss/preflight";
+
+@tailwind utilities;
+* {
+  box-sizing: border-box;
+}
+
+@theme {
+  --color-gray-light: oklch(21.61% 0.0061 56.04);
+  --color-gray-default: oklch(0.268 0.007 34.298);
+  --color-gray-dark: oklch(98.48% 0.0013 106.42);
+  --color-orange-light: oklch(73.02% 0.1809 48.69);
+  --color-orange-default: oklch(73.02% 0.1809 48.69);
+  --color-orange-dark: oklch(73.02% 0.1809 48.69);
+  --color-post-border: oklch(0.987 0.022 95.277);
+  --color-post-background: oklch(0.646 0.222 41.116);
+
+  --container-gridrow: "auto, 1fr, auto";
+}
+
+/* BASIC */
+@utility regular-text {
+  @apply text-gray-light;
+  @variant dark {
+    @apply text-gray-dark;
+  }
+}
+@utility regular-bg {
+  @apply bg-gray-dark;
+  @variant dark {
+    @apply bg-gray-light;
+  }
+}
+@utility main-title {
+  @apply text-orange-500 text-center capitalize text-lg;
+}
+@utility post-border {
+  @apply border-2 border-amber-50/10;
+}
+
+/*CARD CONTAINER BASE */
+@utility card-shadow {
+  @apply shadow-2xl;
+  @variant dark {
+    @apply shadow-amber-500/50;
+  }
+}
+@utility card-container-base {
+  @apply flex flex-col p-12 rounded-sm gap-1 text-center;
+}
+@utility non-focusable-icon {
+  @apply pointer-events-none fill-gray-light;
+  @variant dark {
+    @apply dark:fill-gray-dark;
+  }
+}
+/* HEADER */
+@utility header-background {
+  @apply shadow-md bg-orange-600;
+  @variant dark {
+    @apply bg-gray-default;
+  }
+}
+@utility post-base {
+  @apply post-border bg-stone-600/5 rounded-sm shadow-2xl cursor-pointer;
+}
+@utility input-base {
+  @apply w-full px-4 py-2 border border-stone-200 rounded-sm bg-stone-50;
+  @apply regular-text;
+  @variant dark {
+    @apply bg-gray-default border-stone-600;
+  }
+}
+@utility icon-base {
+  @apply h-20 fill-gray-light;
+  @variant dark {
+    @apply fill-gray-dark;
+  }
+}
+
+@utility post-title-base {
+  @apply mt-8 w-fit font-semibold text-orange-500;
+}
+
+@utility post-text {
+  @apply w-full h-fit my-4 regular-text;
+}
+@utility white-icon {
+  @apply fill-gray-dark;
+}
+@utility white-stroke-icon {
+  @apply stroke-gray-dark;
+}
+
+html {
+  @apply font-sans regular-text regular-bg;
+}
+body {
+  @apply grid h-full;
+}
+main {
+  @apply regular-bg grid h-full grid-rows-[gridrow] gap-12 p-12  max-w-[100dvw];
+}
+h1 {
+  @apply text-5xl font-extrabold regular-text;
+}
+p {
+  @apply regular-text;
+}
+
+.footer {
+  @apply pb-16 text-sm leading-6 items-center;
+}
+.footer-image {
+  @apply flex flex-col w-96 sm:flex-row sm:justify-between items-center p-6 px-16;
+}
+
+.footer-svg-filled {
+  @apply fill-amber-300;
+}
+.footer-svg-border {
+  @apply fill-orange-600;
+}
+.primary-button {
+  @apply capitalize text-sm bg-stone-400  text-white font-semibold p-3 rounded-sm max-w-fit;
+  @variant focus {
+    @apply bg-orange-700;
+  }
+  @variant hover {
+    @apply bg-orange-600;
+  }
+  @variant active {
+    @apply bg-orange-700;
+  }
+  @variant dark {
+    @apply bg-stone-600;
+  }
+}
+.square-button {
+  @apply flex h-12 aspect-square items-center justify-center;
+}
+.input-label {
+  @apply flex flex-col w-full capitalize main-title text-start text-sm;
+}
+
+/*INDEX PAGE */
+.main-container {
+  @apply flex flex-col items-center justify-between gap-12 max-w-5xl mx-auto;
+}
+.first-section {
+  @apply text-center max-w-5xl mx-auto;
+}
+.index-card-group {
+  @apply flex flex-col items-center justify-between gap-12 max-w-2xl my-6;
+}
+
+.detail-text {
+  @apply text-orange-500 text-xs;
+}
+.stack-figure {
+  @apply flex flex-row justify-between w-full;
+}
+.iframe  {
+  @apply h-96 rounded-sm;
+}
+.dev-information {
+  @apply flex flex-col gap-6 w-full md:flex-row justify-between;
+}
+
+/*LOGIN PAGE */
+.login__main {
+  @apply flex flex-col w-dvw;
+}
+.login__wrapper {
+  @apply flex flex-col py-12 gap-40 self-center;
+}
+.login__lower-section {
+  @apply flex-col flex gap-6 items-center;
+}
+.login__welcome_title {
+  @apply text-3xl text-center;
+}
+.login__sign-in-button {
+  @apply flex max-w-sm p-6 rounded-sm shadow-lg items-center justify-center gap-5 bg-orange-500;
+  @variant hover {
+    @apply bg-orange-600;
+  }
+  @variant active {
+    @apply bg-orange-700;
+  }
+}
+.login__sign-in-button__text {
+  @apply regular-text capitalize text-white capitalize text-xs;
+}
+.login__sign-in-button__wrapper {
+  @apply flex justify-center gap-12;
+}
+
+/*PROFILE PAGE */
+.header {
+  @apply flex flex-col gap-4 sticky top-0 items-center p-6 px-16 h-fit z-40;
+  @apply header-background;
+  @apply md:flex-row justify-between;
+}
+.header__nav-link {
+  @apply flex w-fit justify-center items-center gap-1;
+  @apply text-white text-center font-normal capitalize text-xs;
+}
+.session-nav {
+  @apply flex gap-4;
+}
+.header-text {
+  @apply text-white text-center font-normal capitalize text-xs;
+}
+.create-post-button {
+  @apply flex w-fit justify-center items-center gap-1;
+}
+.profile-image {
+  @apply rounded-sm shadow-lg drop-shadow-md;
+}
+.create-post-dialog-header {
+  @apply flex flex-row justify-between w-full;
+}
+.subtitle {
+  @apply mt-4 text-3xl text-start sm:text-4xl font-extrabold tracking-tight text-stone-900;
+  @variant dark {
+    @apply text-stone-50;
+  }
+}
+
+/* CARD */
+.link-container {
+  @apply card-container-base post-border card-shadow;
+  @apply cursor-pointer;
+}
+.link-title {
+  @apply capitalize text-orange-600 text-2xl font-bold;
+}
+.link-subtitle {
+  @apply my-4 regular-text text-xl font-thin capitalize opacity-50;
+}
+.card-container {
+  @apply card-container-base  post-base card-shadow;
+  @apply cursor-default;
+}
+
+/*POST */
+.post-container {
+  @apply flex flex-col text-start p-12 gap-1 post-base min-w-96 w-full;
+}
+.post-container__header {
+  @apply flex flex-row w-full justify-between items-center;
+}
+.post-proprietary-name {
+  @apply regular-text text-xs;
+}
+.post-title {
+  @apply text-3xl font-bold text-orange-600 capitalize;
+}
+.post-subtitle {
+  @apply regular-text text-2xl font-normal capitalize;
+}
+.post-timestamp {
+  @apply text-xs font-light text-stone-800/50 mt-6;
+  @variant dark {
+    @apply text-stone-200/50;
+  }
+}
+.post-dialog[open] {
+  @apply flex flex-col items-start backdrop-blur-lg rounded-sm p-8 gap-12;
+  @apply h-full w-full;
+  @variant dark {
+    @apply bg-stone-300/15;
+  }
+}
+.post-dialog__header {
+  @apply flex flex-row justify-between w-full;
+}
+.post-dialog__text {
+  @apply my-4 min-w-full text-start text-stone-600;
+  @variant dark {
+    @apply text-stone-50;
+  }
+}
+u {
+  @apply regular-text;
+}
+
+/* CARD GROUP BASE */
+.scroll-group {
+  @apply flex flex-row max-w-6xl overflow-x-scroll h-full p-4 gap-10;
+}
+.grid-group {
+  @apply grid grid-cols-1 sm:grid-cols-2 p-4 gap-10 md:grid-cols-3;
+}
+.one-column-group {
+  @apply grid grid-cols-1 p-4 gap-10;
+}
+
+/*CREATE POST FORM */
+.form-container {
+  @apply flex flex-col items-center gap-12 w-full;
+}
+.inputs-wrapper {
+  @apply flex flex-col gap-6 w-full;
+}
+.text-input__container {
+  @apply text-gray-900 text-sm;
+  @apply block w-full p-2.5;
+  @apply input-base;
+
+  @variant focus {
+    @apply focus:ring-orange-500 focus:border-orange-500;
+  }
+  @variant dark {
+    @apply placeholder-gray-400 text-white;
+    @variant focus {
+      @apply focus:ring-orange-500 focus:border-orange-500;
+    }
+  }
+}
+.post-editor__container {
+  @apply w-full mb-4 border border-stone-200 rounded-sm bg-stone-50;
+  @variant dark {
+    @apply bg-stone-700 border-stone-600;
+  }
+}
+.post-editor__header {
+  @apply flex items-center space-x-1 rtl:space-x-reverse sm:pe-4 flex items-center justify-between px-3 py-2 border-b border-stone-200;
+  @variant dark {
+    @apply border-stone-600 border-stone-200;
+  }
+}
+.post-editor__header-button {
+  @apply capitalize regular-text p-3 max-w-fit p-2 rounded-sm cursor-pointer;
+
+  @variant hover {
+    @apply text-stone-900 bg-stone-100;
+  }
+  @variant focus {
+    @apply bg-stone-100;
+  }
+  @variant active {
+    @apply text-stone-900 bg-stone-100;
+  }
+  @variant dark {
+    @apply text-stone-400;
+    @variant hover {
+      @apply text-white bg-stone-600;
+    }
+    @variant active {
+      @apply text-white bg-stone-600;
+    }
+  }
+}
+.post-editor__textarea {
+  @apply block w-full px-0 text-sm text-stone-800 bg-white border-0;
+  @variant dark {
+    @apply bg-stone-800 text-white placeholder-stone-400;
+  }
+  @variant focus {
+    @apply ring-0;
+  }
+}
