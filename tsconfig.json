@@ -19,7 +19,7 @@
         "Components/*"
       ],
       "@/Constants": [
-        "Constants/*"
+        "src/Constants/*"
       ],
       "@/i18n": [
         "i18n/*"
@@ -28,10 +28,10 @@
         "Layouts/*"
       ],
       "@/Pages": [
-        "Pages/*"
+        "src/Pages/*"
       ],
       "@/Schemas": [
-        "Schemas/*"
+        "src/Schemas/*"
       ],
       "@/Styles": [
         "Styles/*"
