@@ -1,6 +1,6 @@
-import { AlertType } from "@/Constants/Enumerations";
+import { AlertType } from "../Constants/Enumerations";
 import { useState } from "preact/hooks";
-import { IAlert } from "@/Constants/Classes";
+import { IAlert } from "../Constants/Classes";
 
 interface Props {
   proprietary: string;

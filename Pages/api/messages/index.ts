@@ -1,4 +1,4 @@
-import { ApiRes, ErrorHandler } from "@/Constants/Classes";
+import { ApiRes, ErrorHandler } from "../../../Constants/Classes";
 import type { APIRoute } from "astro";
 import { db, Messages } from "astro:db";
 

@@ -1,8 +1,8 @@
 import { db, Messages, NOW } from "astro:db";
 import type { APIRoute } from "astro";
 import { v4 } from "uuid";
-import { ApiRes, ErrorHandler } from "@/Constants/Classes";
-import { newPostSchema } from "@/Schemas/Post.schema";
+import { ApiRes, ErrorHandler } from "../../../Constants/Classes";
+import { newPostSchema } from "../../../Schemas/Post.schema";
 
 interface MessagePayload {
   proprietary: string;

@@ -1,6 +1,6 @@
 ---
 import { getSession } from "auth-astro/server";
-import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { Image } from "astro:assets";
 import { SignOut } from "auth-astro/components";
 import CreatePostForm from "@/Components/CreatePostForm.astro";
@@ -10,7 +10,7 @@ import {
   HeaderIcon,
   LogOutIcon,
 } from "./HeaderIcons";
-import Dialog from "@/Components/Dialog";
+import Dialog from "../Dialog";
 
 const session = await getSession(Astro.request);
 const lang = getLangFromUrl(Astro.url);
