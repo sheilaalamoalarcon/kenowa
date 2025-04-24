@@ -1,7 +1,6 @@
 ---
-import "@/styles/global.css";
 import { getLangFromUrl } from "@/i18n/utils";
-import Head from "@/components/Head.astro";
+import Head from "@/Components/Head.astro";
 interface Props {
   title: string;
 }
@@ -12,7 +11,7 @@ const lang = getLangFromUrl(Astro.url);
 ---
 
 <script>
-  import { setupScrollAnimation } from "@/constants/methods";
+  import { setupScrollAnimation } from "@/Constants/Methods";
 
   document.addEventListener("DOMContentLoaded", () =>
     setupScrollAnimation("#scroll-animate")

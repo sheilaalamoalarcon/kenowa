@@ -1,8 +1,8 @@
 ---
 import { getSession } from "auth-astro/server";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
-import { PostType } from "@/components/MyPosts.astro";
-import FeedLayout from "@/layouts/FeedLayout.astro";
+import { PostType } from "@/Components/MyPosts.astro";
+import FeedLayout from "@/Layouts/FeedLayout.astro";
 
 const session = await getSession(Astro.request);
 const lang = getLangFromUrl(Astro.url);

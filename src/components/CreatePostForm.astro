@@ -1,7 +1,8 @@
 ---
 import { useTranslations } from "@/i18n/utils";
-import { StylesTypes } from "@/constants/enums";
+import { StylesTypes } from "@/Constants/Enumerations";
 import TextButton, { TextButtonProps } from "./TextButton.astro";
+import { newPostFormSchema } from "@/Schemas/Post.schema";
 
 interface Props {
   user_id: string;
@@ -19,14 +20,23 @@ if (Astro.request.method == "POST") {
     const title = data.get("title");
     const subtitle = data.get("subtitle");
 
+    const newPost = {
+      proprietary: user_id,
+      proprietary_name: username,
+      title: title,
+      subtitle: subtitle,
+      html_content: htmlContent,
+    };
+
+    console.log("After validation");
+    const validation = newPostFormSchema.safeParse(newPost);
+    if (!validation.success) {
+      throw new Error("Data is not correct or is not complete");
+    }
     await fetch(`${import.meta.env.PUBLIC_URL}/api/messages/new`, {
       method: "POST",
       body: JSON.stringify({
-        proprietary: user_id,
-        proprietary_name: username,
-        title: title,
-        subtitle: subtitle,
-        html_content: htmlContent,
+        ...newPost,
       }),
     });
   } catch (error) {
@@ -116,8 +126,8 @@ const hiddenTextareaProps = {
 ---
 
 <script>
-  import { EditorManager } from "@/constants/classes";
-  import { StylesTypes } from "@/constants/enums";
+  import { EditorManager } from "@/Constants/Classes";
+  import { StylesTypes } from "@/Constants/Enumerations";
 
   const form = document.getElementById("form");
   const editor = new EditorManager("editor", "hidden-textarea");
@@ -136,7 +146,7 @@ const hiddenTextareaProps = {
   const blackBtn = document.getElementById("font-action-bold");
   setSelectedStyle(blackBtn, StylesTypes.BOLD);
 
-  const underlinedBtn = document.getElementById("font-action-underlined");
+  const underlinedBtn = document.getElementById("font-action-underline");
   setSelectedStyle(underlinedBtn, StylesTypes.UNDERLINE);
 
   const italicBtn = document.getElementById("font-action-italic");

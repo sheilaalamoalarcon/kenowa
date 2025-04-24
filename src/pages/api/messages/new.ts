@@ -1,7 +1,8 @@
 import { db, Messages, NOW } from "astro:db";
 import type { APIRoute } from "astro";
 import { v4 } from "uuid";
-import { ApiRes, ErrorHandler } from "@/constants/classes";
+import { ApiRes, ErrorHandler } from "@/Constants/Classes";
+import { newPostSchema } from "@/Schemas/Post.schema";
 
 interface MessagePayload {
   proprietary: string;
@@ -23,9 +24,18 @@ export const POST: APIRoute = async ({ request }) => {
       proprietary_name: proprietary_name.trim(),
       title: title.trim(),
       subtitle: subtitle.trim(),
-      html_content: html_content.trim(),
+      html_content: html_content,
       created_at: NOW,
     };
+
+    const validation = newPostSchema.safeParse(message);
+
+    if (!validation.success) {
+      const errorMessage = validation.error.issues
+        .map((issue) => issue.message)
+        .join(", ");
+      return ErrorHandler.VALIDATION(errorMessage);
+    }
 
     const insertValue = await db.insert(Messages).values(message);
 

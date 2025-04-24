@@ -3,14 +3,14 @@ import { getSession } from "auth-astro/server";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import { Image } from "astro:assets";
 import { SignOut } from "auth-astro/components";
-import CreatePostForm from "@/components/CreatePostForm.astro";
+import CreatePostForm from "@/Components/CreatePostForm.astro";
 import {
   ChatIcon,
   CreatePostIcon,
   HeaderIcon,
   LogOutIcon,
 } from "./HeaderIcons";
-import Dialog from "@/components/Dialog";
+import Dialog from "@/Components/Dialog";
 
 const session = await getSession(Astro.request);
 const lang = getLangFromUrl(Astro.url);
@@ -25,7 +25,7 @@ const navAriaLabel: string = "Web navigation";
 ---
 
 <script>
-  import { DialogManager } from "@/constants/classes";
+  import { DialogManager } from "@/Constants/Classes";
 
   new DialogManager();
 </script>
@@ -34,13 +34,13 @@ const navAriaLabel: string = "Web navigation";
   {
     !session ? (
       <nav aria-label={navAriaLabel}>
-        <a href={"/logIn"} class="header__nav-link" aria-label="Login button">
+        <a href={"/LogIn"} class="header__nav-link" aria-label="Login button">
           {t("nav.logIn")}
         </a>
       </nav>
     ) : (
       <nav class="session-nav" aria-label={navAriaLabel}>
-        <a href="/feed" class="header__nav-link" aria-label="Chat button">
+        <a href="/Feed" class="header__nav-link" aria-label="Chat button">
           <ChatIcon />
           <p class="header-text">{t("nav.chat")}</p>
         </a>
@@ -53,7 +53,7 @@ const navAriaLabel: string = "Web navigation";
           <CreatePostIcon />
           <p class="header-text">{t("nav.create")}</p>
         </button>
-        <a href="/profile" class="header__nav-link" aria-label="Profile button">
+        <a href="/Profile" class="header__nav-link" aria-label="Profile button">
           <Image
             {...imageProps}
             src={session?.user?.image ?? ""}

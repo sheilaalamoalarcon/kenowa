@@ -1,10 +1,10 @@
 ---
 import { getSession } from "auth-astro/server";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
-import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/Header/Header.astro";
-import Footer from "@/components/Footer.astro";
-import MyPosts, { PostType } from "@/components/MyPosts.astro";
+import Layout from "@/Layouts/Layout.astro";
+import Header from "@/Components/Header/Header.astro";
+import Footer from "@/Components/Footer.astro";
+import MyPosts, { PostType } from "@/Components/MyPosts.astro";
 
 interface Props {
   headerTitle: string;
@@ -67,7 +67,7 @@ const gridIconSecondLineSquareBaseProps = {
 ---
 
 <script>
-  import { AddStyleInClassList } from "@/constants/methods";
+  import { AddStyleInClassList } from "@/Constants/Methods";
 
   const oneColumnLayout = document.getElementById("one-column-layout");
   const gridLayout = document.getElementById("grid-layout");

@@ -1,6 +1,3 @@
-import CloseIcon from "./CloseIcon.astro";
-import CreatePostForm from "./CreatePostForm.astro";
-
 interface Props {
   children: any;
   title: string;

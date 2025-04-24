@@ -1,8 +1,8 @@
 export enum Routes {
-  LOG_OUT = "/logOut",
-  LOG_IN = "/logIn",
-  FEED = "/feed",
-  PROFILE = "/profile",
+  LOG_OUT = "/LogOut",
+  LOG_IN = "/LogIn",
+  FEED = "/Feed",
+  PROFILE = "/Profile",
   LANDING = "/",
 }
 

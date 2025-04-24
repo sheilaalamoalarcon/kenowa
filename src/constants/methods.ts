@@ -1,4 +1,4 @@
-import type { CMessage } from "./classes";
+import type { CMessage } from "./Classes";
 
 export function sortByDate(messages: CMessage[]): CMessage[] {
   return messages.sort((a, b) => {

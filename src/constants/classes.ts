@@ -1,4 +1,4 @@
-import { StylesTypes, type AlertType } from "./enums";
+import { StylesTypes, type AlertType } from "./Enumerations";
 export interface CMessage {
   id: string;
   text: string;
@@ -96,7 +96,6 @@ export class DialogManager {
   private init(): void {
     this.openBtn?.addEventListener("click", () => {
       this.dialog?.showModal();
-      console.log("pressed open");
     });
     this.closeBtn?.addEventListener("click", () => this.dialog?.close());
 
@@ -119,7 +118,7 @@ export class EditorManager {
     this.hiddenInput = document.getElementById(
       hiddenInputID
     ) as HTMLInputElement;
-    this.selectedStyle = StylesTypes.REGULAR;
+    this.selectedStyle = StylesTypes.ITALIC;
     this.currentSelection = null;
 
     this.init();
@@ -208,7 +207,6 @@ export class EditorManager {
   }
   toggleStyle(selected: StylesTypes) {
     this.selectedStyle =
-      this.selectedStyle === selected ? StylesTypes.REGULAR : selected;
-    console.log("selected style", selected);
+      this.selectedStyle === selected ? StylesTypes.ITALIC : selected;
   }
 }

@@ -1,8 +1,3 @@
-interface Props {
-  color: string;
-  customStyles?: string;
-}
-
 export const HeaderIcon = () => {
   return (
     <a href="/" aria-labelledby="kenowa go to landing page button">

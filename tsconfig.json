@@ -10,14 +10,32 @@
     ],
     "module": "ESNext", // or ES2022
     "target": "ESNext",
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
       "@/*": [
-        "src/*"
+        "*"
       ],
-      "@/styles": [
-        "styles/*"
-      ]
+      "@/Components": [
+        "Components/*"
+      ],
+      "@/Constants": [
+        "Constants/*"
+      ],
+      "@/i18n": [
+        "i18n/*"
+      ],
+      "@/Layouts": [
+        "Layouts/*"
+      ],
+      "@/Pages": [
+        "Pages/*"
+      ],
+      "@/Schemas": [
+        "Schemas/*"
+      ],
+      "@/Styles": [
+        "Styles/*"
+      ],
     }
   }
 }

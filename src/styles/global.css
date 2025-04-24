@@ -3,7 +3,6 @@
 @import "tailwindcss/preflight";
 
 @tailwind utilities;
-
 * {
   box-sizing: border-box;
 }
@@ -94,6 +93,7 @@
 @utility white-stroke-icon {
   @apply stroke-gray-dark;
 }
+
 html {
   @apply font-sans regular-text regular-bg;
 }
